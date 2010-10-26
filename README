@@ -5,6 +5,12 @@ Gretel is a Ruby on Rails plugin that makes it easy yet flexible to create bread
 It emphasizes that breadcrumbs should is a front end matter and should reside in views rather than models and controllers.
 
 
+Install
+=======
+
+Rails 3: rails plugin install git@github.com:lassebunk/gretel.git
+
+
 Example
 =======
 
