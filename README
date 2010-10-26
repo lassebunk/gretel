@@ -37,13 +37,13 @@ Gretel::Crumbs.layout do
 
 end
 
-In app/views/xx/xx.html.erb:
-
-  <% breadcrumb :issue, @issue %>
-
 In app/views/layouts/application.html.erb:
 
   <%= breadcrumb :pretext => "You are here:", :separator => ">", :autoroot => true, :home_alone => true, :link_last => false %>
+
+In app/views/xx/xx.html.erb:
+
+  <% breadcrumb :issue, @issue %>
 
 Options for <%= breadcrumb %>:
   :pretext     Text to be rendered before breadcrumb, if any. Default: none
