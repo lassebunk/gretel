@@ -8,7 +8,8 @@ It emphasizes that breadcrumbs should is a front end matter and should reside in
 Installation
 ============
 
-Rails 3: rails plugin install git@github.com:lassebunk/gretel.git
+Rails 3:
+$ rails plugin install git@github.com:lassebunk/gretel.git
 
 
 Example
