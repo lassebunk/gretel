@@ -2,7 +2,7 @@ Introduction
 ============
 
 Gretel is a Ruby on Rails plugin that makes it easy yet flexible to create breadcrumbs.
-It emphasizes that breadcrumbs should is a front end matter and should reside in views rather than models and controllers.
+It emphasizes that breadcrumbs is a front end matter and should reside in views rather than models and controllers.
 
 
 Installation
@@ -46,7 +46,7 @@ end
 
 In app/views/layouts/application.html.erb:
 
-  <%= breadcrumb :pretext => "You are here:", :separator => ">", :autoroot => true, :home_alone => true, :link_last => false %>
+  <%= breadcrumb :pretext => "You are here:", :separator => ">", :autoroot => true, :root_alone => true, :link_last => false %>
 
 In app/views/xx/xx.html.erb:
 
@@ -56,7 +56,7 @@ Options for <%= breadcrumb %>:
   :pretext     Text to be rendered before breadcrumb, if any. Default: none
   :separator   Separator between links. Default: >
   :autoroot    Whether it should automatically link to :root if no root parent is given. Default: false
-  :home_alone  Whether it should show "Home" if this is the only link. Default: false
+  :root_alone  Whether it should show "Home" if this is the only link. Default: false
   :link_last   Whether the last crumb should be linked to. Default: false
 
 Copyright (c) 2010 Lasse Bunk, released under the MIT license

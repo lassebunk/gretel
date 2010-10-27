@@ -18,7 +18,7 @@ module Gretel
       else
         if @_breadcrumb_name
           crumb = breadcrumb_for(@_breadcrumb_name, @_breadcrumb_object, options)
-        elsif options[:home_alone]
+        elsif options[:root_alone]
           crumb = breadcrumb_for(:root, options)
         end
       end
