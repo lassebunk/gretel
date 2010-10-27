@@ -46,17 +46,17 @@ end
 
 In app/views/layouts/application.html.erb:
 
-  <%= breadcrumb :pretext => "You are here:", :separator => ">", :autoroot => true, :root_alone => true, :link_last => false %>
+  <%= breadcrumb :pretext => "You are here:", :separator => ">", :autoroot => true, :show_root_alone => true, :link_last => false %>
 
 In app/views/xx/xx.html.erb:
 
   <% breadcrumb :issue, @issue %>
 
 Options for <%= breadcrumb %>:
-  :pretext     Text to be rendered before breadcrumb, if any. Default: none
-  :separator   Separator between links. Default: >
-  :autoroot    Whether it should automatically link to :root if no root parent is given. Default: false
-  :root_alone  Whether it should show :root if this is the only link. Default: false
-  :link_last   Whether the last crumb should be linked to. Default: false
+  :pretext          Text to be rendered before breadcrumb, if any. Default: none
+  :separator        Separator between links. Default: >
+  :autoroot         Whether it should automatically link to :root if no root parent is given. Default: false
+  :show_root_alone  Whether it should show :root if this is the only link. Default: false
+  :link_last        Whether the last crumb should be linked to. Default: false
 
 Copyright (c) 2010 Lasse Bunk, released under the MIT license
