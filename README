@@ -56,7 +56,7 @@ Options for <%= breadcrumb %>:
   :pretext     Text to be rendered before breadcrumb, if any. Default: none
   :separator   Separator between links. Default: >
   :autoroot    Whether it should automatically link to :root if no root parent is given. Default: false
-  :root_alone  Whether it should show "Home" if this is the only link. Default: false
+  :root_alone  Whether it should show :root if this is the only link. Default: false
   :link_last   Whether the last crumb should be linked to. Default: false
 
 Copyright (c) 2010 Lasse Bunk, released under the MIT license
