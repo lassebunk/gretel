@@ -51,6 +51,13 @@ In app/views/layouts/application.html.erb:
 In app/views/xx/xx.html.erb:
 
   <% breadcrumb :issue, @issue %>
+  
+This could also be done in the controller, if you prefer:
+
+  def show
+    @project = Project.find(params[:id])
+    breadcrumb :project, @project
+  end
 
 Options for <%= breadcrumb %>:
   :pretext          Text to be rendered before breadcrumb, if any. Default: none
