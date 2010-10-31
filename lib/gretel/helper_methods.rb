@@ -42,12 +42,12 @@ module Gretel
       out = link_to_if(link_last, crumb.link.text, crumb.link.url)
       
       while parent = crumb.parent
-        last_parent = parent
+        last_parent = parent.name
         crumb = Crumbs.get_crumb(parent.name, parent.object)
         out = link_to(crumb.link.text, crumb.link.url) + " " + separator + " " + out
       end
       
-      if last_parent && options[:autoroot] && last_parent.name != :root
+      if options[:autoroot] && last_parent != :root
         crumb = Crumbs.get_crumb(:root)
         out = link_to(crumb.link.text, crumb.link.url) + " " + separator + " " + out
       end
