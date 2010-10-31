@@ -47,7 +47,8 @@ module Gretel
         out = link_to(crumb.link.text, crumb.link.url) + " " + separator + " " + out
       end
       
-      if options[:autoroot] && last_parent != :root
+      # TODO: Refactor this
+      if options[:autoroot] && name != :root && last_parent != :root
         crumb = Crumbs.get_crumb(:root)
         out = link_to(crumb.link.text, crumb.link.url) + " " + separator + " " + out
       end
