@@ -34,7 +34,7 @@ module Gretel
       options = args.extract_options!
       link_last = options[:link_last]
       options[:link_last] = true
-      separator = options[:separator] || ">"
+      separator = (options[:separator] || "&gt;").html_safe
 
       name, object = args[0], args[1]
       
