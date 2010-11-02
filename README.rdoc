@@ -1,0 +1,65 @@
+Gretel is a Ruby on Rails plugin that makes it easy yet flexible to create breadcrumbs.
+
+
+== Installation
+
+In Rails 3:
+
+  $ rails plugin install git@github.com:lassebunk/gretel.git
+
+
+== Example
+
+In <code>config/initializers/breadcrumbs.rb</code>:
+
+  Gretel::Crumbs.layout do
+ 
+    crumb :root do
+      link "Home", root_path
+    end
+ 
+    crumb :projects do
+      link "Projects", projects_path
+    end
+ 
+    crumb :project do |project|
+      link project.name, project_path(project)
+      parent :projects
+    end
+ 
+    crumb :project_issues do |project|
+      link "Issues", project_issues_path(project)
+      parent :project, project
+    end
+ 
+    crumb :issue do |issue|
+      link issue.name, issue_path(issue)
+      parent :project_issues, issue.project
+    end
+
+  end
+
+In <code>app/views/layouts/application.html.erb</code>:
+
+  <%= breadcrumb :pretext => "You are here:", :separator => ">", :autoroot => true, :show_root_alone => true, :link_last => false %>
+
+In <code>app/views/xx/xx.html.erb</code>:
+
+  <% breadcrumb :issue, @issue %>
+  
+This could also be done in the controller, if you prefer:
+
+  def show
+    @project = Project.find(params[:id])
+    breadcrumb :project, @project
+  end
+
+Options for <%= breadcrumb %>:
+
+  :pretext          Text to be rendered before breadcrumb, if any. Default: none
+  :separator        Separator between links. Default: &gt;
+  :autoroot         Whether it should automatically link to :root if no root parent is given. Default: false
+  :show_root_alone  Whether it should show :root if this is the only link. Default: false
+  :link_last        Whether the last crumb should be linked to. Default: false
+
+Copyright (c) 2010 Lasse Bunk, released under the MIT license
