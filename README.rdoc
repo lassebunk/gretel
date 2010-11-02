@@ -54,7 +54,7 @@ This could also be done in the controller, if you prefer:
     breadcrumb :project, @project
   end
 
-Options for <%= breadcrumb %>:
+Options for <code><%= breadcrumb %></code>:
 
   :pretext          Text to be rendered before breadcrumb, if any. Default: none
   :separator        Separator between links. Default: &gt;
