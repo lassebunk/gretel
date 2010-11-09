@@ -13,7 +13,7 @@ Gretel::Crumbs.layout do
   # end
   
   # crumb :project do |project|
-  #   link project.name, project_path(project)
+  #   link lambda { |project| "#{project.name} (#{project.id.to_s})" }, project_path(project)
   #   parent :projects
   # end
   
