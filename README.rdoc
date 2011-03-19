@@ -5,7 +5,7 @@ Gretel is a Ruby on Rails plugin that makes it easy yet flexible to create bread
 
 In Rails 3:
 
-  $ rails plugin install git@github.com:lassebunk/gretel.git
+  $ rails plugin install git://github.com/lassebunk/gretel.git
 
 
 == Example
