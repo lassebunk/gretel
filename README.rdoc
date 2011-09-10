@@ -10,6 +10,10 @@ In Rails 3:
 
 == Example
 
+Start by generating initializer and route:
+
+  $ rails generate gretel breadcrumbs
+
 In <code>config/initializers/breadcrumbs.rb</code>:
 
   Gretel::Crumbs.layout do
