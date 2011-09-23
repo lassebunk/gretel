@@ -39,18 +39,18 @@ module Gretel
       name, object = args[0], args[1]
       
       crumb = Crumbs.get_crumb(name, object)
-      out = link_to_if(link_last, crumb.link.text, crumb.link.url)
+      out = link_to_if(link_last, crumb.link.text, crumb.link.url, crumb.link.options)
       
       while parent = crumb.parent
         last_parent = parent.name
         crumb = Crumbs.get_crumb(parent.name, parent.object)
-        out = link_to(crumb.link.text, crumb.link.url) + " " + separator + " " + out
+        out = link_to(crumb.link.text, crumb.link.url, crumb.link.options) + " " + separator + " " + out
       end
       
       # TODO: Refactor this
       if options[:autoroot] && name != :root && last_parent != :root
         crumb = Crumbs.get_crumb(:root)
-        out = link_to(crumb.link.text, crumb.link.url) + " " + separator + " " + out
+        out = link_to(crumb.link.text, crumb.link.url, crumb.link.options) + " " + separator + " " + out
       end
       
       out
