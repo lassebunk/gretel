@@ -1,1 +1,1 @@
-ActionController::Base.send :include, Gretel::HelperMethods
+require 'gretel'
