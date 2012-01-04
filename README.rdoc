@@ -25,7 +25,7 @@ In <code>config/initializers/breadcrumbs.rb</code>:
     end
  
     crumb :projects do
-      link "Projects", projects_path, { :class => 'breadcrumb', :style => 'font-weight: bold;' }
+      link "Projects", projects_path, :class => 'breadcrumb', :style => 'font-weight: bold;'
     end
  
     crumb :project do |project|
