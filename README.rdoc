@@ -72,4 +72,9 @@ Options for <code><%= breadcrumb %></code>:
   :show_root_alone  Whether it should show :root if this is the only link. Default: false
   :link_last        Whether the last crumb should be linked to. Default: false
 
+== Contributors
+
+* Alan Larkin
+* David Doan
+
 Copyright (c) 2010 Lasse Bunk, released under the MIT license
