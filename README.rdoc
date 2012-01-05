@@ -43,6 +43,11 @@ In <code>config/initializers/breadcrumbs.rb</code>:
       parent :project_issues, issue.project
     end
 
+    crumb :issue_user do |issue, user|
+      link user.name, issue_user_path(issue, user)
+      parent :issue, issue
+    end
+
   end
 
 In <code>app/views/layouts/application.html.erb</code>:
