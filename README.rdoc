@@ -25,11 +25,8 @@ In <code>config/initializers/breadcrumbs.rb</code>:
     end
  
     crumb :projects do
-<<<<<<< HEAD
       link "Projects", projects_path, :class => "breadcrumb", :style => "font-weight: bold;"
-=======
       link "Projects", projects_path, { :class => 'breadcrumb', :style => 'font-weight: bold;' }
->>>>>>> parent of ef73699... beauty without brackets :-)
     end
  
     crumb :project do |project|
