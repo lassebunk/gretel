@@ -1,9 +1,9 @@
 module Gretel
   class Parent
-    attr_accessor :name, :params
+    attr_accessor :name, :object
     
-    def initialize(name, *params)
-      @name, @params = name, params
+    def initialize(name, object)
+      @name, @object = name, object
     end
   end
 end

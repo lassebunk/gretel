@@ -20,32 +20,29 @@ module Gretel
         all[name] = block
       end
       
-      def get_crumb(name, *params)
+      def get_crumb(name, object = nil)
         raise "Crumb '#{name}' not found." unless all[name]
         
-        @params = params # share the params so we can call it from link() and parent()
+        @object = object # share the object so we can call it from link() and parent()
         @link = nil
         @parent = nil
         
-        all[name].call(*params)
+        all[name].call(object)
         Gretel::Crumb.new(@link, @parent)
       end
       
       def link(text, url, options = {})
-        text = text.call(*@params) if text.is_a?(Proc)
-        url = url.call(*@params) if url.is_a?(Proc)
+        text = text.call(@object) if text.is_a?(Proc)
+        url = url.call(@object) if url.is_a?(Proc)
         
         @link = Gretel::Link.new(text, url, options)
       end
       
-      def parent(name, *params)
-        name = name.call(*@params) if name.is_a?(Proc)
+      def parent(name, object = nil)
+        name = name.call(@object) if name.is_a?(Proc)
+        object = object.call(@object) if object.is_a?(Proc)
 
-        params.each_with_index do |param, i|
-          params[i] = param.call(&@params) if param.is_a?(Proc)
-        end
-
-        @parent = Gretel::Parent.new(name, *params)
+        @parent = Gretel::Parent.new(name, object)
       end
     end
   end
