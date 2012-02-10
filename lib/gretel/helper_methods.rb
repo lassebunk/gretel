@@ -3,9 +3,9 @@ module Gretel
     include ActionView::Helpers::UrlHelper
     def controller # hack because ActionView::Helpers::UrlHelper needs a controller method
     end
-    
+
     def self.included(base)
-      base.send :helper_method, :breadcrumb_for, :breadcrumb
+      base.send :helper_method, :breadcrumb_for, :breadcrumb, :render_breadcrumbs, :crumb_link
     end
     
     def breadcrumb(*args)
@@ -29,31 +29,56 @@ module Gretel
       
       crumb
     end
-    
+
     def breadcrumb_for(*args)
       options = args.extract_options!
-      link_last = options[:link_last]
-      options[:link_last] = true
-      separator = (options[:separator] || "&gt;").html_safe
-
+      
+      separator = (options[:separator] || "&gt;").html_safe    
       name, object = args[0], args[1]
-      
-      crumb = Crumbs.get_crumb(name, object)
-      out = link_to_if(link_last, crumb.link.text, crumb.link.url, crumb.link.options)
-      
+
+      crumb_list_for(name, object, options)
+        .map {|crumb| crumb_link(crumb) }
+        .join(' ' + separator + ' ').html_safe
+    end
+
+    def render_breadcrumbs(partial, *args)
+      options = args.extract_options!
+
+      if @_breadcrumb_name
+        crumbs = crumb_list_for(@_breadcrumb_name, @_breadcrumb_object, options)
+      elsif options[:show_root_alone]
+        crumbs = crumb_list_for(:root, nil, options)
+      end
+
+      render_to_string(partial: partial, locals: {crumbs: crumbs}).html_safe
+    end
+
+    def crumb_link(crumb)
+      if crumb.link.url.nil?
+        crumb.link.text
+      else
+        link_to(crumb.link.text, crumb.link.url, crumb.link.options)
+      end
+    end
+
+    private
+    def crumb_list_for(name, object, options)
+      crumbs = []
+
+      crumb = Gretel::Crumbs.get_crumb(name, object)
+      (crumbs << crumb) if options[:link_last]
+
       while parent = crumb.parent
         last_parent = parent.name
-        crumb = Crumbs.get_crumb(parent.name, parent.object)
-        out = link_to(crumb.link.text, crumb.link.url, crumb.link.options) + " " + separator + " " + out
+        crumb = Gretel::Crumbs.get_crumb(parent.name, parent.object)
+        crumbs << crumb
       end
-      
-      # TODO: Refactor this
+
       if options[:autoroot] && name != :root && last_parent != :root
-        crumb = Crumbs.get_crumb(:root)
-        out = link_to(crumb.link.text, crumb.link.url, crumb.link.options) + " " + separator + " " + out
+        crumbs << Gretel::Crumbs.get_crumb(:root)
       end
-      
-      out
-    end
+
+      crumbs.reverse
+    end   
   end
 end
