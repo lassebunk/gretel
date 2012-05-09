@@ -39,7 +39,11 @@ module Gretel
       name, object = args[0], args[1]
       
       crumb = Crumbs.get_crumb(name, object)
-      out = link_to_if(link_last, crumb.link.text, crumb.link.url, crumb.link.options)
+      if link_last
+        out = link_to_if(link_last, crumb.link.text, crumb.link.url, crumb.link.options.merge(:class => "current"))
+      else
+        out = content_tag(:span, crumb.link.text, :class => "current")
+      end
       
       while parent = crumb.parent
         last_parent = parent.name
