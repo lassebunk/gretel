@@ -42,7 +42,7 @@ module Gretel
       if link_last
         out = link_to_if(link_last, crumb.link.text, crumb.link.url, crumb.link.options.merge(:class => "current"))
       else
-        if options[:use_microformat]
+        if options[:use_microformats]
           out = content_tag(:span, crumb.link.text, :class => "current", :itemprop => "title")
         else
           out = content_tag(:span, crumb.link.text, :class => "current")
@@ -52,7 +52,7 @@ module Gretel
       while parent = crumb.parent
         last_parent = parent.name
         crumb = Crumbs.get_crumb(parent.name, parent.object)
-        if options[:use_microformat]
+        if options[:use_microformats]
           out = content_tag(:div, link_to(content_tag(:span, crumb.link.text, :itemprop => "title"), crumb.link.url, crumb.link.options.merge(:itemprop => "url")) + " ", :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb") + " " + separator + " " + out
         else
           out = link_to(crumb.link.text, crumb.link.url, crumb.link.options) + " " + separator + " " + out
@@ -62,7 +62,7 @@ module Gretel
       # TODO: Refactor this
       if options[:autoroot] && name != :root && last_parent != :root
         crumb = Crumbs.get_crumb(:root)
-        if options[:use_microformat]
+        if options[:use_microformats]
           out = content_tag(:div, link_to(content_tag(:span, crumb.link.text, :itemprop => "title"), crumb.link.url, crumb.link.options.merge(:itemprop => "url")) + " ", :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb") + " " + separator + " " + out
         else
           out = link_to(crumb.link.text, crumb.link.url, crumb.link.options) + " " + separator + " " + out
