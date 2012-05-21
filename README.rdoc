@@ -48,7 +48,8 @@ In <code>config/initializers/breadcrumbs.rb</code>:
 
 In <code>app/views/layouts/application.html.erb</code>:
 
-  <%= breadcrumb :pretext => "You are here:",
+  <%= breadcrumb :use_microformats => true,
+                 :pretext => "You are here:",
                  :separator => ">",
                  :autoroot => true,
                  :show_root_alone => true,
