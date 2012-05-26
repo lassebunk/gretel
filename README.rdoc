@@ -73,9 +73,6 @@ In <code>config/initializers/breadcrumbs.rb</code>:
       link product.name, product
       parent :category, product.category
     end
-    
-    # parent crumb
-    parent :categories
   end
 
 In <code>app/views/layouts/application.html.erb</code>:
