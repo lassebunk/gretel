@@ -59,7 +59,7 @@ module Gretel
       out = []
       while link = links.shift
         if options[:use_microformats]
-          out << content_tag(:div, self.class.helpers.link_to(content_tag(:span, link.text, :itemprop => "title"), link.url, link.options.merge(:itemprop => "url")), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
+          out << self.class.helpers.content_tag(:div, self.class.helpers.link_to(self.class.helpers.content_tag(:span, link.text, :itemprop => "title"), link.url, link.options.merge(:itemprop => "url")), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
         else
           out << self.class.helpers.link_to(link.text, link.url)
         end
@@ -68,15 +68,15 @@ module Gretel
       if last_link
         if options[:link_last]
           if options[:use_microformats]
-            out << content_tag(:div, self.class.helpers.link_to(content_tag(:span, last_link.text, :class => "current", :itemprop => "title"), last_link.url, last_link.options.merge(:itemprop => "url")), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
+            out << self.class.helpers.content_tag(:div, self.class.helpers.link_to(self.class.helpers.content_tag(:span, last_link.text, :class => "current", :itemprop => "title"), last_link.url, last_link.options.merge(:itemprop => "url")), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
           else
             out << self.class.helpers.link_to(last_link.text, last_link.url, :class => "current")
           end
         else
           if options[:use_microformats]
-            out << content_tag(:div, content_tag(:span, last_link.text, :class => "current", :itemprop => "title"), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
+            out << self.class.helpers.content_tag(:div, self.class.helpers.content_tag(:span, last_link.text, :class => "current", :itemprop => "title"), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
           else
-            out << content_tag(:span, last_link.text, :class => "current")
+            out << self.class.helpers.content_tag(:span, last_link.text, :class => "current")
           end
         end
       end
