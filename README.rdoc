@@ -50,18 +50,30 @@ In <code>config/initializers/breadcrumbs.rb</code>:
     
     # multiple links per crumb (recursive links for parent categories)
     crumb :category do |category|
-      link category.name, category
-      while parent_category = category.parent_category
-        link parent_category.name, parent_category
+      categories = [category]
+
+      parent_category = category.parent_category
+      if parent_category
+        parents.unshift parent_category
+      end
+
+      while parent_category && parent_category = parent_category.parent_category
+        parents.unshift parent_category
+      end
+
+      categories.each do |category|
+        link category.name, category
       end
     end
-    
+
     # product crumb with recursive parent categories
     crumb :product do |product|
       link product.name, product
       parent :category, product.category
     end
-
+    
+    # parent crumb
+    parent :categories
   end
 
 In <code>app/views/layouts/application.html.erb</code>:
