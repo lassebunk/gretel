@@ -36,31 +36,56 @@ module Gretel
 
       name, object = args[0], args[1]
       
-      crumbs = []
+      links = []
       
       crumb = Crumbs.get_crumb(name, object)
       while link = crumb.links.shift
-        crumbs << link_to(link.text, link.url)
+        links.unshift link
       end
       
       while crumb = crumb.parent
         last_parent = crumb.name
         crumb = Crumbs.get_crumb(crumb.name, crumb.object)
         while link = crumb.links.shift
-          crumbs.unshift link_to(link.text, link.url)
+          links.unshift link
         end
       end
       
       if options[:autoroot] && name != :root && last_parent != :root
         crumb = Crumbs.get_crumb(:root)
         while link = crumb.links.shift
-          crumbs.unshift link_to(link.text, link.url)
+          links.unshift link
         end
       end
       
-      crumbs.join(" " + (options[:separator] || "&gt;") + " ").html_safe
+      last_link = links.pop
+      
+      out = []
+      while link = links.shift
+        if options[:use_microformats]
+          out << content_tag(:div, link_to(content_tag(:span, link.text, :itemprop => "title"), link.url, link.options.merge(:itemprop => "url")), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
+        else
+          out << link_to(link.text, link.url)
+        end
+      end
+      
+      if last_link
+        if options[:link_last]
+          if options[:use_microformats]
+            out << content_tag(:div, link_to(content_tag(:span, last_link.text, :class => "current", :itemprop => "title"), last_link.url, last_link.options.merge(:itemprop => "url")), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
+          else
+            out << link_to(last_link.text, last_link.url, :class => "current")
+          end
+        else
+          if options[:use_microformats]
+            out << content_tag(:div, content_tag(:span, last_link.text, :class => "current", :itemprop => "title"), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
+          else
+            out << content_tag(:span, last_link.text, :class => "current", :itemprop => "title")
+          end
+        end
+      end
+      
+      out.join(" " + (options[:separator] || "&gt;") + " ").html_safe
     end
-    
-    # TODO: use_microformats + link_last
   end
 end
