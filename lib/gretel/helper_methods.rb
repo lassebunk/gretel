@@ -80,7 +80,7 @@ module Gretel
           if options[:use_microformats]
             out << content_tag(:div, content_tag(:span, last_link.text, :class => "current", :itemprop => "title"), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
           else
-            out << content_tag(:span, last_link.text, :class => "current", :itemprop => "title")
+            out << content_tag(:span, last_link.text, :class => "current")
           end
         end
       end
