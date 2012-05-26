@@ -46,14 +46,14 @@ module Gretel
       while crumb = crumb.parent
         last_parent = crumb.name
         crumb = Crumbs.get_crumb(crumb.name, crumb.object)
-        while link = crumb.links.shift
+        while link = crumb.links.pop
           links.unshift link
         end
       end
       
       if options[:autoroot] && name != :root && last_parent != :root
         crumb = Crumbs.get_crumb(:root)
-        while link = crumb.links.shift
+        while link = crumb.links.pop
           links.unshift link
         end
       end

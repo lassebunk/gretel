@@ -21,10 +21,13 @@ module Gretel
       end
       
       def get_crumb(name, object = nil)
+        crumb = all[name]
+        raise ArgumentError, "Breadcrumb :#{name} not found." unless crumb
+        
         @object = object # share the object so we can call it from link() and parent()
         @parent = nil
         
-        all[name].call(object)
+        crumb.call(object)
         Gretel::Crumb.new(@links, @parent)
       end
       
