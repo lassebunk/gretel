@@ -21,21 +21,21 @@ module Gretel
       end
       
       def get_crumb(name, object = nil)
-        raise "Crumb '#{name}' not found." unless all[name]
-        
         @object = object # share the object so we can call it from link() and parent()
-        @link = nil
         @parent = nil
         
         all[name].call(object)
-        Gretel::Crumb.new(@link, @parent)
+        Gretel::Crumb.new(@links, @parent)
       end
       
       def link(text, url, options = {})
         text = text.call(@object) if text.is_a?(Proc)
         url = url.call(@object) if url.is_a?(Proc)
         
-        @link = Gretel::Link.new(text, url, options)
+        @links ||= []
+        @links << Gretel::Link.new(text, url, options)
+        
+        @links
       end
       
       def parent(name, object = nil)

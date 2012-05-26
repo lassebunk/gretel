@@ -19,29 +19,47 @@ Start by generating initializer:
 In <code>config/initializers/breadcrumbs.rb</code>:
 
   Gretel::Crumbs.layout do
- 
+    
+    # root crumb
     crumb :root do
       link "Home", root_path
     end
- 
+    
+    # custom styles
     crumb :projects do
       link "Projects", projects_path, :class => "breadcrumb", :style => "font-weight: bold;"
-      link "Projects", projects_path, { :class => 'breadcrumb', :style => 'font-weight: bold;' }
     end
  
+    # lambdas
     crumb :project do |project|
       link lambda { |project| "#{project.name} (#{project.id.to_s})" }, project_path(project)
       parent :projects
     end
- 
+    
+    # parent crumbs
     crumb :project_issues do |project|
       link "Issues", project_issues_path(project)
       parent :project, project
     end
- 
+    
+    # child 
     crumb :issue do |issue|
       link issue.name, issue_path(issue)
       parent :project_issues, issue.project
+    end
+    
+    # multiple links per crumb (recursive links for parent categories)
+    crumb :category do |category|
+      link category.name, category
+      while parent_category = category.parent_category
+        link parent_category.name, parent_category
+      end
+    end
+    
+    # product crumb with recursive parent categories
+    crumb :product do |product|
+      link product.name, product
+      parent :category, product.category
     end
 
   end
@@ -73,6 +91,10 @@ Options for <code><%= breadcrumb %></code>:
   :autoroot         Whether it should automatically link to :root if no root parent is given. Default: false
   :show_root_alone  Whether it should show :root if this is the only link. Default: false
   :link_last        Whether the last crumb should be linked to. Default: false
+
+== Todo's
+
+* Currently breaks devise mailers because of the <code>controller</code> method in <code>lib/gretel/helper_methods</code>. Can anybody help fixing this?
 
 == Contributors
 

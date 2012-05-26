@@ -33,43 +33,34 @@ module Gretel
     def breadcrumb_for(*args)
       options = args.extract_options!
       link_last = options[:link_last]
-      options[:link_last] = true
-      separator = (options[:separator] || "&gt;").html_safe
 
       name, object = args[0], args[1]
       
+      crumbs = []
+      
       crumb = Crumbs.get_crumb(name, object)
-      if link_last
-        out = link_to_if(link_last, crumb.link.text, crumb.link.url, crumb.link.options.merge(:class => "current"))
-      else
-        if options[:use_microformats]
-          out = content_tag(:span, crumb.link.text, :class => "current", :itemprop => "title")
-        else
-          out = content_tag(:span, crumb.link.text, :class => "current")
+      while link = crumb.links.shift
+        crumbs << link_to(link.text, link.url)
+      end
+      
+      while crumb = crumb.parent
+        last_parent = crumb.name
+        crumb = Crumbs.get_crumb(crumb.name, crumb.object)
+        while link = crumb.links.shift
+          crumbs.unshift link_to(link.text, link.url)
         end
       end
       
-      while parent = crumb.parent
-        last_parent = parent.name
-        crumb = Crumbs.get_crumb(parent.name, parent.object)
-        if options[:use_microformats]
-          out = content_tag(:div, link_to(content_tag(:span, crumb.link.text, :itemprop => "title"), crumb.link.url, crumb.link.options.merge(:itemprop => "url")) + " ", :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb") + " " + separator + " " + out
-        else
-          out = link_to(crumb.link.text, crumb.link.url, crumb.link.options) + " " + separator + " " + out
-        end
-      end
-      
-      # TODO: Refactor this
       if options[:autoroot] && name != :root && last_parent != :root
         crumb = Crumbs.get_crumb(:root)
-        if options[:use_microformats]
-          out = content_tag(:div, link_to(content_tag(:span, crumb.link.text, :itemprop => "title"), crumb.link.url, crumb.link.options.merge(:itemprop => "url")) + " ", :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb") + " " + separator + " " + out
-        else
-          out = link_to(crumb.link.text, crumb.link.url, crumb.link.options) + " " + separator + " " + out
+        while link = crumb.links.shift
+          crumbs.unshift link_to(link.text, link.url)
         end
       end
       
-      out
+      crumbs.join(" " + (options[:separator] || "&gt;") + " ").html_safe
     end
+    
+    # TODO: use_microformats + link_last
   end
 end
