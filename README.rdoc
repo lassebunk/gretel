@@ -117,7 +117,7 @@ Options for <code><%= breadcrumb %></code>:
 * Lasse Bunk (creator)
 * Alan Larkin
 * David Doan
-* Carlivar
+* Carl Johnson
 * Tom Canham
 
 Copyright (c) 2010 Lasse Bunk, released under the MIT license
