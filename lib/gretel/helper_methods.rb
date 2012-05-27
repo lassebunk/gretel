@@ -38,21 +38,21 @@ module Gretel
 
         crumb = Crumbs.get_crumb(@_breadcrumb_name, @_breadcrumb_object)
         while link = crumb.links.pop
-          links.unshift ViewLink.new(link.text, link.url, options)
+          links.unshift ViewLink.new(link.text, link.url, link.options)
         end
 
         while crumb = crumb.parent
           last_parent = crumb.name
           crumb = Crumbs.get_crumb(crumb.name, crumb.object)
           while link = crumb.links.pop
-            links.unshift ViewLink.new(link.text, link.url, options)
+            links.unshift ViewLink.new(link.text, link.url, link.options)
           end
         end
 
         if options[:autoroot] && @_breadcrumb_name != :root && last_parent != :root
           crumb = Crumbs.get_crumb(:root)
           while link = crumb.links.pop
-            links.unshift ViewLink.new(link.text, link.url, options)
+            links.unshift ViewLink.new(link.text, link.url, link.options)
           end
         end
 
@@ -60,11 +60,11 @@ module Gretel
 
         out = []
         while link = links.shift
-          out << ViewLink.new(link.text, link.url, options)
+          out << ViewLink.new(link.text, link.url, link.options)
         end
 
         if last_link
-          out << ViewLink.new(last_link.text, last_link.url, options, true)
+          out << ViewLink.new(last_link.text, last_link.url, last_link.options, true)
         end
       else
         out = []

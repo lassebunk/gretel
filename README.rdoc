@@ -81,13 +81,13 @@ In <code>app/views/layouts/application.html.erb</code>:
                  :separator => " &rsaquo; ",
                  :autoroot => true,
                  :show_root_alone => true,
-                 :link_last => false,
+                 :link_current => false,
                  :use_microformats => true
                  %>
 
 Or, if you want to customize your breadcrumbs:
 
-  <% breadcrumbs(:autoroot => true, :show_root_alone => false, :link_last => false).each_with_index do |crumb, index| %>
+  <% breadcrumbs(:autoroot => true, :show_root_alone => false).each_with_index do |crumb, index| %>
     <% if index > 0 %> &gt;<% end %>
     <% if crumb.current? %>
       <span class="current"><%= crumb.text %></span>
