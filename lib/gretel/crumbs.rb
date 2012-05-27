@@ -31,7 +31,11 @@ module Gretel
         Gretel::Crumb.new(@links, @parent)
       end
       
-      def link(text, url, options = {})
+      def link(*args)
+        options = args.extract_options!
+        text = args[0]
+        url = args[1]
+        
         text = text.call(@object) if text.is_a?(Proc)
         url = url.call(@object) if url.is_a?(Proc)
         

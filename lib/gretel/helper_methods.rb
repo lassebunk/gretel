@@ -83,7 +83,7 @@ module Gretel
       
       out = []
       while link = links.shift
-        out << get_crumb(link.text, link.url, options[:use_microformats], "", link.options)
+        out << get_crumb(link.text, link.url, options[:use_microformats], nil, link.options)
       end
       
       if current_link
@@ -102,13 +102,18 @@ module Gretel
         if use_microformats
           content_tag(:div, content_tag(:span, text, :class => css_class, :itemprop => "title"), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
         else
-          content_tag(:span, text, :class => css_class)
+          if css_class
+            content_tag(:span, text, :class => css_class)
+          else
+            text
+          end
         end
       else
+        options.merge! :class => (options[:class] ? options[:class] + " " : "") + css_class if css_class
         if use_microformats
-          content_tag(:div, link_to(content_tag(:span, text, :class => css_class, :itemprop => "title"), url, options.merge(:itemprop => "url")), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
+          content_tag(:div, link_to(content_tag(:span, text, :itemprop => "title"), url, options.merge(:itemprop => "url")), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
         else
-          link_to(text, url, :class => css_class)
+          link_to(text, url, options)
         end
       end
     end
