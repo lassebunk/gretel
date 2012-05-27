@@ -5,7 +5,7 @@ module Gretel
     end
     
     def self.included(base)
-      base.send :helper_method, :breadcrumb_for, :breadcrumb
+      base.send :helper_method, :breadcrumbs, :breadcrumb
     end
     
     def breadcrumb(*args)
@@ -30,33 +30,54 @@ module Gretel
       crumb
     end
     
+    def breadcrumbs(*args)
+      options = args.extract_options!
+      
+      if @_breadcrumb_name
+        links = []
+
+        crumb = Crumbs.get_crumb(@_breadcrumb_name, @_breadcrumb_object)
+        while link = crumb.links.pop
+          links.unshift ViewLink.new(link.text, link.url, options)
+        end
+
+        while crumb = crumb.parent
+          last_parent = crumb.name
+          crumb = Crumbs.get_crumb(crumb.name, crumb.object)
+          while link = crumb.links.pop
+            links.unshift ViewLink.new(link.text, link.url, options)
+          end
+        end
+
+        if options[:autoroot] && @_breadcrumb_name != :root && last_parent != :root
+          crumb = Crumbs.get_crumb(:root)
+          while link = crumb.links.pop
+            links.unshift ViewLink.new(link.text, link.url, options)
+          end
+        end
+
+        last_link = links.pop
+
+        out = []
+        while link = links.shift
+          out << ViewLink.new(link.text, link.url, options)
+        end
+
+        if last_link
+          out << ViewLink.new(last_link.text, last_link.url, options, true)
+        end
+      else
+        out = []
+      end
+
+      out
+    end
+    
     def breadcrumb_for(*args)
       options = args.extract_options!
-      link_last = options[:link_last]
-
       name, object = args[0], args[1]
       
-      links = []
-      
-      crumb = Crumbs.get_crumb(name, object)
-      while link = crumb.links.pop
-        links.unshift link
-      end
-      
-      while crumb = crumb.parent
-        last_parent = crumb.name
-        crumb = Crumbs.get_crumb(crumb.name, crumb.object)
-        while link = crumb.links.pop
-          links.unshift link
-        end
-      end
-      
-      if options[:autoroot] && name != :root && last_parent != :root
-        crumb = Crumbs.get_crumb(:root)
-        while link = crumb.links.pop
-          links.unshift link
-        end
-      end
+      links = breadcrumbs(name, object, options)
       
       last_link = links.pop
       
@@ -70,7 +91,7 @@ module Gretel
       end
       
       if last_link
-        if options[:link_last]
+        if options[:link_last] || options[:link_current]
           if options[:use_microformats]
             out << content_tag(:div, link_to(content_tag(:span, last_link.text, :class => "current", :itemprop => "title"), last_link.url, last_link.options.merge(:itemprop => "url")), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
           else
@@ -85,7 +106,7 @@ module Gretel
         end
       end
       
-      out.join(" " + (options[:separator] || "&gt;") + " ").html_safe
+      out.join(options[:separator] || " &gt; ").html_safe
     end
   end
 end
