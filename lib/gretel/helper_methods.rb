@@ -23,8 +23,13 @@ module Gretel
         end
       end
       
-      if crumb && options[:pretext]
-        crumb = options[:pretext].html_safe + " " + crumb
+      if crumb
+        if options[:pretext]
+          crumb = options[:pretext].html_safe + crumb
+        end
+        if options[:posttext]
+          crumb = crumb + options[:posttext].html_safe
+        end
       end
       
       crumb

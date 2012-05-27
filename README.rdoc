@@ -77,7 +77,8 @@ In <code>app/views/xx/xx.html.erb</code>:
 
 In <code>app/views/layouts/application.html.erb</code>:
 
-  <%= breadcrumb :pretext => "You are here:",
+  <%= breadcrumb :pretext => "You are here: ",
+                 :posttext => " &laquo; that was the breadcrumbs!",
                  :separator => " &rsaquo; ",
                  :autoroot => true,
                  :show_root_alone => true,
