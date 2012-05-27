@@ -82,7 +82,7 @@ In <code>app/views/layouts/application.html.erb</code>:
                  :autoroot => true,
                  :show_root_alone => true,
                  :link_current => false,
-                 :use_microformats => true
+                 :semantic => true
                  %>
 
 Or, if you want to customize your breadcrumbs:

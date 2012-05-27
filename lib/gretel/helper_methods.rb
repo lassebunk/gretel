@@ -83,23 +83,23 @@ module Gretel
       
       out = []
       while link = links.shift
-        out << get_crumb(link.text, link.url, options[:use_microformats], nil, link.options)
+        out << get_crumb(link.text, link.url, options[:semantic], nil, link.options)
       end
       
       if current_link
         if options[:link_last] || options[:link_current]
-          out << get_crumb(current_link.text, current_link.url, options[:use_microformats], "current", current_link.options)
+          out << get_crumb(current_link.text, current_link.url, options[:semantic], "current", current_link.options)
         else
-          out << get_crumb(current_link.text, nil, options[:use_microformats], "current")
+          out << get_crumb(current_link.text, nil, options[:semantic], "current")
         end
       end
       
       out.join(options[:separator] || " &gt; ").html_safe
     end
     
-    def get_crumb(text, url, use_microformats, css_class, options = {})
+    def get_crumb(text, url, semantic, css_class, options = {})
       if url.blank?
-        if use_microformats
+        if semantic
           content_tag(:div, content_tag(:span, text, :class => css_class, :itemprop => "title"), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
         else
           if css_class
@@ -110,7 +110,7 @@ module Gretel
         end
       else
         options.merge! :class => (options[:class] ? options[:class] + " " : "") + css_class if css_class
-        if use_microformats
+        if semantic
           content_tag(:div, link_to(content_tag(:span, text, :itemprop => "title"), url, options.merge(:itemprop => "url")), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
         else
           link_to(text, url, options)
