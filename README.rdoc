@@ -109,7 +109,7 @@ Options for <code><%= breadcrumb %></code>:
   :separator        Separator between links. Default: &gt;
   :autoroot         Whether it should automatically link to :root if no root parent is given. Default: false
   :show_root_alone  Whether it should show :root if this is the only link. Default: false
-  :link_last        Whether the last crumb should be linked to. Default: false
+  :link_current     Whether the current crumb should be linked to. Default: false
 
 == Contributors
 

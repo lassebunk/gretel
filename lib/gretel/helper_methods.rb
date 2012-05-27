@@ -56,15 +56,15 @@ module Gretel
           end
         end
 
-        last_link = links.pop
+        current_link = links.pop
 
         out = []
         while link = links.shift
           out << ViewLink.new(link.text, link.url, link.options)
         end
 
-        if last_link
-          out << ViewLink.new(last_link.text, last_link.url, last_link.options, true)
+        if current_link
+          out << ViewLink.new(current_link.text, current_link.url, current_link.options, true)
         end
       else
         out = []
@@ -79,18 +79,18 @@ module Gretel
       
       links = breadcrumbs(name, object, options)
       
-      last_link = links.pop
+      current_link = links.pop
       
       out = []
       while link = links.shift
         out << get_crumb(link.text, link.url, options[:use_microformats], "", link.options)
       end
       
-      if last_link
+      if current_link
         if options[:link_last] || options[:link_current]
-          out << get_crumb(last_link.text, last_link.url, options[:use_microformats], "current", last_link.options)
+          out << get_crumb(current_link.text, current_link.url, options[:use_microformats], "current", current_link.options)
         else
-          out << get_crumb(last_link.text, nil, options[:use_microformats], "current")
+          out << get_crumb(current_link.text, nil, options[:use_microformats], "current")
         end
       end
       
