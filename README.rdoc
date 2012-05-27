@@ -102,6 +102,7 @@ Options for <code><%= breadcrumb %></code>:
 
 == Contributors
 
+* Lasse Bunk (creator)
 * Alan Larkin
 * David Doan
 
