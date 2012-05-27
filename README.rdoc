@@ -51,16 +51,12 @@ In <code>config/initializers/breadcrumbs.rb</code>:
     # multiple links per crumb (recursive links for parent categories)
     crumb :category do |category|
       parents = [category]
-
-      parent_category = category.parent_category
-      if parent_category
+    
+      parent_category = category
+      while parent_category = parent_category.parent_category
         parents.unshift parent_category
       end
-
-      while parent_category && parent_category = parent_category.parent_category
-        parents.unshift parent_category
-      end
-
+    
       parents.each do |category|
         link category.name, category
       end
