@@ -112,6 +112,11 @@ Options for <code><%= breadcrumb %></code>:
   :show_root_alone  Whether it should show :root if this is the only link. Default: false
   :link_current     Whether the current crumb should be linked to. Default: false
 
+
+== Todo's
+
+* Make sure that you in your development environment can update routes without having to restart the server
+
 == Contributors
 
 * Lasse Bunk (creator)
