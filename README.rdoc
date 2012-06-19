@@ -115,7 +115,7 @@ Options for <code><%= breadcrumb %></code>:
 
 == Todo's
 
-* Do it so that you in your development environment can update breadcrumbs without having to restart the server – can anybody help me fix this?
+* Do it so that you in your development environment can update breadcrumbs without having to restart the server – can anybody please help me fix this?
 
 * Add I18n <code>t</code> and <code>l</code> helper methods so you can use them in the breadcrumbs layout definition
 
