@@ -1,13 +1,9 @@
 module Gretel
   class Crumbs
     class << self
-      def controller # hack because Rails.application.routes.url_helpers needs a controller method
-      end
-      
       def layout(&block)
         # needs to be done here because Rails.application isn't set when this file is required
         self.class.send :include, Rails.application.routes.url_helpers
-        self.class.send :include, ActionView::Helpers::UrlHelper
         
         instance_eval &block
       end
