@@ -14,7 +14,7 @@ And run <code>bundle install</code>.
 
 Start by generating initializer:
 
-  $ rails generate gretel breadcrumbs
+  $ rails generate gretel:install
 
 In <code>config/initializers/breadcrumbs.rb</code>:
 
