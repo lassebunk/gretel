@@ -97,27 +97,18 @@ Or, if you want to customize your breadcrumbs:
     <% end %>
   <% end %>
 
-This could also be done in the controller, if you prefer:
-
-  def show
-    @project = Project.find(params[:id])
-    breadcrumb :project, @project
-  end
-
 Options for <code><%= breadcrumb %></code>:
 
   :pretext          Text to be rendered before breadcrumb, if any. Default: none
+  :posttext         Text to be appended after breadrcumb, if any: Default: none
   :separator        Separator between links. Default: &gt;
   :autoroot         Whether it should automatically link to :root if no root parent is given. Default: false
   :show_root_alone  Whether it should show :root if this is the only link. Default: false
   :link_current     Whether the current crumb should be linked to. Default: false
+  :semantic         Whether it should generate semantic breadcrumbs as per:
+                    http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417
+                    Default: false
 
-
-== Todo's
-
-* Do it so that you in your development environment can update breadcrumbs without having to restart the server – can anybody please help me fix this?
-
-* Add I18n <code>t</code> and <code>l</code> helper methods so you can use them in the breadcrumbs layout definition
 
 == Contributors
 
@@ -127,4 +118,4 @@ Options for <code><%= breadcrumb %></code>:
 * Carl Johnson
 * Tom Canham
 
-Copyright (c) 2010 Lasse Bunk, released under the MIT license
+Copyright (c) 2010-2013 Lasse Bunk, released under the MIT license
