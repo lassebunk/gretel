@@ -32,7 +32,11 @@ module Gretel
         end
       end
       
-      crumb
+      if crumb
+        content_tag(:div, crumb, :class => "breadcrumbs", :id => options[:id])
+      else
+        ""
+      end
     end
     
     def breadcrumbs(*args)
