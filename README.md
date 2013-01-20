@@ -140,7 +140,6 @@ Default: false
 
 **:id**
 HTML element ID to be inserted. Default: none
-```
 
 Contributors
 ------------
