@@ -5,4 +5,4 @@ require 'gretel/view_link'
 require 'gretel/link'
 require 'gretel/parent'
 
-ActionController::Base.send :include, Gretel::HelperMethods
+ActionView::Base.send :include, Gretel::HelperMethods

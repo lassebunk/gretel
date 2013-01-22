@@ -1,13 +1,5 @@
 module Gretel
   module HelperMethods
-    include ActionView::Helpers::UrlHelper
-    def controller # hack because ActionView::Helpers::UrlHelper needs a controller method
-    end
-    
-    def self.included(base)
-      base.send :helper_method, :breadcrumbs, :breadcrumb
-    end
-    
     def breadcrumb(*args)
       options = args.extract_options!
       name, object = args[0], args[1]
