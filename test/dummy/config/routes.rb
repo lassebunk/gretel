@@ -1,23 +1,29 @@
 Dummy::Application.routes.draw do
-  root :to => "home#root"
+  root :to => "test#root"
 
-  match "about"              => "home#about",         :as => :about
-  match "about/contact"      => "home#contact",       :as => :contact
-  match "about/contact/form" => "home#contact_form",  :as => :contact_form
+  match "about"              => "dummy#dummy", :as => :about
+  match "about/contact"      => "dummy#dummy", :as => :contact
+  match "about/contact/form" => "dummy#dummy", :as => :contact_form
 
-  resources :projects do
-    resources :issues
-  end
-
-  [ :root,
-    :simple,
+  [ :basic,
     :with_root,
-    :without_root,
     :with_autopath,
     :with_parent,
     :with_parent_object,
     :multiple_links,
-    :multiple_links_with_parent ].each do |action|
-      match action.to_s => "home##{action}", :as => action
+    :multiple_links_with_parent,
+    :semantic,
+    :no_breadcrumb,
+    :link_current,
+    :pretext,
+    :posttext,
+    :separator,
+    :autoroot,
+    :element_id ].each do |action|
+      match action.to_s => "test##{action}", :as => action
+  end
+
+  resources :projects do
+    resources :issues
   end
 end
