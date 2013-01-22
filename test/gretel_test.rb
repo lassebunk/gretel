@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class GretelTest < ActiveSupport::TestCase
-  test "truth" do
-    assert_kind_of Module, Gretel
+  test "initializer should work" do
+    assert_respond_to Gretel::Crumbs, :layout
   end
 end
