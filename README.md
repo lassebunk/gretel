@@ -127,14 +127,14 @@ You can pass options to `<%= breadcrumb %>`, e.g. `<%= breadcrumb :pretext => "Y
 
 Option           | Description                                                                                                                | Default
 ---------------- | -------------------------------------------------------------------------------------------------------------------------- | -------
-:pretext         | Text to be rendered before breadcrumb, e.g. `"You are here:"`                                                              | None
+:pretext         | Text to be rendered before breadcrumb, e.g. `"You are here: "`                                                             | None
 :posttext        | Text to be appended after breadcrumb, e.g. `"Text after breacrumb"`                                                        | None
 :separator       | Separator between links, e.g. `" &rsaquo; "`                                                                               | `&gt;`
 :autoroot        | Whether it should automatically link to the `:root` crumb if no parent is given.                                           | False
 :show_root_alone | Whether it should show `:root` if that is the only link.                                                                   | False
 :link_current    | Whether the current crumb should be linked to.                                                                             | False
 :semantic        | Whether it should generate [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417). | False
-:id              | ID for the `<div class="breadcrumbs">` element.                                                                             | None
+:id              | ID for the `<div class="breadcrumbs">` element.                                                                            | None
 
 Contributors
 ------------
