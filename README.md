@@ -144,10 +144,6 @@ HTML element ID to be inserted. Default: none
 Contributors
 ------------
 
-* Lasse Bunk (creator)
-* Alan Larkin
-* David Doan
-* Carl Johnson
-* Tom Canham
+* [See the list of contributors](https://github.com/lassebunk/gretel/graphs/contributors)
 
 Copyright (c) 2010-2013 [Lasse Bunk](http://lassebunk.dk), released under the MIT license
