@@ -10,8 +10,11 @@ In your *Gemfile*:
 gem 'gretel'
 ```
 
-And run `bundle install`.
+And run:
 
+```bash
+$ bundle install
+```
 
 Example
 -------
@@ -99,9 +102,12 @@ In *app/views/layouts/application.html.erb*:
                %>
 ```
 
-This will generate a `<div>` containing the breadcrumbs.
+This will generate a `<div class="breadcrumbs">` containing the breadcrumbs.
 
-Or, if you want to customize your breadcrumbs:
+Custom breadcrumbs
+------------------
+
+If you want to customize your breadcrumbs, you can loop through the crumbs as an array:
 
 ```erb
 <% breadcrumbs(:autoroot => true, :show_root_alone => false).each_with_index do |crumb, index| %>
@@ -114,32 +120,21 @@ Or, if you want to customize your breadcrumbs:
 <% end %>
 ```
 
-Options for <code><%= breadcrumb %></code>:
+Options
+-------
 
-**:pretext**
-Text to be rendered before breadcrumb, if any. Default: none
+You can pass options to `<%= breadcrumb %>`, e.g. `<%= breadcrumb :pretext => "You are here:" %>`:
 
-**:posttext**
-Text to be appended after breadrcumb, if any: Default: none
-
-**:separator**
-Separator between links. Default: `&gt;`
-
-**:autoroot**
-Whether it should automatically link to :root if no root parent is given. Default: false
-
-**:show_root_alone**
-Whether it should show :root if this is the only link. Default: false
-
-**:link_current**
-Whether the current crumb should be linked to. Default: false
-
-**:semantic**
-Whether it should generate [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417).
-Default: false
-
-**:id**
-HTML element ID to be inserted. Default: none
+Option           | Description                                                                                                                | Default
+---------------- | -------------------------------------------------------------------------------------------------------------------------- | -------
+:pretext         | Text to be rendered before breadcrumb, e.g. `"You are here:"`                                                              | None
+:posttext        | Text to be appended after breadcrumb, e.g. `"Text after breacrumb"`                                                        | None
+:separator       | Separator between links, e.g. `" &rsaquo; "`                                                                               | `&gt;`
+:autoroot        | Whether it should automatically link to the `:root` crumb if no parent is given.                                           | False
+:show_root_alone | Whether it should show `:root` if that is the only link.                                                                   | False
+:link_current    | Whether the current crumb should be linked to.                                                                             | False
+:semantic        | Whether it should generate [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417). | False
+:id              | ID for the `<div class="breadcrumbs">` element.                                                                             | None
 
 Contributors
 ------------
