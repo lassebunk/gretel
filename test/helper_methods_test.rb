@@ -97,4 +97,10 @@ class HelperMethodsTest < ActionView::TestCase
     assert_equal %{<div class="breadcrumbs" id="custom_id"><span class="current">About</span></div>},
                  breadcrumb(:id => "custom_id")
   end
+
+  test "renders proc" do
+    breadcrumb :with_proc
+    assert_equal %{<div class="breadcrumbs"><a href="URL from proc" class="current">Name from proc</a></div>},
+                 breadcrumb(:link_current => true)
+  end
 end

@@ -40,4 +40,8 @@ Gretel::Crumbs.layout do
     link "Contact form", contact_form_path
     parent :basic
   end
+
+  crumb :with_proc do
+    link Proc.new { "Name from proc" }, Proc.new { "URL from proc" }
+  end
 end
