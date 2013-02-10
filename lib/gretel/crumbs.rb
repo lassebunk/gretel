@@ -4,7 +4,6 @@ module Gretel
       # Lay out the breadcrumbs.
       #
       # Example:
-      #
       #   Gretel::Crumbs.layout do
       #     crumb :root do
       #       link "Home", root_path
