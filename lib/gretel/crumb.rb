@@ -29,7 +29,7 @@ module Gretel
       return @parent unless args.any?
       key = args.shift
       
-      @parent ||= Gretel::Crumb.new(key, *args)
+      @parent = Gretel::Crumb.new(key, *args)
     end
 
     # Key of the breadcrumb.
