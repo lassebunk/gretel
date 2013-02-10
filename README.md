@@ -129,9 +129,9 @@ Option           | Description                                                  
 :show_root_alone | Whether it should show `:root` if that is the only link.                                                                   | False
 :link_current    | Whether the current crumb should be linked to.                                                                             | False
 :semantic        | Whether it should generate [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417). | False
+:id              | ID for the breadcrumbs container.                                                                                          | None
 :class           | CSS class for the breadcrumbs container.                                                                                   | `"breadcrumbs"`
-:current_class   | CSS class for the current link / span.                                                                                     | `"current"`
-:id              | ID for the `<div class="breadcrumbs">` element.                                                                            | None
+:current_class   | CSS class for the current link or span.                                                                                    | `"current"`
 
 Documentation
 -------------
