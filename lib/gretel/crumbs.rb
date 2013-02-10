@@ -1,51 +1,19 @@
 module Gretel
-  class Crumbs
+  module Crumbs
     class << self
       def layout(&block)
-        # needs to be done here because Rails.application isn't set when this file is required
-        self.class.send :include, Rails.application.routes.url_helpers
-        
+        # Needs to be done here because Rails.application isn't set when this file is required
+        # TODO: Can this be done otherwise?
+        Gretel::Crumb.send :include, Rails.application.routes.url_helpers
         instance_eval &block
       end
-      
-      def all
+
+      def crumb(key, &block)
+        crumbs[key] = block
+      end
+
+      def crumbs
         @crumbs ||= {}
-      end
-
-      def crumb(name, &block)
-        all[name] = block
-      end
-      
-      def get_crumb(name, object = nil)
-        crumb = all[name]
-        raise ArgumentError, "Breadcrumb :#{name} not found." unless crumb
-        
-        @object = object # share the object so we can call it from link() and parent()
-        @parent = nil
-        
-        crumb.call(object)
-        Gretel::Crumb.new(@links, @parent)
-      end
-      
-      def link(*args)
-        options = args.extract_options!
-        text = args[0]
-        url = args[1]
-        
-        text = text.call(@object) if text.is_a?(Proc)
-        url = url.call(@object) if url.is_a?(Proc)
-        
-        @links ||= []
-        @links << Gretel::Link.new(text, url, options)
-        
-        @links
-      end
-      
-      def parent(name, object = nil)
-        name = name.call(@object) if name.is_a?(Proc)
-        object = object.call(@object) if object.is_a?(Proc)
-
-        @parent = Gretel::Parent.new(name, object)
       end
     end
   end

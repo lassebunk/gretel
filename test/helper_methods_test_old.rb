@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class HelperMethodsTest < ActionView::TestCase
-  include Gretel::ViewHelpers
+  include Gretel::HelperMethods
   fixtures :all
 
   test "shows root breadcrumb" do
