@@ -118,7 +118,7 @@ If you supply a block to the `breadcrumbs` method, it will yield an array with t
 Options
 -------
 
-You can pass options to `<%= breadcrumb %>`, e.g. `<%= breadcrumb :pretext => "You are here:" %>`:
+You can pass options to `<%= breadcrumbs %>`, e.g. `<%= breadcrumbs :pretext => "You are here:" %>`:
 
 Option           | Description                                                                                                                | Default
 ---------------- | -------------------------------------------------------------------------------------------------------------------------- | -------
