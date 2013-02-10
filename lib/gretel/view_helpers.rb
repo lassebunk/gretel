@@ -23,7 +23,7 @@ module Gretel
     #     <% if links.any? %>
     #       You are here:
     #       <% links.each do |link| %>
-    #         <%= link_to link.text, link.url %> (<%= link.key %>) %>
+    #         <%= link_to link.text, link.url %> (<%= link.key %>)
     #       <% end %>
     #     <% end %>
     #   <% end %>
