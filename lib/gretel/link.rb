@@ -1,9 +1,9 @@
 module Gretel
   class Link
-    attr_accessor :options, :text, :url
-    
-    def initialize(text, url, options = {})
-      @text, @url, @options = text, url, options
+    attr_accessor :key, :text, :url
+
+    def initialize(key, text, url)
+      @key, @text, @url = key, text, url
     end
   end
 end

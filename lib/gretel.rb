@@ -1,8 +1,7 @@
-require 'gretel/crumb'
+require 'gretel/version'
 require 'gretel/crumbs'
-require 'gretel/helper_methods'
-require 'gretel/view_link'
+require 'gretel/crumb'
 require 'gretel/link'
-require 'gretel/parent'
+require 'gretel/view_helpers'
 
-ActionView::Base.send :include, Gretel::HelperMethods
+ActionView::Base.send :include, Gretel::ViewHelpers
