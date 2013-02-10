@@ -53,4 +53,12 @@ Gretel::Crumbs.layout do
   crumb :parent_with_multiple_params do |d, e, f|
     link "First #{d} then #{e} then #{f}", about_path
   end
+
+  crumb :with_unsafe_html do
+    link "Test <strong>bold text</strong>", about_path
+  end
+
+  crumb :with_safe_html do
+    link "Test <strong>bold text</strong>".html_safe, about_path
+  end
 end

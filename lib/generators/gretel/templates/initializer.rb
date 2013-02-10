@@ -1,7 +1,6 @@
+# Remember to restart your application after editing this file.
+
 Gretel::Crumbs.layout do
-  
-  # Remember to restart your application after editing this file.
-  
   # Example crumbs:
   
   # crumb :root do
