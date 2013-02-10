@@ -1,16 +1,22 @@
-Gem::Specification.new do |s|
-  s.name = "gretel"
-  s.version = "1.2.1"
+# -*- encoding: utf-8 -*-
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'gretel/version'
 
-  s.author = "Lasse Bunk"
-  s.email = "lassebunk@gmail.com"
-  s.description = "Gretel is a Ruby on Rails plugin that makes it easy yet flexible to create breadcrumbs."
-  s.summary = "Flexible Ruby on Rails breadcrumbs plugin."
-  s.homepage = "http://github.com/lassebunk/gretel"
-  
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
-  s.test_files = Dir["test/**/*"]
+Gem::Specification.new do |gem|
+  gem.name          = "gretel"
+  gem.version       = Gretel::VERSION
+  gem.authors       = ["Lasse Bunk"]
+  gem.email         = ["lassebunk@gmail.com"]
+  gem.description   = %q{Gretel is a Ruby on Rails plugin that makes it easy yet flexible to create breadcrumbs.}
+  gem.summary       = %q{Flexible Ruby on Rails breadcrumbs plugin.}
+  gem.homepage      = "http://github.com/lassebunk/gretel"
+  gem.license       = "MIT"
 
-  s.add_development_dependency "rails", "~> 3.2.11"
-  s.add_development_dependency "sqlite3"
+  gem.files         = `git ls-files`.split($/)
+  gem.test_files    = gem.files.grep(%r{^test/})
+  gem.require_paths = ["lib"]
+
+  gem.add_development_dependency "rails", "~> 3.2.11"
+  gem.add_development_dependency "sqlite3"
 end

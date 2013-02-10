@@ -9,7 +9,7 @@ Installation
 In your *Gemfile*:
 
 ```ruby
-gem 'gretel'
+gem 'gretel', '2.0.0.beta1'
 ```
 
 And run:
@@ -31,36 +31,29 @@ Then, in *config/initializers/breadcrumbs.rb*:
 
 ```ruby
 Gretel::Crumbs.layout do
-  
-  # root crumb
+  # Root crumb
   crumb :root do
     link "Home", root_path
   end
   
-  # custom styles
+  # Regular crumb
   crumb :projects do
-    link "Projects", projects_path, :class => "breadcrumb", :style => "font-weight: bold;"
+    link "Projects", projects_path
   end
 
-  # lambdas
-  crumb :project do |project|
-    link lambda { |project| "#{project.name} (#{project.id.to_s})" }, project_path(project)
-    parent :projects
-  end
-  
-  # parent crumbs
+  # Parent crumbs
   crumb :project_issues do |project|
     link "Issues", project_issues_path(project)
     parent :project, project
   end
   
-  # child 
+  # Child 
   crumb :issue do |issue|
     link issue.name, issue_path(issue)
     parent :project_issues, issue.project
   end
   
-  # multiple links per crumb (recursive links for parent categories)
+  # Multiple links per crumb (recursive links for parent categories)
   crumb :category do |category|
     parents = [category]
   
@@ -76,48 +69,48 @@ Gretel::Crumbs.layout do
     parent :categories
   end
   
-  # product crumb with recursive parent categories
+  # Product crumb with recursive parent categories
   crumb :product do |product|
     link product.name, product
     parent :category, product.category
   end
+
+  # Multiple arguments
+  crumb :multiple_test do |a, b, c|
+    link "Test #{a}, #{b}, #{c}", test_path
+    parent :other_test, 3, 4, 5
+  end
 end
 ```
 
-At the top of *app/views/issues/show.html.erb*:
+At the top of *app/views/issues/show.html.erb*, set the current breadcrumb:
 
 ```erb
 <% breadcrumb :issue, @issue %>
 ```
 
-In *app/views/layouts/application.html.erb*:
+Then, in *app/views/layouts/application.html.erb*:
 
 ```erb
-<%= breadcrumb :pretext => "You are here: ",
-               :posttext => " &laquo; that was the breadcrumbs!",
-               :separator => " &rsaquo; ",
-               :autoroot => true,
-               :show_root_alone => true,
-               :link_current => false,
-               :semantic => true,
-               :id => "topcrumbs"
-               %>
+<%= breadcrumbs :pretext => "You are here: ",
+                :separator => " &rsaquo; ",
+                :semantic => true %>
 ```
 
 This will generate a `<div class="breadcrumbs">` containing the breadcrumbs.
 
-Custom breadcrumbs
-------------------
+Building the breadcrumbs manually
+---------------------------------
 
-If you want to customize your breadcrumbs, you can loop through the crumbs as an array:
+If you supply a block to the `breadcrumbs` method, it will yield an array with the breadcrumb links so you can build the breadcrumbs HTML manually:
 
 ```erb
-<% breadcrumbs(:autoroot => true, :show_root_alone => false).each_with_index do |crumb, index| %>
-  <% if index > 0 %> &gt;<% end %>
-  <% if crumb.current? %>
-    <span class="current"><%= crumb.text %></span>
-  <% else %>
-    <%= link_to crumb.text, crumb.url %>
+<% breadcrumbs do |links| %>
+  <% if links.any? %>
+    You are here:
+    <% links.each do |link| %>
+      <%= link_to link.text, link.url %> (<%= link.key %>) %>
+    <% end %>
   <% end %>
 <% end %>
 ```
@@ -136,7 +129,15 @@ Option           | Description                                                  
 :show_root_alone | Whether it should show `:root` if that is the only link.                                                                   | False
 :link_current    | Whether the current crumb should be linked to.                                                                             | False
 :semantic        | Whether it should generate [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417). | False
+:class           | CSS class for the breadcrumbs container.                                                                                   | `"breadcrumbs"`
+:current_class   | CSS class for the current link / span.                                                                                     | `"current"`
 :id              | ID for the `<div class="breadcrumbs">` element.                                                                            | None
+
+Documentation
+-------------
+
+* [Full documentation](http://rubydoc.info/github/lassebunk/gretel)
+* [Changelog](https://github.com/lassebunk/gretel/blob/master/CHANGELOG.md)
 
 Contributors
 ------------
