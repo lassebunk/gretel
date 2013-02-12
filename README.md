@@ -123,6 +123,7 @@ This will generate the following HTML:
 
 ```html
 <div class="breadcrumbs">
+  You are here:
   <a href="/">Home</a> &rsaquo;
   <a href="/issues">All issues</a> &rsaquo;
   <span class="current">My Issue</span>
