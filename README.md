@@ -114,7 +114,7 @@ At the top of *app/views/issues/show.html.erb*, set the current breadcrumb:
 Then, in *app/views/layouts/application.html.erb*:
 
 ```erb
-<%= breadcrumbs :pretext => "You are here: ",
+<%= breadcrumbs :pretext => "You are here:",
                 :separator => "&rsaquo;" %>
 ```
 
