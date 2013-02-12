@@ -115,8 +115,7 @@ Then, in *app/views/layouts/application.html.erb*:
 
 ```erb
 <%= breadcrumbs :pretext => "You are here: ",
-                :separator => "&rsaquo;",
-                :autoroot => true %>
+                :separator => "&rsaquo;" %>
 ```
 
 This will generate the following HTML:
