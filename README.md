@@ -80,22 +80,6 @@ This will generate the following HTML:
 </div>
 ```
 
-Building the breadcrumbs manually
----------------------------------
-
-If you supply a block to the `breadcrumbs` method, it will yield an array with the breadcrumb links so you can build the breadcrumbs HTML manually:
-
-```erb
-<% breadcrumbs do |links| %>
-  <% if links.any? %>
-    You are here:
-    <% links.each do |link| %>
-      <%= link_to link.text, link.url %> (<%= link.key %>)
-    <% end %>
-  <% end %>
-<% end %>
-```
-
 Options
 -------
 
@@ -113,6 +97,22 @@ Option           | Description                                                  
 :id              | ID for the breadcrumbs container.                                                                                          | None
 :class           | CSS class for the breadcrumbs container.                                                                                   | `"breadcrumbs"`
 :current_class   | CSS class for the current link or span.                                                                                    | `"current"`
+
+Building the breadcrumbs manually
+---------------------------------
+
+If you supply a block to the `breadcrumbs` method, it will yield an array with the breadcrumb links so you can build the breadcrumbs HTML manually:
+
+```erb
+<% breadcrumbs do |links| %>
+  <% if links.any? %>
+    You are here:
+    <% links.each do |link| %>
+      <%= link_to link.text, link.url %> (<%= link.key %>)
+    <% end %>
+  <% end %>
+<% end %>
+```
 
 More examples
 -------------
