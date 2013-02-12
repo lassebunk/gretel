@@ -80,6 +80,11 @@ Gretel::Crumbs.layout do
     link "Test #{a}, #{b}, #{c}", test_path
     parent :other_test, 3, 4, 5
   end
+
+  # Breadcrumb without link URL; will not generate a link
+  crumb :without_link do
+    link "Breadcrumb without link"
+  end
 end
 ```
 

@@ -122,4 +122,10 @@ class HelperMethodsTest < ActionView::TestCase
                   [:multiple_links_with_parent, "Contact", "/about/contact"],
                   [:multiple_links_with_parent, "Contact form", "/about/contact/form"]], out
   end
+
+  test "without link" do
+    breadcrumb :without_link
+    assert_equal %{<div class="breadcrumbs">Also without link &gt; <span class="current">Without link</span></div>},
+                 breadcrumb
+  end
 end

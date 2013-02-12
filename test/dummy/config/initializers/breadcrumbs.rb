@@ -61,4 +61,13 @@ Gretel::Crumbs.layout do
   crumb :with_safe_html do
     link "Test <strong>bold text</strong>".html_safe, about_path
   end
+
+  crumb :without_link do
+    link "Without link"
+    parent :parent_without_link
+  end
+
+  crumb :parent_without_link do
+    link "Also without link"
+  end
 end

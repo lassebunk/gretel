@@ -11,7 +11,7 @@ module Gretel
     end
 
     # Sets link of the breadcrumb.
-    def link(text, url)
+    def link(text, url = nil)
       links << Gretel::Link.new(key, text, url)
     end
 
