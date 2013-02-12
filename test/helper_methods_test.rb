@@ -127,12 +127,12 @@ class HelperMethodsTest < ActionView::TestCase
   test "without link" do
     breadcrumb :without_link
     assert_equal %{<div class="breadcrumbs">Also without link &gt; <span class="current">Without link</span></div>},
-                 breadcrumb
+                 breadcrumbs
   end
 
   test "view context" do
     breadcrumb :using_view_helper
     assert_equal %{<div class="breadcrumbs"><span class="current">TestTest</span></div>},
-                 breadcrumb
+                 breadcrumbs
   end
 end
