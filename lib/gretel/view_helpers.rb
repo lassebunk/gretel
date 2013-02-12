@@ -53,7 +53,7 @@ module Gretel
       end
 
       # Handle autoroot
-      if options[:autoroot] && links.map(&:key).exclude?(:root)
+      if options[:autoroot] && links.map(&:key).exclude?(:root) && Gretel::Crumbs.crumb_defined?(:root)
         links.unshift *Gretel::Crumb.new(self, :root).links
       end
 
@@ -113,7 +113,7 @@ module Gretel
       { :pretext => "",
         :posttext => "",
         :separator => "&gt;",
-        :autoroot => false,
+        :autoroot => true,
         :show_root_alone => false,
         :link_current => false,
         :semantic => false,

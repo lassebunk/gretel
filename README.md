@@ -90,7 +90,7 @@ Option           | Description                                                  
 :pretext         | Text to be rendered before breadcrumb, e.g. `"You are here: "`                                                             | None
 :posttext        | Text to be appended after breadcrumb, e.g. `"Text after breacrumb"`                                                        | None
 :separator       | Separator between links, e.g. `" &rsaquo; "`                                                                               | `"&gt;"`
-:autoroot        | Whether it should automatically link to the `:root` crumb if no parent is given.                                           | False
+:autoroot        | Whether it should automatically link to the `:root` crumb if no parent is given.                                           | True
 :show_root_alone | Whether it should show `:root` if that is the only link.                                                                   | False
 :link_current    | Whether the current crumb should be linked to.                                                                             | False
 :semantic        | Whether it should generate [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417). | False
