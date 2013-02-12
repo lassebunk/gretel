@@ -104,6 +104,18 @@ class HelperMethodsTest < ActionView::TestCase
                  breadcrumbs(:id => "custom_id")
   end
 
+  test "shows custom container class" do
+    breadcrumb :basic
+    assert_equal %{<div class="custom_class">\n  <a href="/">Home</a> &gt;\n  <span class="current">About</span>\n</div>},
+                 breadcrumbs(:class => "custom_class")
+  end
+
+  test "shows custom current class" do
+    breadcrumb :basic
+    assert_equal %{<div class="breadcrumbs">\n  <a href="/">Home</a> &gt;\n  <span class="custom_current_class">About</span>\n</div>},
+                 breadcrumbs(:current_class => "custom_current_class")
+  end
+
   test "unsafe html" do
     breadcrumb :with_unsafe_html
     assert_equal %{<div class="breadcrumbs">\n  <a href="/">Home</a> &gt;\n  <span class="current">Test &lt;strong&gt;bold text&lt;/strong&gt;</span>\n</div>},
