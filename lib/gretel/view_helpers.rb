@@ -82,17 +82,20 @@ module Gretel
       fragments << render_breadcrumb_fragment(current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], :class => options[:current_class])
 
       # Build the final HTML
-      html = (options[:pretext] + fragments.join(options[:separator]) + options[:posttext]).html_safe
-      content_tag(:div, html, :id => options[:id], :class => options[:class])
+      pretext = options[:pretext].present? ? options[:pretext] + "\n" : ""
+      posttext = options[:posttext].present? ? "\n" + options[:posttext] : ""
+      separator = options[:separator].present? ? " " + options[:separator] + "\n" : ""
+      html = (pretext + fragments.join(separator) + posttext).gsub("\n", "\n  ").html_safe
+      content_tag(:div, "\n  #{html}\n".html_safe, :id => options[:id], :class => options[:class])
     end
 
     # Renders HTML for a breadcrumb fragment, i.e. a breadcrumb link.
     def render_breadcrumb_fragment(text, url, semantic, options = {})
       if semantic
         if url.present?
-          content_tag(:div, link_to(content_tag(:span, text, :itemprop => "title"), url, :class => options[:class], :itemprop => "url"), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
+          content_tag(:div, ("\n  " + link_to(content_tag(:span, text, :itemprop => "title"), url, :class => options[:class], :itemprop => "url") + "\n").html_safe, :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
         else
-          content_tag(:div, content_tag(:span, text, :class => options[:class], :itemprop => "title"), :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
+          content_tag(:div, ("\n  " + content_tag(:span, text, :class => options[:class], :itemprop => "title") + "\n").html_safe, :itemscope => "", :itemtype => "http://data-vocabulary.org/Breadcrumb")
         end
       else
         if url.present?
@@ -109,7 +112,7 @@ module Gretel
     def default_breadcrumb_options
       { :pretext => "",
         :posttext => "",
-        :separator => " &gt; ",
+        :separator => "&gt;",
         :autoroot => false,
         :show_root_alone => false,
         :link_current => false,
