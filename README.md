@@ -41,6 +41,90 @@ Gretel::Crumbs.layout do
   crumb :root do
     link "Home", root_path
   end
+
+  # Issue list
+  crumb :issues do
+    link "All issues", issues_path
+    parent :root
+  end
+
+  # Issue
+  crumb :issue do |issue|
+    link issue.title, issue
+    parent :issues
+  end
+end
+```
+
+At the top of *app/views/issues/show.html.erb*, set the current breadcrumb (assuming you have loaded `@issue` with an issue):
+
+```erb
+<% breadcrumb :issue, @issue %>
+```
+
+Then, in *app/views/layouts/application.html.erb*:
+
+```erb
+<%= breadcrumbs :pretext => "You are here:",
+                :separator => "&rsaquo;" %>
+```
+
+This will generate the following HTML:
+
+```html
+<div class="breadcrumbs">
+  You are here:
+  <a href="/">Home</a> &rsaquo;
+  <a href="/issues">All issues</a> &rsaquo;
+  <span class="current">My Issue</span>
+</div>
+```
+
+Building the breadcrumbs manually
+---------------------------------
+
+If you supply a block to the `breadcrumbs` method, it will yield an array with the breadcrumb links so you can build the breadcrumbs HTML manually:
+
+```erb
+<% breadcrumbs do |links| %>
+  <% if links.any? %>
+    You are here:
+    <% links.each do |link| %>
+      <%= link_to link.text, link.url %> (<%= link.key %>)
+    <% end %>
+  <% end %>
+<% end %>
+```
+
+Options
+-------
+
+You can pass options to `<%= breadcrumbs %>`, e.g. `<%= breadcrumbs :pretext => "You are here:" %>`:
+
+Option           | Description                                                                                                                | Default
+---------------- | -------------------------------------------------------------------------------------------------------------------------- | -------
+:pretext         | Text to be rendered before breadcrumb, e.g. `"You are here: "`                                                             | None
+:posttext        | Text to be appended after breadcrumb, e.g. `"Text after breacrumb"`                                                        | None
+:separator       | Separator between links, e.g. `" &rsaquo; "`                                                                               | `"&gt;"`
+:autoroot        | Whether it should automatically link to the `:root` crumb if no parent is given.                                           | False
+:show_root_alone | Whether it should show `:root` if that is the only link.                                                                   | False
+:link_current    | Whether the current crumb should be linked to.                                                                             | False
+:semantic        | Whether it should generate [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417). | False
+:id              | ID for the breadcrumbs container.                                                                                          | None
+:class           | CSS class for the breadcrumbs container.                                                                                   | `"breadcrumbs"`
+:current_class   | CSS class for the current link or span.                                                                                    | `"current"`
+
+More examples
+-------------
+
+In *config/initializers/breadcrumbs.rb*:
+
+```ruby
+Gretel::Crumbs.layout do
+  # Root crumb
+  crumb :root do
+    link "Home", root_path
+  end
   
   # Regular crumb
   crumb :projects do
@@ -104,64 +188,6 @@ Gretel::Crumbs.layout do
   end
 end
 ```
-
-At the top of *app/views/issues/show.html.erb*, set the current breadcrumb:
-
-```erb
-<% breadcrumb :issue, @issue %>
-```
-
-Then, in *app/views/layouts/application.html.erb*:
-
-```erb
-<%= breadcrumbs :pretext => "You are here:",
-                :separator => "&rsaquo;" %>
-```
-
-This will generate the following HTML:
-
-```html
-<div class="breadcrumbs">
-  You are here:
-  <a href="/">Home</a> &rsaquo;
-  <a href="/issues">All issues</a> &rsaquo;
-  <span class="current">My Issue</span>
-</div>
-```
-
-Building the breadcrumbs manually
----------------------------------
-
-If you supply a block to the `breadcrumbs` method, it will yield an array with the breadcrumb links so you can build the breadcrumbs HTML manually:
-
-```erb
-<% breadcrumbs do |links| %>
-  <% if links.any? %>
-    You are here:
-    <% links.each do |link| %>
-      <%= link_to link.text, link.url %> (<%= link.key %>)
-    <% end %>
-  <% end %>
-<% end %>
-```
-
-Options
--------
-
-You can pass options to `<%= breadcrumbs %>`, e.g. `<%= breadcrumbs :pretext => "You are here:" %>`:
-
-Option           | Description                                                                                                                | Default
----------------- | -------------------------------------------------------------------------------------------------------------------------- | -------
-:pretext         | Text to be rendered before breadcrumb, e.g. `"You are here: "`                                                             | None
-:posttext        | Text to be appended after breadcrumb, e.g. `"Text after breacrumb"`                                                        | None
-:separator       | Separator between links, e.g. `" &rsaquo; "`                                                                               | `"&gt;"`
-:autoroot        | Whether it should automatically link to the `:root` crumb if no parent is given.                                           | False
-:show_root_alone | Whether it should show `:root` if that is the only link.                                                                   | False
-:link_current    | Whether the current crumb should be linked to.                                                                             | False
-:semantic        | Whether it should generate [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417). | False
-:id              | ID for the breadcrumbs container.                                                                                          | None
-:class           | CSS class for the breadcrumbs container.                                                                                   | `"breadcrumbs"`
-:current_class   | CSS class for the current link or span.                                                                                    | `"current"`
 
 Access to view helpers
 ----------------------
