@@ -115,11 +115,19 @@ Then, in *app/views/layouts/application.html.erb*:
 
 ```erb
 <%= breadcrumbs :pretext => "You are here: ",
-                :separator => " &rsaquo; ",
-                :semantic => true %>
+                :separator => "&rsaquo;",
+                :autoroot => true %>
 ```
 
-This will generate a `<div class="breadcrumbs">` containing the breadcrumbs.
+This will generate the following HTML:
+
+```html
+<div class="breadcrumbs">
+  <a href="/">Home</a> &rsaquo;
+  <a href="/issues">All issues</a> &rsaquo;
+  <span class="current">My Issue</span>
+</div>
+```
 
 Building the breadcrumbs manually
 ---------------------------------
@@ -146,7 +154,7 @@ Option           | Description                                                  
 ---------------- | -------------------------------------------------------------------------------------------------------------------------- | -------
 :pretext         | Text to be rendered before breadcrumb, e.g. `"You are here: "`                                                             | None
 :posttext        | Text to be appended after breadcrumb, e.g. `"Text after breacrumb"`                                                        | None
-:separator       | Separator between links, e.g. `" &rsaquo; "`                                                                               | `" &gt; "`
+:separator       | Separator between links, e.g. `" &rsaquo; "`                                                                               | `"&gt;"`
 :autoroot        | Whether it should automatically link to the `:root` crumb if no parent is given.                                           | False
 :show_root_alone | Whether it should show `:root` if that is the only link.                                                                   | False
 :link_current    | Whether the current crumb should be linked to.                                                                             | False
