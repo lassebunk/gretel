@@ -53,6 +53,17 @@ class HelperMethodsTest < ActionView::TestCase
                  breadcrumbs(:semantic => true)
   end
 
+  test "doesn't show root alone" do
+    breadcrumb :root
+    assert_equal "", breadcrumbs
+  end
+
+  test "shows root alone" do
+    breadcrumb :root
+    assert_equal %{<div class="breadcrumbs">\n  <span class="current">Home</span>\n</div>},
+                 breadcrumbs(:show_root_alone => true)
+  end
+
   test "shows no breadcrumb" do
     assert_equal "", breadcrumbs
   end
