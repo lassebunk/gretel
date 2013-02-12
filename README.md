@@ -152,7 +152,7 @@ When inside `Gretel::Crumbs.layout do .. end`, you have access to all view helpe
 Documentation
 -------------
 
-* [Full documentation](http://rubydoc.info/github/lassebunk/gretel)
+* [Full documentation](http://rubydoc.info/gems/gretel)
 * [Changelog](https://github.com/lassebunk/gretel/blob/master/CHANGELOG.md)
 
 Contributors
