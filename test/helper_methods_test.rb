@@ -135,4 +135,10 @@ class HelperMethodsTest < ActionView::TestCase
     assert_equal %{<div class="breadcrumbs"><span class="current">TestTest</span></div>},
                  breadcrumbs
   end
+
+  test "multiple arguments" do
+    breadcrumb :with_multiple_arguments, "One", "Two", "Three"
+    assert_equal %{<div class="breadcrumbs"><a href="/about">First OneOne then TwoTwo then ThreeThree</a> &gt; <span class="current">One and Two and Three</span></div>},
+                 breadcrumb
+  end
 end

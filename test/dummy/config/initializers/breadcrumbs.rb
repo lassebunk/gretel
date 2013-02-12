@@ -45,12 +45,12 @@ Gretel::Crumbs.layout do
     link Proc.new { "Name from proc" }, Proc.new { "URL from proc" }
   end
 
-  crumb :with_multiple_params do |a, b, c|
+  crumb :with_multiple_arguments do |a, b, c|
     link "#{a} and #{b} and #{c}", contact_path
-    parent :parent_with_multiple_params, a * 2, b * 2, c * 2
+    parent :parent_with_multiple_arguments, a * 2, b * 2, c * 2
   end
 
-  crumb :parent_with_multiple_params do |d, e, f|
+  crumb :parent_with_multiple_arguments do |d, e, f|
     link "First #{d} then #{e} then #{f}", about_path
   end
 
