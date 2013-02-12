@@ -91,6 +91,17 @@ Gretel::Crumbs.layout do
   crumb :without_link do
     link "Breadcrumb without link"
   end
+
+  # Breadcrumb using view helper
+  module UsersHelper
+    def user_name_for(user)
+      user.name
+    end
+  end
+
+  crumb :user do
+    link user_name_for(user), user
+  end
 end
 ```
 

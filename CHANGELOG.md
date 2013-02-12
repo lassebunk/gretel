@@ -13,3 +13,4 @@ Version 2.0
 * No longer supports procs for link text or URL as this is unnecessary when you can pass arguments to the block anyway.
 * It now accepts multiple arguments for `crumb` and `parent` (see the readme).
 * Breadcrumbs are now rendered with `<%= breadcrumbs %>`, although you can still use the old `<%= breadcrumb %>` (without *s*).
+* You can now access view helpers from inside `Gretel::Crumbs.layout do .. end`.
