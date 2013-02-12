@@ -133,6 +133,11 @@ Option           | Description                                                  
 :class           | CSS class for the breadcrumbs container.                                                                                   | `"breadcrumbs"`
 :current_class   | CSS class for the current link or span.                                                                                    | `"current"`
 
+Access to view helpers
+----------------------
+
+When inside `Gretel::Crumbs.layout do .. end`, you have access to all view helpers of the current view where the breadcrumbs are inserted.
+
 Documentation
 -------------
 
