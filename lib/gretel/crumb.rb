@@ -2,10 +2,11 @@ module Gretel
   class Crumb
     # Initializes a new crumb from the given +key+.
     # It finds the breadcrumb created in +Gretel::Crumbs.layout+ and renders the block using the arguments supplied in +args+.
-    def initialize(key, *args)
+    def initialize(context, key, *args)
       block = Gretel::Crumbs.crumbs[key]
       raise ArgumentError, "Breadcrumb :#{key} not found." unless block
       @key = key
+      @context = context
       instance_exec *args, &block
     end
 
@@ -28,11 +29,17 @@ module Gretel
     def parent(*args)
       return @parent unless args.any?
       key = args.shift
-      
-      @parent = Gretel::Crumb.new(key, *args)
+
+      @parent = Gretel::Crumb.new(context, key, *args)
     end
 
     # Key of the breadcrumb.
     attr_reader :key
+    attr_reader :context
+
+    # Proxy to view context
+    def method_missing(method, *args, &block)
+      context.send(method, *args, &block)
+    end
   end
 end
