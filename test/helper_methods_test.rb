@@ -141,4 +141,12 @@ class HelperMethodsTest < ActionView::TestCase
     assert_equal %{<div class="breadcrumbs">\n  <a href="/about">First OneOne then TwoTwo then ThreeThree</a> &gt;\n  <span class="current">One and Two and Three</span>\n</div>},
                  breadcrumb
   end
+
+  test "calling breadcrumbs helper twice" do
+    breadcrumb :with_parent
+    2.times do
+      assert_equal %{<div class="breadcrumbs">\n  <a href="/about">About</a> &gt;\n  <span class="current">Contact</span>\n</div>},
+                   breadcrumbs
+    end
+  end
 end
