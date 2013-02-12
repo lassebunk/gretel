@@ -70,4 +70,8 @@ Gretel::Crumbs.layout do
   crumb :parent_without_link do
     link "Also without link"
   end
+
+  crumb :using_view_helper do
+    link times_two("Test"), about_path
+  end
 end
