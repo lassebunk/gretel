@@ -10,10 +10,6 @@ module Gretel
       #     end
       #   end
       def layout(&block)
-        # The URL helpers include needs to be done here because
-        # Rails.application isn't set when this file is required
-        # TODO: Can this be done otherwise?
-        Gretel::Crumb.send :include, Rails.application.routes.url_helpers
         instance_eval &block
       end
 

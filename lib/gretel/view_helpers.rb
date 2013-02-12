@@ -40,9 +40,9 @@ module Gretel
     # Returns an array of links for the path of the breadcrumb set by +breadcrumb+.
     def get_breadcrumb_links(options = {})
       return [] if @_breadcrumb_key.blank?
-      
+
       # Get breadcrumb set by the `breadcrumb` method
-      crumb = Gretel::Crumb.new(@_breadcrumb_key, *@_breadcrumb_args)
+      crumb = Gretel::Crumb.new(self, @_breadcrumb_key, *@_breadcrumb_args)
 
       # Links of first crumb
       links = crumb.links.dup
@@ -54,7 +54,7 @@ module Gretel
 
       # Handle autoroot
       if options[:autoroot] && links.map(&:key).exclude?(:root)
-        links.unshift *Gretel::Crumb.new(:root).links
+        links.unshift *Gretel::Crumb.new(self, :root).links
       end
 
       # Handle show root alone
