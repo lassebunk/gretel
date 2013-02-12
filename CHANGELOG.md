@@ -14,3 +14,4 @@ Version 2.0
 * It now accepts multiple arguments for `crumb` and `parent` (see the readme).
 * Breadcrumbs are now rendered with `<%= breadcrumbs %>`, although you can still use the old `<%= breadcrumb %>` (without *s*).
 * You can now access view helpers from inside `Gretel::Crumbs.layout do .. end`.
+* Breadcrumbs HTML is now indented for better readability.
