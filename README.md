@@ -45,7 +45,6 @@ Gretel::Crumbs.layout do
   # Issue list
   crumb :issues do
     link "All issues", issues_path
-    parent :root
   end
 
   # Issue
