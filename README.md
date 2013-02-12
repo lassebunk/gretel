@@ -99,7 +99,7 @@ Gretel::Crumbs.layout do
     end
   end
 
-  crumb :user do
+  crumb :user do |user|
     link user_name_for(user), user
   end
 end
