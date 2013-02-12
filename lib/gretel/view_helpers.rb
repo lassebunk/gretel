@@ -86,7 +86,7 @@ module Gretel
       content_tag(:div, html, :id => options[:id], :class => options[:class])
     end
 
-    # Renders HTML for at breadcrumb fragment, i.e. a breadcrumb link.
+    # Renders HTML for a breadcrumb fragment, i.e. a breadcrumb link.
     def render_breadcrumb_fragment(text, url, semantic, options = {})
       if semantic
         if url.present?
