@@ -64,11 +64,11 @@ At the top of *app/views/issues/show.html.erb*, set the current breadcrumb (assu
 Then, in *app/views/layouts/application.html.erb*:
 
 ```erb
-<%= breadcrumbs :pretext => "You are here:",
-                :separator => "&rsaquo;" %>
+<%= breadcrumbs :pretext => "You are here: ",
+                :separator => " &rsaquo; " %>
 ```
 
-This will generate the following HTML:
+This will generate the following HTML (indented for readability):
 
 ```html
 <div class="breadcrumbs">
@@ -82,13 +82,13 @@ This will generate the following HTML:
 Options
 -------
 
-You can pass options to `<%= breadcrumbs %>`, e.g. `<%= breadcrumbs :pretext => "You are here:" %>`:
+You can pass options to `<%= breadcrumbs %>`, e.g. `<%= breadcrumbs :pretext => "You are here: " %>`:
 
 Option           | Description                                                                                                                | Default
 ---------------- | -------------------------------------------------------------------------------------------------------------------------- | -------
 :pretext         | Text to be rendered before breadcrumb, e.g. `"You are here: "`                                                             | None
 :posttext        | Text to be appended after breadcrumb, e.g. `"Text after breacrumb"`                                                        | None
-:separator       | Separator between links, e.g. `"&rsaquo;"`                                                                               | `"&gt;"`
+:separator       | Separator between links, e.g. `" &rsaquo; "`                                                                               | `" &gt; "`
 :autoroot        | Whether it should automatically link to the `:root` crumb if no parent is given.                                           | True
 :show_root_alone | Whether it should show `:root` if that is the only link.                                                                   | False
 :link_current    | Whether the current crumb should be linked to.                                                                             | False
