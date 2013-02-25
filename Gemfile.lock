@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gretel (2.0.0.beta1)
+    gretel (2.0.0)
 
 GEM
   remote: http://rubygems.org/
