@@ -9,13 +9,7 @@ Installation
 In your *Gemfile*:
 
 ```ruby
-gem 'gretel', '2.0.0.beta1'
-```
-
-Or, if you want to run the stable version ([see documentation](https://github.com/lassebunk/gretel/tree/v1.2.1)):
-
-```ruby
-gem 'gretel', '1.2.1'
+gem 'gretel'
 ```
 
 And run:
