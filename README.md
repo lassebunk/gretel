@@ -193,6 +193,11 @@ Documentation
 * [Full documentation](http://rubydoc.info/gems/gretel)
 * [Changelog](https://github.com/lassebunk/gretel/blob/master/CHANGELOG.md)
 
+Versioning
+----------
+
+Follows [semantic versioning](http://semver.org/).
+
 Contributors
 ------------
 
