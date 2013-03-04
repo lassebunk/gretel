@@ -35,6 +35,8 @@ module Gretel
 
     # Key of the breadcrumb.
     attr_reader :key
+
+    # The current view context.
     attr_reader :context
 
     # Proxy to view context
