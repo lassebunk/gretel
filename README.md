@@ -157,6 +157,20 @@ Gretel::Crumbs.layout do
     link product.name, product
     parent :category, product.category
   end
+  
+  # Example of using params to alter the parent, e.g. to match the user's actual navigation path
+  # URL: /products/123?q=my+search
+  crumb :product do |product|
+    if keyword = params[:q].presence
+      parent :search, keyword
+    else # default
+      parent :category, product.category
+    end
+  end
+  
+  crumb :search do |keyword|
+    link "Search for #{keyword}", search_path(:q => keyword)
+  end
 
   # Multiple arguments
   crumb :multiple_test do |a, b, c|
