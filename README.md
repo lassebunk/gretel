@@ -158,7 +158,8 @@ Gretel::Crumbs.layout do
     parent :category, product.category
   end
   
-  # Example of using params to alter the parent, e.g. to match the user's actual navigation path
+  # Example of using params to alter the parent, e.g. to
+  # match the user's actual navigation path
   # URL: /products/123?q=my+search
   crumb :product do |product|
     if keyword = params[:q].presence
