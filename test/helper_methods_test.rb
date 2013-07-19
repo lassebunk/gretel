@@ -176,4 +176,154 @@ class HelperMethodsTest < ActionView::TestCase
                    breadcrumbs
     end
   end
+
+  test "reload configuration when file is changed" do
+    path = setup_loading_from_tmp_folder
+    Gretel.reload_environments << "test"
+
+    File.open(path.join("site.rb"), "w") do |f|
+      f.write <<-EOT
+        crumb :root do
+          link "Home (loaded)", root_path
+        end
+        crumb :about do
+          link "About (loaded)", about_path
+        end
+      EOT
+    end
+
+    breadcrumb :about
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &gt; <span class="current">About (loaded)</span></div>}, breadcrumbs
+
+    sleep 1 # File change interval is 1 second
+
+    File.open(path.join("site.rb"), "w") do |f|
+      f.write <<-EOT
+        crumb :root do
+          link "Home (reloaded)", "/test"
+        end
+        crumb :about do
+          link "About (reloaded)", "/reloaded"
+        end
+      EOT
+    end
+
+    breadcrumb :about
+    assert_equal %{<div class="breadcrumbs"><a href="/test">Home (reloaded)</a> &gt; <span class="current">About (reloaded)</span></div>}, breadcrumbs
+  end
+
+  test "reload configuration when file is added" do
+    path = setup_loading_from_tmp_folder
+    Gretel.reload_environments << "test"
+
+    File.open(path.join("site.rb"), "w") do |f|
+      f.write <<-EOT
+        crumb :root do
+          link "Home (loaded)", root_path
+        end
+      EOT
+    end
+
+    assert_raises ArgumentError do
+      breadcrumb :about
+      breadcrumbs
+    end
+
+    File.open(path.join("pages.rb"), "w") do |f|
+      f.write <<-EOT
+        crumb :about do
+          link "About (loaded)", about_path
+        end
+      EOT
+    end
+
+    breadcrumb :about
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &gt; <span class="current">About (loaded)</span></div>}, breadcrumbs
+  end
+
+  test "reload configuration when file is deleted" do
+    path = setup_loading_from_tmp_folder
+    Gretel.reload_environments << "test"
+
+    File.open(path.join("site.rb"), "w") do |f|
+      f.write <<-EOT
+        crumb :root do
+          link "Home (loaded)", root_path
+        end
+        crumb :about do
+          link "About (loaded)", about_path
+        end
+      EOT
+    end
+
+    File.open(path.join("pages.rb"), "w") do |f|
+      f.write <<-EOT
+        crumb :contact do
+          link "Contact (loaded)", "/contact"
+          parent :about
+        end
+      EOT
+    end
+
+    breadcrumb :contact
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &gt; <a href="/about">About (loaded)</a> &gt; <span class="current">Contact (loaded)</span></div>}, breadcrumbs
+
+    File.delete path.join("pages.rb")
+
+    assert_raises ArgumentError do
+      breadcrumb :contact
+      breadcrumbs
+    end
+
+    breadcrumb :about
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &gt; <span class="current">About (loaded)</span></div>}, breadcrumbs
+  end
+
+  test "reloads only in development environment" do
+    path = setup_loading_from_tmp_folder
+
+    assert_equal ["development"], Gretel.reload_environments
+
+    File.open(path.join("site.rb"), "w") do |f|
+      f.write <<-EOT
+        crumb :root do
+          link "Home (loaded)", root_path
+        end
+        crumb :about do
+          link "About (loaded)", about_path
+        end
+      EOT
+    end
+
+    breadcrumb :about
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &gt; <span class="current">About (loaded)</span></div>}, breadcrumbs
+
+    sleep 1
+
+    File.open(path.join("site.rb"), "w") do |f|
+      f.write <<-EOT
+        crumb :root do
+          link "Home (reloaded)", "/test"
+        end
+        crumb :about do
+          link "About (reloaded)", "/reloaded"
+        end
+      EOT
+    end
+
+    breadcrumb :about
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &gt; <span class="current">About (loaded)</span></div>}, breadcrumbs
+  end
+
+private
+
+  def setup_loading_from_tmp_folder
+    path = Rails.root.join("tmp", "testcrumbs")
+    FileUtils.rm_rf path
+    FileUtils.mkdir_p path
+
+    Gretel.breadcrumb_paths = [path.join("*.rb")]
+
+    path
+  end
 end
