@@ -1,6 +1,6 @@
-# crumb :root do
-#   link "Home", root_path
-# end
+crumb :root do
+  link "Home", root_path
+end
 
 # crumb :projects do
 #   link "Projects", projects_path
@@ -20,3 +20,9 @@
 #   link issue.title, issue_path(issue)
 #   parent :project_issues, issue.project
 # end
+
+# If you want to split your breadcrumbs configuration over multiple files, you
+# can create a folder named `config/breadcrumbs` and put your configuration
+# files there. All *.rb files (e.g. `frontend.rb` or `products.rb`) in that
+# folder are loaded and reloaded automatically when you change them, just like
+# this file (`config/breadcrumbs.rb`).
