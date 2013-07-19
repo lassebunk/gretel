@@ -1,18 +1,6 @@
 module Gretel
   module Crumbs
     class << self
-      # Lay out the breadcrumbs.
-      #
-      # Example:
-      #   Gretel::Crumbs.layout do
-      #     crumb :root do
-      #       link "Home", root_path
-      #     end
-      #   end
-      def layout(&block)
-        instance_eval &block
-      end
-
       # Stores the supplied block for later use.
       def crumb(key, &block)
         crumbs[key] = block
@@ -28,9 +16,54 @@ module Gretel
         crumbs.has_key?(key)
       end
 
+      # Loads the breadcrumb configuration files.
+      def load_breadcrumbs
+        @crumbs = {}
+
+        # Deprecated in v2.1.0.
+        instance_eval &deprecated_breadcrumbs_block
+
+        loaded_file_mtimes.clear
+        breadcrumb_files.each do |file|
+          instance_eval open(file).read, file
+          loaded_file_mtimes << File.mtime(file)
+        end
+
+        @loaded = true
+      end
+
+      # Reloads the breadcrumb configuration files if they have changed.
+      def reload_if_needed
+        load_breadcrumbs if reload?
+      end
+
+      # Returns true if a breadcrumbs reload is needed based on configuration file changes.
+      def reload?
+        return true unless loaded?
+        return false unless Gretel.reload_environments.include?(Rails.env)
+
+        loaded_file_mtimes != breadcrumb_files.map { |file| File.mtime(file) }
+      end
+
+      # Returns true if the breadcrumb configuration files have been loaded.
+      def loaded?
+        !!@loaded
+      end
+
+      # List of breadcrumb configuration files.
+      def breadcrumb_files
+        Dir[*Gretel.breadcrumb_paths]
+      end
+
       # Resets all changes made to +Gretel::Crumbs+. Used for testing.
       def reset!
         instance_variables.each { |var| remove_instance_variable var }
+      end
+
+    private
+
+      def loaded_file_mtimes
+        @loaded_file_mtimes ||= []
       end
     end
   end

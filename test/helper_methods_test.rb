@@ -5,6 +5,10 @@ class HelperMethodsTest < ActionView::TestCase
   fixtures :all
   helper :application
 
+  setup do
+    Gretel.reset!
+  end
+
   test "shows basic breadcrumb" do
     breadcrumb :basic
     assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <span class="current">About</span></div>},
