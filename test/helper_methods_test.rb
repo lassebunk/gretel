@@ -137,9 +137,8 @@ class HelperMethodsTest < ActionView::TestCase
   test "yields a block containing breadcrumb links array" do
     breadcrumb :multiple_links_with_parent
 
-    out = nil # Needs to be defined here to be set inside block and then accessed outside
-    breadcrumbs do |links|
-      out = links.map { |link| [link.key, link.text, link.url] }
+    out = breadcrumbs do |links|
+      links.map { |link| [link.key, link.text, link.url] }
     end
 
     assert_equal [[:root, "Home", "/"],
