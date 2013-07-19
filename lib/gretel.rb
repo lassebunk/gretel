@@ -42,11 +42,6 @@ module Gretel
     # Sets the Rails environment names with automatic configuration reload. Default is +["development"]+.
     attr_writer :reload_environments
 
-    # Helper for accessing +Rails.root+.
-    def root
-      Rails.root
-    end
-
     # Resets all changes made to +Gretel+ and +Gretel::Crumbs+. Used for testing.
     def reset!
       instance_variables.each { |var| remove_instance_variable var }
