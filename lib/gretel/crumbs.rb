@@ -27,6 +27,11 @@ module Gretel
       def crumb_defined?(key)
         crumbs.has_key?(key)
       end
+
+      # Resets all changes made to +Gretel::Crumbs+. Used for testing.
+      def reset!
+        instance_variables.each { |var| remove_instance_variable var }
+      end
     end
   end
 end
