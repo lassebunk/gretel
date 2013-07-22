@@ -9,7 +9,25 @@ In the Rails development environment, these files are automatically reloaded whe
 
 Using the initializer (e.g. `config/initializers/breadcrumbs.rb`) is deprecated but still supported until Gretel version 3.0.
 
-To update, use `bundle update gretel`.
+To update, use `bundle update gretel`. Then remove the `Gretel::Crumbs.layout do ... end` block, so instead of:
+
+```ruby
+Gretel::Crumbs.layout do
+  crumb :root do
+    link "Home", root_path
+  end
+end
+```
+
+in the initializer, you write:
+
+```ruby
+crumb :root do
+  link "Home", root_path
+end
+```
+
+in `config/breadcrumbs.rb`.
 
 Installation
 ------------
