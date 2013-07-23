@@ -1,8 +1,8 @@
 Description:
-  Generates initializer for Gretel.
+  Generates a sample breadcrumbs configuration file for Gretel.
 
 Example:
   rails generate gretel:install
 
   This will create:
-    config/initializers/breadcrumbs.rb
+    config/breadcrumbs.rb

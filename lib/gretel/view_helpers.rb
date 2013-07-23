@@ -28,6 +28,8 @@ module Gretel
     #     <% end %>
     #   <% end %>
     def breadcrumbs(options = {})
+      Gretel::Crumbs.reload_if_needed
+      
       options = default_breadcrumb_options.merge(options)
       links = get_breadcrumb_links(options)
       if block_given?

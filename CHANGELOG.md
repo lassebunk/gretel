@@ -1,6 +1,10 @@
 Changelog
 =========
 
+Version 2.1
+-----------
+* Breadcrumbs are now configured in `config/breadcrumbs.rb` and `config/breadcrumbs/**/*.rb` and reloaded when changed in the development environment instead of the initializer that required restart when configuration changed.
+
 Version 2.0
 -----------
 
