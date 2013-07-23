@@ -8,8 +8,9 @@ Instead of using the initializer that in Gretel version 2.0 and below required r
 In the Rails development environment, these files are automatically reloaded when changed.
 
 Using the initializer (e.g. `config/initializers/breadcrumbs.rb`) is deprecated but still supported until Gretel version 3.0.
+If you want to silence the deprecation warning until you upgrade, you can set `Gretel.suppress_deprecation_warnings = true` before the layout block in your initializer.
 
-To update, use `bundle update gretel`. Then remove the `Gretel::Crumbs.layout do ... end` block, so instead of:
+To update to the latest version of Gretel, use `bundle update gretel`. Then remove the `Gretel::Crumbs.layout do ... end` block, so instead of:
 
 ```ruby
 Gretel::Crumbs.layout do
