@@ -225,7 +225,7 @@ Nice to know
 
 ### Access to view helpers
 
-When inside `Gretel::Crumbs.layout do .. end`, you have access to all view helpers of the current view where the breadcrumbs are inserted.
+When configuring breadcrumbs, you have access to all view helpers of the view where the breadcrumbs are inserted.
 
 ### Using multiple breadcrumb configuration files
 
