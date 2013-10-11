@@ -247,6 +247,14 @@ Gretel has a built-in view helper method named `breadcrumb_trail` that contains 
 
 The product view will now have the breadcrumb trail from the first page (reviews) instead of its default parent.
 
+### Custom trail param
+
+The default trail param is `params[:trail]`. You can change it in an initializer:
+
+```ruby
+Gretel::Trail.trail_param = :other_param
+```
+
 ### Note
 
 Please use the trail functionality with care; the trails can get very long.
