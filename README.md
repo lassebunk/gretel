@@ -205,10 +205,10 @@ If you supply a block to the `breadcrumbs` method, it will yield an array with t
 <% end %>
 ```
 
-Setting custom breadcrumb trails
+Setting breadcrumb trails
 --------------------------------
 
-You can set a custom breadcrumb trail via `params[:trail]`. This makes it possible to link to a different breadcrumb trail than the one specified in your breadcrumb.
+You can set a breadcrumb trail via `params[:trail]`. This makes it possible to link to a different breadcrumb trail than the one specified in your breadcrumb.
 
 An example is if you have a store with products that have a default parent to their category, but when linking from the review section, you want to link back to the reviews instead.
 
