@@ -50,13 +50,13 @@ module Gretel
       # Encodes links array to Base64, internally using YAML for serialization.
       def encode_base64(links)
         arr = links.map { |link| [link.key, link.text, link.url] }
-        Base64.urlsafe_encode64(arr.to_yaml)
+        Base64.urlsafe_encode64(arr.to_json)
       end
 
       # Decodes links array from Base64.
       def decode_base64(base64)
-        yaml = Base64.urlsafe_decode64(base64)
-        arr = YAML.load(yaml)
+        json = Base64.urlsafe_decode64(base64)
+        arr = JSON.parse(json)
         arr.map { |key, text, url| Link.new(key, text, url) }
       rescue
         Rails.logger.info "[Gretel] Trail decode failed: Invalid Base64 '#{base64}' in trail"
