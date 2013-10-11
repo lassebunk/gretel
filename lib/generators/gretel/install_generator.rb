@@ -8,5 +8,12 @@ module Gretel
     def create_config_file
       copy_file "breadcrumbs.rb", "config/breadcrumbs.rb"
     end
+
+    desc "Creates an initializer with trail secret"
+    def create_initializer
+      initializer "gretel.rb" do
+        %{Gretel::Trail.secret = '#{SecureRandom.hex(64)}'}
+      end
+    end
   end
 end

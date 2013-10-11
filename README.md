@@ -1,34 +1,19 @@
 [![Build Status](https://secure.travis-ci.org/lassebunk/gretel.png)](http://travis-ci.org/lassebunk/gretel)
 
 Gretel is a [Ruby on Rails](http://rubyonrails.org) plugin that makes it easy yet flexible to create breadcrumbs.
+It is based around the idea that breadcrumbs are a separate concern, and therefore should be defined in their own place.
+You define a set of breadcrumbs in the config folder and specify in the view which breadcrumb to use.
+Gretel also supports [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417) (those used in Google results).
 
-New in version 2.1
+Have fun! And please do write, if you (dis)like it – [lassebunk@gmail.com](mailto:lassebunk@gmail.com).
+
+New in version 2.2
 ------------------
-Instead of using the initializer that in Gretel version 2.0 and below required restarting the application after breadcrumb configuration changes, the configuration of the breadcrumbs is now loaded from `config/breadcrumbs.rb` (and `config/breadcrumbs/*.rb` if you want to split your breadcrumbs configuration across multiple files).
-In the Rails development environment, these files are automatically reloaded when changed.
 
-Using the initializer (e.g. `config/initializers/breadcrumbs.rb`) is deprecated but still supported until Gretel version 3.0.
-If you want to silence the deprecation warning until you upgrade, you can set `Gretel.suppress_deprecation_warnings = true` before the layout block in your initializer.
+Gretel now supports setting trails via the URL – `params[:trail]`. This makes it possible to link to a different breadcrumb trail than the one specified in your breadcrumb,
+for example if you have a store with products that have a default parent to their category, but when linking from the review section, you want to link back to the reviews instead.
 
-To update to the latest version of Gretel, use `bundle update gretel`. Then remove the `Gretel::Crumbs.layout do ... end` block, so instead of:
-
-```ruby
-Gretel::Crumbs.layout do
-  crumb :root do
-    link "Home", root_path
-  end
-end
-```
-
-in the initializer, you write:
-
-```ruby
-crumb :root do
-  link "Home", root_path
-end
-```
-
-in `config/breadcrumbs.rb`.
+See below for more info or the [changelog](https://github.com/lassebunk/gretel/blob/master/CHANGELOG.md) for more changes.
 
 Installation
 ------------
@@ -220,6 +205,52 @@ If you supply a block to the `breadcrumbs` method, it will yield an array with t
 <% end %>
 ```
 
+Setting custom breadcrumb trails
+--------------------------------
+
+You can set a custom breadcrumb trail via `params[:trail]`. This makes it possible to link to a different breadcrumb trail than the one specified in your breadcrumb.
+
+An example is if you have a store with products that have a default parent to their category, but when linking from the review section, you want to link back to the reviews instead.
+
+### Initial setup
+
+To use breadcrumb trails, you must set a secret to be used when encoding the trails.
+
+You can generate it using the installer:
+
+```bash
+$ rails generate gretel:install
+```
+
+This will create an initializer in *config/initializers/gretel.rb* that will contain a random secret key.
+
+If you want to do it manually, you can put the following in *config/initializers/gretel.rb*:
+
+```
+Gretel::Trail.secret = 'your_key_here' # Must be changed to something else to be secure
+```
+
+You can generate a key using `SecureRandom.hex(64)`.
+
+### Example
+
+This example shows how to link to the trail in the view.
+Gretel has a built-in view helper method named `breadcrumb_trail` that contains the current breadcrumb trail ready for use in a URL.
+
+```erb
+<% breadcrumb :reviews %>
+...
+<% @products.each do |product| %>
+  <%= link_to @product.name, product_path(product, trail: breadcrumb_trail) %>
+<% end %>
+```
+
+The product view will now have the breadcrumb trail from the first page (reviews) instead of its default parent.
+
+### Note
+
+Please use the trail functionality with care; the trails can get very long.
+
 Nice to know
 ------------
 
@@ -235,6 +266,34 @@ The format is the same as `config/breadcrumbs.rb` which is also loaded.
 ### Automatic reloading of breadcrumb configuration files
 
 Since Gretel version 2.1.0, the breadcrumb configuration files are now reloaded in the Rails development environment if they change. In other environments, like production, the files are loaded once, when first needed.
+
+Upgrading from version 2.0 or below
+-----------------------------------
+Instead of using the initializer that in Gretel version 2.0 and below required restarting the application after breadcrumb configuration changes, the configuration of the breadcrumbs is now loaded from `config/breadcrumbs.rb` (and `config/breadcrumbs/*.rb` if you want to split your breadcrumbs configuration across multiple files).
+In the Rails development environment, these files are automatically reloaded when changed.
+
+Using the initializer (e.g. `config/initializers/breadcrumbs.rb`) is deprecated but still supported until Gretel version 3.0.
+If you want to silence the deprecation warning until you upgrade, you can set `Gretel.suppress_deprecation_warnings = true` before the layout block in your initializer.
+
+To update to the latest version of Gretel, use `bundle update gretel`. Then remove the `Gretel::Crumbs.layout do ... end` block, so instead of:
+
+```ruby
+Gretel::Crumbs.layout do
+  crumb :root do
+    link "Home", root_path
+  end
+end
+```
+
+in the initializer, you write:
+
+```ruby
+crumb :root do
+  link "Home", root_path
+end
+```
+
+in `config/breadcrumbs.rb`.
 
 Documentation
 -------------

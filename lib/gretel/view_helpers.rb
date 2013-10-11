@@ -10,6 +10,8 @@ module Gretel
       if args.any?
         @_breadcrumb_key = args.shift
         @_breadcrumb_args = args
+        @_breadcrumb_links = nil
+        @_breadcrumb_trail = nil
       else
         breadcrumbs(options)
       end
@@ -28,10 +30,8 @@ module Gretel
     #     <% end %>
     #   <% end %>
     def breadcrumbs(options = {})
-      Gretel::Crumbs.reload_if_needed
-      
       options = default_breadcrumb_options.merge(options)
-      links = get_breadcrumb_links(options)
+      links = breadcrumb_links_for_render(options)
       if block_given?
         yield links
       else
@@ -39,20 +39,21 @@ module Gretel
       end
     end
 
-    # Returns an array of links for the path of the breadcrumb set by +breadcrumb+.
-    def get_breadcrumb_links(options = {})
-      return [] if @_breadcrumb_key.blank?
+    def breadcrumb_trail
+      @_breadcrumb_trail ||= Gretel::Trail.encode(breadcrumb_links)
+    end
 
-      # Get breadcrumb set by the `breadcrumb` method
-      crumb = Gretel::Crumb.new(self, @_breadcrumb_key, *@_breadcrumb_args)
+    private
 
-      # Links of first crumb
-      links = crumb.links.dup
-
-      # Build parents
-      while crumb = crumb.parent
-        links.unshift *crumb.links
+    def breadcrumb_links
+      @_breadcrumb_links ||= begin
+        Gretel::Crumbs.reload_if_needed
+        get_breadcrumb_links
       end
+    end
+
+    def breadcrumb_links_for_render(options = {})
+      links = breadcrumb_links.dup
 
       # Handle autoroot
       if options[:autoroot] && links.map(&:key).exclude?(:root) && Gretel::Crumbs.crumb_defined?(:root)
@@ -62,6 +63,33 @@ module Gretel
       # Handle show root alone
       if links.count == 1 && links.first.key == :root && !options[:show_root_alone]
         links.shift
+      end
+
+      links
+    end
+
+    # Returns an array of links for the path of the breadcrumb set by +breadcrumb+.
+    def get_breadcrumb_links
+      return [] if @_breadcrumb_key.blank?
+
+      # Get breadcrumb set by the `breadcrumb` method
+      crumb = Gretel::Crumb.new(self, @_breadcrumb_key, *@_breadcrumb_args)
+
+      # Links of first crumb
+      links = crumb.links.dup
+      
+      links.last.tap do |last|
+        last.url = request.try(:fullpath) || last.url
+      end
+
+      if params[Gretel::Trail.trail_param].present?
+        # Decode trail from URL
+        links.unshift *Gretel::Trail.decode(params[Gretel::Trail.trail_param])
+      else
+        # Build parents
+        while crumb = crumb.parent
+          links.unshift *crumb.links
+        end
       end
 
       links

@@ -2,6 +2,7 @@ require 'gretel/version'
 require 'gretel/crumbs'
 require 'gretel/crumb'
 require 'gretel/link'
+require 'gretel/trail'
 require 'gretel/view_helpers'
 require 'gretel/deprecated'
 
@@ -42,10 +43,11 @@ module Gretel
     # Sets the Rails environment names with automatic configuration reload. Default is +["development"]+.
     attr_writer :reload_environments
 
-    # Resets all changes made to +Gretel+ and +Gretel::Crumbs+. Used for testing.
+    # Resets all changes made to +Gretel+, +Gretel::Crumbs+, and +Gretel::Trail+. Used for testing.
     def reset!
       instance_variables.each { |var| remove_instance_variable var }
       Crumbs.reset!
+      Trail.reset!
     end
   end
 end

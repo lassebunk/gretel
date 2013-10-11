@@ -7,6 +7,7 @@ class HelperMethodsTest < ActionView::TestCase
 
   setup do
     Gretel.reset!
+    Gretel::Trail.secret = "128107d341e912db791d98bbe874a8250f784b0a0b4dbc5d5032c0fc1ca7bda9c6ece667bd18d23736ee833ea79384176faeb54d2e0d21012898dde78631cdf1"
   end
 
   test "shows basic breadcrumb" do
@@ -175,6 +176,29 @@ class HelperMethodsTest < ActionView::TestCase
       assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <a href="/about">About</a> &gt; <span class="current">Contact</span></div>},
                    breadcrumbs
     end
+  end
+
+  test "trail helper" do
+    breadcrumb :basic
+
+    assert_equal "12hY7tdmRCBzQ_LS0tCi0gLSA6YmFzaWMKICAtIEFib3V0CiAgLSAvYWJvdXQK", breadcrumb_trail
+  end
+
+  test "loading trail" do
+    params[:trail] = "12hY7tdmRCBzQ_LS0tCi0gLSA6YmFzaWMKICAtIEFib3V0CiAgLSAvYWJvdXQK"
+    breadcrumb :multiple_links
+
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <a href="/about">About</a> &gt; <a href="/about/contact">Contact</a> &gt; <span class="current">Contact form</span></div>},
+                 breadcrumbs
+  end
+
+  test "different trail param" do
+    Gretel::Trail.trail_param = :mytest
+    params[:mytest] = "12hY7tdmRCBzQ_LS0tCi0gLSA6YmFzaWMKICAtIEFib3V0CiAgLSAvYWJvdXQK"
+    breadcrumb :multiple_links
+
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <a href="/about">About</a> &gt; <a href="/about/contact">Contact</a> &gt; <span class="current">Contact form</span></div>},
+                 breadcrumbs
   end
 
   test "reload configuration when file is changed" do

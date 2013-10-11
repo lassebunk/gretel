@@ -1,6 +1,12 @@
 Changelog
 =========
 
+Version 2.2
+-----------
+* Support for setting trails via the URL – `params[:trail]`. This makes it possible to link to a different breadcrumb trail than the one specified in your breadcrumb,
+  for example if you have a store with products that have a default parent to their category, but when linking from the review section, you want to link back to the reviews instead.
+  See the readme for more info.
+
 Version 2.1
 -----------
 * Breadcrumbs are now configured in `config/breadcrumbs.rb` and `config/breadcrumbs/**/*.rb` and reloaded when changed in the development environment instead of the initializer that required restart when configuration changed.
