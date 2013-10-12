@@ -31,12 +31,14 @@ module Gretel
       end
     end
 
+    # Encoded breadcrumb trail to be used in URLs.
     def breadcrumb_trail
       gretel_renderer.trail
     end
 
     private
 
+    # Reference to the Gretel breadcrumbs renderer.
     def gretel_renderer
       @_gretel_renderer ||= Gretel::Renderer.new(self, nil)
     end
