@@ -3,7 +3,7 @@ Changelog
 
 Version 3.0
 -----------
-* Support for `Gretel::Crumbs.layout do ... end` in an initializer has been removed. See the readme for details on how to upgrade.
+* Support for defining breadcrumbs using `Gretel::Crumbs.layout do ... end` in an initializer has been removed. See the readme for details on how to upgrade.
 * Support for setting trails via the URL – `params[:trail]`. This makes it possible to link back to a different breadcrumb trail than the one specified in your breadcrumb,
   for example if you have a store with products that have a default parent to their category, but when linking from the review section, you want to link back to the reviews instead.
   See the readme for more info.
