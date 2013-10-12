@@ -53,7 +53,7 @@ module Gretel
       def decode_base64(base64)
         json = Base64.urlsafe_decode64(base64)
         arr = JSON.parse(json)
-        arr.map { |key, text, url| Link.new(key, text, url) }
+        arr.map { |key, text, url| Link.new(key.to_sym, text, url) }
       rescue
         Rails.logger.info "[Gretel] Trail decode failed: Invalid Base64 '#{base64}' in trail"
         []
