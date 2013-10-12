@@ -47,7 +47,7 @@ module Gretel
 
     private
 
-      # Encodes links array to Base64, internally using YAML for serialization.
+      # Encodes links array to Base64, internally using JSON for serialization.
       def encode_base64(links)
         arr = links.map { |link| [link.key, link.text, link.url] }
         Base64.urlsafe_encode64(arr.to_json)
