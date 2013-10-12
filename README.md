@@ -21,7 +21,7 @@ Installation
 In your *Gemfile*:
 
 ```ruby
-gem "gretel"
+gem "gretel", "3.0.0.beta1"
 ```
 
 And run:
