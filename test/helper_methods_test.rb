@@ -55,7 +55,7 @@ class HelperMethodsTest < ActionView::TestCase
   test "shows semantic breadcrumb" do
     breadcrumb :with_root
     assert_equal %{<div class="breadcrumbs"><div itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/" itemprop="url"><span itemprop="title">Home</span></a></div> &gt; <div itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><span class="current" itemprop="title">About</span></div></div>},
-                 breadcrumbs(:semantic => true)
+                 breadcrumbs(semantic: true)
   end
 
   test "doesn't show root alone" do
@@ -66,7 +66,7 @@ class HelperMethodsTest < ActionView::TestCase
   test "shows root alone" do
     breadcrumb :root
     assert_equal %{<div class="breadcrumbs"><span class="current">Home</span></div>},
-                 breadcrumbs(:show_root_alone => true)
+                 breadcrumbs(show_root_alone: true)
   end
 
   test "shows no breadcrumb" do
@@ -76,49 +76,49 @@ class HelperMethodsTest < ActionView::TestCase
   test "links current breadcrumb" do
     breadcrumb :with_root
     assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <a href="/about" class="current">About</a></div>},
-                 breadcrumbs(:link_current => true)
+                 breadcrumbs(link_current: true)
   end
 
   test "shows pretext" do
     breadcrumb :basic
     assert_equal %{<div class="breadcrumbs">You are here: <a href="/">Home</a> &gt; <span class="current">About</span></div>},
-                 breadcrumbs(:pretext => "You are here: ")
+                 breadcrumbs(pretext: "You are here: ")
   end
 
   test "shows posttext" do
     breadcrumb :basic
     assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <span class="current">About</span> - text after breadcrumbs</div>},
-                 breadcrumbs(:posttext => " - text after breadcrumbs")
+                 breadcrumbs(posttext: " - text after breadcrumbs")
   end
 
   test "autoroot disabled" do
     breadcrumb :basic
     assert_equal %{<div class="breadcrumbs"><span class="current">About</span></div>},
-                 breadcrumbs(:autoroot => false)
+                 breadcrumbs(autoroot: false)
   end
 
   test "shows separator" do
     breadcrumb :with_root
     assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
-                 breadcrumbs(:separator => " &rsaquo; ")
+                 breadcrumbs(separator: " &rsaquo; ")
   end
 
   test "shows element id" do
     breadcrumb :basic
     assert_equal %{<div class="breadcrumbs" id="custom_id"><a href="/">Home</a> &gt; <span class="current">About</span></div>},
-                 breadcrumbs(:id => "custom_id")
+                 breadcrumbs(id: "custom_id")
   end
 
   test "shows custom container class" do
     breadcrumb :basic
     assert_equal %{<div class="custom_class"><a href="/">Home</a> &gt; <span class="current">About</span></div>},
-                 breadcrumbs(:class => "custom_class")
+                 breadcrumbs(class: "custom_class")
   end
 
   test "shows custom current class" do
     breadcrumb :basic
     assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <span class="custom_current_class">About</span></div>},
-                 breadcrumbs(:current_class => "custom_current_class")
+                 breadcrumbs(current_class: "custom_current_class")
   end
 
   test "unsafe html" do

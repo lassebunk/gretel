@@ -25,6 +25,6 @@ class DeprecatedTest < ActionView::TestCase
 
     breadcrumb :deprecated_child
     assert_equal %{<div class="breadcrumbs"><a href="/">Test deprecated</a> &gt; <span class="current">Child</span></div>},
-                 breadcrumbs(:autoroot => false)
+                 breadcrumbs(autoroot: false)
   end
 end

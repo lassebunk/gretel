@@ -68,8 +68,8 @@ At the top of *app/views/issues/show.html.erb*, set the current breadcrumb (assu
 Then, in *app/views/layouts/application.html.erb*:
 
 ```erb
-<%= breadcrumbs :pretext => "You are here: ",
-                :separator => " &rsaquo; " %>
+<%= breadcrumbs pretext: "You are here: ",
+                separator: " &rsaquo; " %>
 ```
 
 This will generate the following HTML (indented for readability):
@@ -86,7 +86,7 @@ This will generate the following HTML (indented for readability):
 Options
 -------
 
-You can pass options to `<%= breadcrumbs %>`, e.g. `<%= breadcrumbs :pretext => "You are here: " %>`:
+You can pass options to `<%= breadcrumbs %>`, e.g. `<%= breadcrumbs pretext: "You are here: " %>`:
 
 Option           | Description                                                                                                                | Default
 ---------------- | -------------------------------------------------------------------------------------------------------------------------- | -------
@@ -155,7 +155,7 @@ end
 # match the user's actual navigation path
 # URL: /products/123?q=my+search
 crumb :search do |keyword|
-  link "Search for #{keyword}", search_path(:q => keyword)
+  link "Search for #{keyword}", search_path(q: keyword)
 end
 
 crumb :product do |product|
