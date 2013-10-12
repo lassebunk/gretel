@@ -7,6 +7,13 @@ class DeprecatedTest < ActionView::TestCase
 
   setup do
     Gretel.reset!
+    Gretel.suppress_deprecation_warnings = true
+  end
+
+  test "show root alone" do
+    breadcrumb :root
+    assert_equal %{<div class="breadcrumbs"><span class="current">Home</span></div>},
+                 breadcrumbs(show_root_alone: true)
   end
 
   test "deprecated configuration block" do

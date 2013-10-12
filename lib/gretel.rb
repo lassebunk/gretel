@@ -32,6 +32,7 @@ module Gretel
     # Shows a deprecation warning.
     def show_deprecation_warning(message)
       return if suppress_deprecation_warnings?
+      message = "[Gretel] #{message}"
       puts message
       Rails.logger.warn message
     end

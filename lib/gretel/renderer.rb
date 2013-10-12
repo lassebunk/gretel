@@ -6,7 +6,7 @@ module Gretel
       posttext: "",
       separator: "",
       autoroot: true,
-      show_root_alone: false,
+      display_single_fragment: false,
       link_current: false,
       semantic: false,
       class: "breadcrumbs",
@@ -73,9 +73,17 @@ module Gretel
 
     attr_reader :context, :breadcrumb_key, :breadcrumb_args
 
+    # Returns merged options for rendering breadcrumbs.
     def options_for_render(options = {})
       style = options_for_style(options[:style] || DEFAULT_OPTIONS[:style])
-      DEFAULT_OPTIONS.merge(style).merge(options)
+      options = DEFAULT_OPTIONS.merge(style).merge(options)
+      
+      if show_root_alone = options.delete(:show_root_alone)
+        Gretel.show_deprecation_warning "The :show_root_alone option is deprecated. Use `breadcrumbs(display_single_fragment: #{show_root_alone.inspect})` instead."
+        options[:display_single_fragment] = show_root_alone
+      end
+      
+      options
     end
 
     # Returns options for the given +style_key+ and raises an exception if it's not found.
@@ -138,7 +146,7 @@ module Gretel
       end
 
       # Handle show root alone
-      if out.count == 1 && out.first.key == :root && !options[:show_root_alone]
+      if out.size == 1 && !options[:display_single_fragment]
         out.shift
       end
 

@@ -65,10 +65,10 @@ class HelperMethodsTest < ActionView::TestCase
     assert_equal "", breadcrumbs
   end
 
-  test "shows root alone" do
+  test "displays single fragment" do
     breadcrumb :root
     assert_equal %{<div class="breadcrumbs"><span class="current">Home</span></div>},
-                 breadcrumbs(show_root_alone: true)
+                 breadcrumbs(display_single_fragment: true)
   end
 
   test "shows no breadcrumb" do
@@ -95,8 +95,7 @@ class HelperMethodsTest < ActionView::TestCase
 
   test "autoroot disabled" do
     breadcrumb :basic
-    assert_equal %{<div class="breadcrumbs"><span class="current">About</span></div>},
-                 breadcrumbs(autoroot: false)
+    assert_equal "", breadcrumbs(autoroot: false)
   end
 
   test "shows separator" do

@@ -88,19 +88,19 @@ Options
 
 You can pass options to `<%= breadcrumbs %>`, e.g. `<%= breadcrumbs pretext: "You are here: " %>`:
 
-Option           | Description                                                                                                                | Default
----------------- | -------------------------------------------------------------------------------------------------------------------------- | -------
-:style           | How to render the breadcrumbs. Can be `:default`, `:ol`, `:ul`, or `:bootstrap`. See below for more info.                  | `:default`
-:pretext         | Text to be rendered before breadcrumb, e.g. `"You are here: "`.                                                            | None
-:posttext        | Text to be appended after breadcrumb, e.g. `"Text after breacrumb"`,                                                       | None
-:separator       | Separator between links, e.g. `" &rsaquo; "`.                                                                              | `" &rsaquo; "`
-:autoroot        | Whether it should automatically link to the `:root` crumb if no parent is given.                                           | True
-:show_root_alone | Whether it should show `:root` if that is the only link.                                                                   | False
-:link_current    | Whether the current crumb should be linked to.                                                                             | False
-:semantic        | Whether it should generate [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417). | False
-:id              | ID for the breadcrumbs container.                                                                                          | None
-:class           | CSS class for the breadcrumbs container.                                                                                   | `"breadcrumbs"`
-:current_class   | CSS class for the current link or span.                                                                                    | `"current"`
+Option                   | Description                                                                                                                | Default
+------------------------ | -------------------------------------------------------------------------------------------------------------------------- | -------
+:style                   | How to render the breadcrumbs. Can be `:default`, `:ol`, `:ul`, or `:bootstrap`. See below for more info.                  | `:default`
+:pretext                 | Text to be rendered before breadcrumb, e.g. `"You are here: "`.                                                            | None
+:posttext                | Text to be appended after breadcrumb, e.g. `"Text after breacrumb"`,                                                       | None
+:separator               | Separator between links, e.g. `" &rsaquo; "`.                                                                              | `" &rsaquo; "`
+:autoroot                | Whether it should automatically link to the `:root` crumb if no parent is given.                                           | True
+:display_single_fragment | Whether it should display the breadcrumb if it includes only one link.                                                     | False
+:link_current            | Whether the current crumb should be linked to.                                                                             | False
+:semantic                | Whether it should generate [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417). | False
+:id                      | ID for the breadcrumbs container.                                                                                          | None
+:class                   | CSS class for the breadcrumbs container.                                                                                   | `"breadcrumbs"`
+:current_class           | CSS class for the current link or span.                                                                                    | `"current"`
 
 ### Styles
 
