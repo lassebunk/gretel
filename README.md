@@ -7,13 +7,20 @@ Gretel also supports [semantic breadcrumbs](http://support.google.com/webmasters
 
 Have fun! And please do write, if you (dis)like it – [lassebunk@gmail.com](mailto:lassebunk@gmail.com).
 
-New in version 2.2
+New in version 3.0
 ------------------
 
-Gretel now supports setting trails via the URL – `params[:trail]`. This makes it possible to link back to a different breadcrumb trail than the one specified in your breadcrumb,
-for example if you have a store with products that have a default parent to their category, but when linking from the review section, you want to link back to the reviews instead.
+* You can now set trails via the URL – `params[:trail]`. This makes it possible to link back to a different breadcrumb trail than the one specified in your breadcrumb,
+  for example if you have a store with products that have a default parent to their category, but when linking from the reviews section, you want to link back to the reviews instead.
+  Read more about trails below.
+* Breadcrumbs can now be rendered in different styles like ul- and ol lists, and for use with the [Twitter Bootstrap](http://getbootstrap.com/) framework. See the `:style` option below for more info.
+* Defining breadcrumbs using `Gretel::Crumbs.layout do ... end` in an initializer has been removed. See below for details on how to upgrade.
+* The `:show_root_alone` option is now called `:display_single_fragment` and can be used to hide the breadcrumbs when there are only one link, also if it is not the root breadcrumb.
+  The old `:show_root_alone` option is still supported until Gretel version 4.0 and will show a deprecation warning when it's used.
 
-See below for more info or the [changelog](https://github.com/lassebunk/gretel/blob/master/CHANGELOG.md) for more changes.
+I hope you find these changes as useful as I did when I made them – if you have more suggestions, please create an [Issue](https://github.com/lassebunk/gretel/issues) or [Pull Request](https://github.com/lassebunk/gretel/pulls).
+
+See below for more info or the [changelog](https://github.com/lassebunk/gretel/blob/master/CHANGELOG.md) for less significant changes.
 
 Installation
 ------------
