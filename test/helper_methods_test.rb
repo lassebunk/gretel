@@ -173,6 +173,13 @@ class HelperMethodsTest < ActionView::TestCase
     end
   end
 
+  test "breadcrumb not found" do
+    assert_raises ArgumentError do
+      breadcrumb :nonexistent
+      breadcrumbs
+    end
+  end
+
   # Styles
 
   test "default style" do
