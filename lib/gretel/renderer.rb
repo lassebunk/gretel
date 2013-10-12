@@ -110,8 +110,9 @@ module Gretel
         # Links of first crumb
         links = crumb.links.dup
         
-        links.last.tap do |last|
-          last.url = request.try(:fullpath) || last.url
+        # Set current link to actual path
+        if links.any? && request
+          links.last.url = request.fullpath
         end
 
         # Get trail
