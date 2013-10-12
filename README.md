@@ -15,7 +15,7 @@ New in version 3.0 :muscle:
   Read more about trails below.
 * Breadcrumbs can now be rendered in different styles like ul- and ol lists, and for use with the [Twitter Bootstrap](http://getbootstrap.com/) framework. See the `:style` option below for more info.
 * Defining breadcrumbs using `Gretel::Crumbs.layout do ... end` in an initializer has been removed. See below for details on how to upgrade.
-* The `:show_root_alone` option is now called `:display_single_fragment` and can be used to hide the breadcrumbs when there are only one link, also if it is not the root breadcrumb.
+* The `:show_root_alone` option is now called `:display_single_fragment` and can be used to hide the breadcrumbs when there is only one link, also if it is not the root breadcrumb.
   The old `:show_root_alone` option is still supported until Gretel version 4.0 and will show a deprecation warning when it's used.
 
 I hope you find these changes as useful as I did when I made them – if you have more suggestions, please create an [Issue](https://github.com/lassebunk/gretel/issues) or [Pull Request](https://github.com/lassebunk/gretel/pulls).
