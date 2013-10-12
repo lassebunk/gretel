@@ -181,7 +181,7 @@ class HelperMethodsTest < ActionView::TestCase
   end
 
   test "current link url is set to fullpath" do
-    self.request = Struct.new(:fullpath).new("/testpath?a=1&b=2")
+    self.request = OpenStruct.new(fullpath: "/testpath?a=1&b=2")
 
     breadcrumb :basic
     assert_equal "/testpath?a=1&b=2", breadcrumbs { |links| links.last.url }
