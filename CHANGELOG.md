@@ -7,6 +7,7 @@ Version 3.0
 * Support for setting trails via the URL – `params[:trail]`. This makes it possible to link to a different breadcrumb trail than the one specified in your breadcrumb,
   for example if you have a store with products that have a default parent to their category, but when linking from the review section, you want to link back to the reviews instead.
   See the readme for more info.
+* Breadcrumbs rendering is now done in a separate class to unclutter the view with helpers. The public API is still the same.
 
 Version 2.1
 -----------
