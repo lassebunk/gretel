@@ -11,7 +11,7 @@ New in version 3.0 :muscle:
 ---------------------------
 
 * You can now set trails via the URL – `params[:trail]`. This makes it possible to link back to a different breadcrumb trail than the one specified in your breadcrumb,
-  for example if you have a store with products that have a default parent to their category, but when linking from the reviews section, you want to link back to the reviews instead.
+  for example if you have a store with products that have a default parent to their category, but when visiting from the reviews section, you want to link back to the reviews instead.
   Read more about trails below.
 * Breadcrumbs can now be rendered in different styles like ul- and ol lists, and for use with the [Twitter Bootstrap](http://getbootstrap.com/) framework. See the `:style` option below for more info.
 * Defining breadcrumbs using `Gretel::Crumbs.layout do ... end` in an initializer has been removed. See below for details on how to upgrade.
@@ -235,7 +235,7 @@ Setting breadcrumb trails
 
 You can set a breadcrumb trail via `params[:trail]`. This makes it possible to link back to a different breadcrumb trail than the one specified in your breadcrumb.
 
-An example is if you have a store with products that have a default parent to their category, but when linking from the reviews section, you want to link back to the reviews instead.
+An example is if you have a store with products that have a default parent to their category, but when visiting from the reviews section, you want to link back to the reviews instead.
 
 ### Initial setup
 
