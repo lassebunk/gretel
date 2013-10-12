@@ -8,6 +8,7 @@ Version 3.0
   for example if you have a store with products that have a default parent to their category, but when linking from the review section, you want to link back to the reviews instead.
   See the readme for more info.
 * Breadcrumbs rendering is now done in a separate class to unclutter the view with helpers. The public API is still the same.
+* Support for rendering the breadcrumbs in different styles like ul- and ol lists, and for use with [Twitter Bootstrap](http://getbootstrap.com/). See the `:style` option in the readme for more info.
 * The `:show_root_alone` option is now called `:display_single_fragment` and can be used to display the breadcrumbs only when there are more than one link, also if it is not the root breadcrumb.
 
 Version 2.1
