@@ -232,6 +232,20 @@ class HelperMethodsTest < ActionView::TestCase
     assert_equal "/testpath?a=1&b=2", breadcrumbs { |links| links.last.url }
   end
 
+  test "calling the breadcrumb method with wrong arguments" do
+    assert_nothing_raised do
+      breadcrumb :basic, test: 1
+    end
+
+    assert_raises ArgumentError do
+      breadcrumb
+    end
+
+    assert_raises ArgumentError do
+      breadcrumb(pretext: "bla")
+    end
+  end
+
   # Trails
 
   test "trail helper" do
