@@ -251,11 +251,11 @@ class HelperMethodsTest < ActionView::TestCase
   test "trail helper" do
     breadcrumb :basic
 
-    assert_equal "766f605caf033b3cf85ffdcc5e8b14b5945a034a_W1siYmFzaWMiLCJBYm91dCIsIi9hYm91dCJdXQ==", breadcrumb_trail
+    assert_equal "667ea523f92bdb3a086494575b18f587170e482b_W1siYmFzaWMiLCJBYm91dCIsMCwiL2Fib3V0Il1d", breadcrumb_trail
   end
 
   test "loading trail" do
-    params[:trail] = "766f605caf033b3cf85ffdcc5e8b14b5945a034a_W1siYmFzaWMiLCJBYm91dCIsIi9hYm91dCJdXQ=="
+    params[:trail] = "667ea523f92bdb3a086494575b18f587170e482b_W1siYmFzaWMiLCJBYm91dCIsMCwiL2Fib3V0Il1d"
     breadcrumb :multiple_links
 
     assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/about">About</a> &rsaquo; <a href="/about/contact">Contact</a> &rsaquo; <span class="current">Contact form</span></div>},
@@ -264,7 +264,7 @@ class HelperMethodsTest < ActionView::TestCase
 
   test "different trail param" do
     Gretel::Trail.trail_param = :mytest
-    params[:mytest] = "766f605caf033b3cf85ffdcc5e8b14b5945a034a_W1siYmFzaWMiLCJBYm91dCIsIi9hYm91dCJdXQ=="
+    params[:mytest] = "667ea523f92bdb3a086494575b18f587170e482b_W1siYmFzaWMiLCJBYm91dCIsMCwiL2Fib3V0Il1d"
     breadcrumb :multiple_links
 
     assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/about">About</a> &rsaquo; <a href="/about/contact">Contact</a> &rsaquo; <span class="current">Contact form</span></div>},
