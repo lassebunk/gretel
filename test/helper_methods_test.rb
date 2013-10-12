@@ -71,6 +71,12 @@ class HelperMethodsTest < ActionView::TestCase
                  breadcrumbs(display_single_fragment: true)
   end
 
+  test "displays single non-root fragment" do
+    breadcrumb :basic
+    assert_equal %{<div class="breadcrumbs"><span class="current">About</span></div>},
+                 breadcrumbs(autoroot: false, display_single_fragment: true)
+  end
+
   test "shows no breadcrumb" do
     assert_equal "", breadcrumbs
   end
