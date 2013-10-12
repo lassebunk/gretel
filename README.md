@@ -277,11 +277,11 @@ Since Gretel version 2.1.0, the breadcrumb configuration files are now reloaded 
 
 Upgrading from version 2.0 or below
 -----------------------------------
+
 Instead of using the initializer that in Gretel version 2.0 and below required restarting the application after breadcrumb configuration changes, the configuration of the breadcrumbs is now loaded from `config/breadcrumbs.rb` (and `config/breadcrumbs/*.rb` if you want to split your breadcrumbs configuration across multiple files).
 In the Rails development environment, these files are automatically reloaded when changed.
 
-Using the initializer (e.g. `config/initializers/breadcrumbs.rb`) is deprecated but still supported until Gretel version 3.0.
-If you want to silence the deprecation warning until you upgrade, you can set `Gretel.suppress_deprecation_warnings = true` before the layout block in your initializer.
+Using the initializer (e.g. `config/initializers/breadcrumbs.rb`) was deprecated in Gretel version 2.1.0 and removed in version 3.0. It raises an error if you try to use it.
 
 To update to the latest version of Gretel, use `bundle update gretel`. Then remove the `Gretel::Crumbs.layout do ... end` block, so instead of:
 

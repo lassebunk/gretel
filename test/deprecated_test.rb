@@ -10,21 +10,9 @@ class DeprecatedTest < ActionView::TestCase
   end
 
   test "deprecated configuration block" do
-    Gretel.suppress_deprecation_warnings = true
-    
-    Gretel::Crumbs.layout do
-      crumb :deprecated_parent do
-        link "Test deprecated", root_path
-      end
-
-      crumb :deprecated_child do
-        link "Child", about_path
-        parent :deprecated_parent
+    assert_raises RuntimeError do
+      Gretel::Crumbs.layout do
       end
     end
-
-    breadcrumb :deprecated_child
-    assert_equal %{<div class="breadcrumbs"><a href="/">Test deprecated</a> &gt; <span class="current">Child</span></div>},
-                 breadcrumbs(autoroot: false)
   end
 end
