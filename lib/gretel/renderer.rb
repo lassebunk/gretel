@@ -104,7 +104,7 @@ module Gretel
           Gretel::Crumbs.reload_if_needed
 
           # Get breadcrumb set by the `breadcrumb` method
-          crumb = Gretel::Crumb.new(self, breadcrumb_key, *breadcrumb_args)
+          crumb = Gretel::Crumb.new(context, breadcrumb_key, *breadcrumb_args)
 
           # Links of first crumb
           links = crumb.links.dup
