@@ -109,7 +109,7 @@ Option                   | Description                                          
 :class                   | CSS class for the breadcrumbs container.                                                                                   | `"breadcrumbs"`
 :current_class           | CSS class for the current link or span.                                                                                    | `"current"`
 :container_tag           | Tag type that contains the breadcrumbs.                                                                                    | `:div`
-:fragment_tag            | Tag type to contain each breadcrumb fragment/link                                                                          | None
+:fragment_tag            | Tag type to contain each breadcrumb fragment/link.                                                                         | None
 
 ### Styles
 
