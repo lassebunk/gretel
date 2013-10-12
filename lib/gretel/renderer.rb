@@ -169,12 +169,10 @@ module Gretel
         text = content_tag(:span, text, itemprop: "title")
         text = link_to(text, url, itemprop: "url") if url.present?
         content_tag(fragment_tag, text, class: options[:class], itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
+      elsif url.present?
+        content_tag(:div, link_to(content_tag(:span, text, itemprop: "title"), url, class: options[:class], itemprop: "url"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
       else
-        if url.present?
-          content_tag(:div, link_to(content_tag(:span, text, itemprop: "title"), url, class: options[:class], itemprop: "url"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
-        else
-          content_tag(:div, content_tag(:span, text, class: options[:class], itemprop: "title"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
-        end
+        content_tag(:div, content_tag(:span, text, class: options[:class], itemprop: "title"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
       end
     end
 
@@ -183,14 +181,12 @@ module Gretel
       if fragment_tag
         text = link_to(text, url) if url.present?
         content_tag(fragment_tag, text, class: options[:class])
+      elsif url.present?
+        link_to(text, url, class: options[:class])
+      elsif options[:class].present?
+        content_tag(:span, text, class: options[:class])
       else
-        if url.present?
-          link_to(text, url, class: options[:class])
-        elsif options[:class].present?
-          content_tag(:span, text, class: options[:class])
-        else
-          text
-        end
+        text
       end
     end
 
