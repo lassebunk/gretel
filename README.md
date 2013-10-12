@@ -7,8 +7,8 @@ Gretel also supports [semantic breadcrumbs](http://support.google.com/webmasters
 
 Have fun! And please do write, if you (dis)like it – [lassebunk@gmail.com](mailto:lassebunk@gmail.com).
 
-New in version 3.0
-------------------
+New in version 3.0 :muscle:
+---------------------------
 
 * You can now set trails via the URL – `params[:trail]`. This makes it possible to link back to a different breadcrumb trail than the one specified in your breadcrumb,
   for example if you have a store with products that have a default parent to their category, but when linking from the reviews section, you want to link back to the reviews instead.
