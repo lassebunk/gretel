@@ -218,6 +218,13 @@ class HelperMethodsTest < ActionView::TestCase
     end
   end
 
+  test "current link url is set to fullpath" do
+    self.request = Struct.new(:fullpath).new("/testpath?a=1&b=2")
+
+    breadcrumb :basic
+    assert_equal "/testpath?a=1&b=2", breadcrumbs { |links| links.last.url }
+  end
+
   # Trails
 
   test "trail helper" do
