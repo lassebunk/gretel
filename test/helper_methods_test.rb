@@ -180,6 +180,27 @@ class HelperMethodsTest < ActionView::TestCase
     end
   end
 
+  test "current link url is set to fullpath" do
+    self.request = Struct.new(:fullpath).new("/testpath?a=1&b=2")
+
+    breadcrumb :basic
+    assert_equal "/testpath?a=1&b=2", breadcrumbs { |links| links.last.url }
+  end
+
+  test "calling the breadcrumb method with wrong arguments" do
+    assert_nothing_raised do
+      breadcrumb :basic, test: 1
+    end
+
+    assert_raises ArgumentError do
+      breadcrumb
+    end
+
+    assert_raises ArgumentError do
+      breadcrumb(pretext: "bla")
+    end
+  end
+
   # Styles
 
   test "default style" do
@@ -222,27 +243,6 @@ class HelperMethodsTest < ActionView::TestCase
     breadcrumb :basic
     assert_raises ArgumentError do
       breadcrumbs(style: :nonexistent)
-    end
-  end
-
-  test "current link url is set to fullpath" do
-    self.request = Struct.new(:fullpath).new("/testpath?a=1&b=2")
-
-    breadcrumb :basic
-    assert_equal "/testpath?a=1&b=2", breadcrumbs { |links| links.last.url }
-  end
-
-  test "calling the breadcrumb method with wrong arguments" do
-    assert_nothing_raised do
-      breadcrumb :basic, test: 1
-    end
-
-    assert_raises ArgumentError do
-      breadcrumb
-    end
-
-    assert_raises ArgumentError do
-      breadcrumb(pretext: "bla")
     end
   end
 
