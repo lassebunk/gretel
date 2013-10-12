@@ -15,13 +15,13 @@ class TrailTest < ActiveSupport::TestCase
   end
 
   test "encoding" do
-    assert_equal "122.5Th13fvkg_W1sicm9vdCIsIkhvbWUiLCIvIl0sWyJzdG9yZSIsIlN0b3JlIiwiL3N0b3JlIl0sWyJzZWFyY2giLCJTZWFyY2giLCIvc3RvcmUvc2VhcmNoP3E9dGVzdCJdXQ==",
+    assert_equal "d278317ef89269c967780e371e2628559332d1a0_W1sicm9vdCIsIkhvbWUiLCIvIl0sWyJzdG9yZSIsIlN0b3JlIiwiL3N0b3JlIl0sWyJzZWFyY2giLCJTZWFyY2giLCIvc3RvcmUvc2VhcmNoP3E9dGVzdCJdXQ==",
                  Gretel::Trail.encode(@links.map { |key, text, url| Gretel::Link.new(key, text, url) })
   end
 
   test "decoding" do
     assert_equal @links,
-                 Gretel::Trail.decode("122.5Th13fvkg_W1sicm9vdCIsIkhvbWUiLCIvIl0sWyJzdG9yZSIsIlN0b3JlIiwiL3N0b3JlIl0sWyJzZWFyY2giLCJTZWFyY2giLCIvc3RvcmUvc2VhcmNoP3E9dGVzdCJdXQ==").map { |link| [link.key, link.text, link.url] }
+                 Gretel::Trail.decode("d278317ef89269c967780e371e2628559332d1a0_W1sicm9vdCIsIkhvbWUiLCIvIl0sWyJzdG9yZSIsIlN0b3JlIiwiL3N0b3JlIl0sWyJzZWFyY2giLCJTZWFyY2giLCIvc3RvcmUvc2VhcmNoP3E9dGVzdCJdXQ==").map { |link| [link.key, link.text, link.url] }
   end
 
   test "invalid trail" do

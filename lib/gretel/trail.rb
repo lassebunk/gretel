@@ -8,24 +8,20 @@ module Gretel
 
       # Securely encodes array of links to a trail string to be used in URL.
       def encode(links)
-        ensure_secret!
-
         base64 = encode_base64(links)
-        hash = base64.crypt(secret)
+        hash = generate_hash(base64)
 
         [hash, base64].join("_")
       end
 
       # Securely decodes a URL trail string to array of links.
       def decode(trail)
-        ensure_secret!
-
         hash, base64 = trail.split("_", 2)
 
         if base64.blank?
           Rails.logger.info "[Gretel] Trail decode failed: No Base64 in trail"
           []
-        elsif hash == base64.crypt(secret)
+        elsif hash == generate_hash(base64)
           decode_base64(base64)
         else
           Rails.logger.info "[Gretel] Trail decode failed: Invalid hash '#{hash}' in trail"
@@ -63,11 +59,11 @@ module Gretel
         []
       end
 
-      # Ensures that a secret has been set, and raises an exception if this is not the case.
-      def ensure_secret!
+      # Generates a salted hash of +base64+.
+      def generate_hash(base64)
         raise "Gretel::Trail.secret is not set. Please set it to an unguessable string, e.g. from `rake secret`, or use `rails generate gretel:install` to generate and set it automatically." if secret.blank?
+        Digest::SHA1.hexdigest([base64, secret].join)
       end
-
     end
   end
 end
