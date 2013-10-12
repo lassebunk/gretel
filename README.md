@@ -10,7 +10,7 @@ Have fun! And please do write, if you (dis)like it – [lassebunk@gmail.com](mai
 New in version 2.2
 ------------------
 
-Gretel now supports setting trails via the URL – `params[:trail]`. This makes it possible to link to a different breadcrumb trail than the one specified in your breadcrumb,
+Gretel now supports setting trails via the URL – `params[:trail]`. This makes it possible to link back to a different breadcrumb trail than the one specified in your breadcrumb,
 for example if you have a store with products that have a default parent to their category, but when linking from the review section, you want to link back to the reviews instead.
 
 See below for more info or the [changelog](https://github.com/lassebunk/gretel/blob/master/CHANGELOG.md) for more changes.
@@ -224,9 +224,9 @@ If you supply a block to the `breadcrumbs` method, it will yield an array with t
 Setting breadcrumb trails
 --------------------------------
 
-You can set a breadcrumb trail via `params[:trail]`. This makes it possible to link to a different breadcrumb trail than the one specified in your breadcrumb.
+You can set a breadcrumb trail via `params[:trail]`. This makes it possible to link back to a different breadcrumb trail than the one specified in your breadcrumb.
 
-An example is if you have a store with products that have a default parent to their category, but when linking from the review section, you want to link back to the reviews instead.
+An example is if you have a store with products that have a default parent to their category, but when linking from the reviews section, you want to link back to the reviews instead.
 
 ### Initial setup
 
