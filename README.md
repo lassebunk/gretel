@@ -287,9 +287,9 @@ Please use the trail functionality with care; the trails can get very long.
 Nice to know
 ------------
 
-### Access to view helpers
+### Access to view methods
 
-When configuring breadcrumbs, you have access to all view helpers of the view where the breadcrumbs are inserted.
+When configuring breadcrumbs inside a `crumb :xx do ... end` block, you have access to all methods that are normally accessible in the view where the breadcrumbs are inserted. This includes your view helpers, `params`, `request`, etc.
 
 ### Using multiple breadcrumb configuration files
 
