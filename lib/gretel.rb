@@ -3,6 +3,7 @@ require 'gretel/crumbs'
 require 'gretel/crumb'
 require 'gretel/link'
 require 'gretel/trail'
+require 'gretel/renderer'
 require 'gretel/view_helpers'
 require 'gretel/deprecated'
 

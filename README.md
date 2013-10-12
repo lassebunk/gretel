@@ -90,9 +90,10 @@ You can pass options to `<%= breadcrumbs %>`, e.g. `<%= breadcrumbs pretext: "Yo
 
 Option           | Description                                                                                                                | Default
 ---------------- | -------------------------------------------------------------------------------------------------------------------------- | -------
-:pretext         | Text to be rendered before breadcrumb, e.g. `"You are here: "`                                                             | None
-:posttext        | Text to be appended after breadcrumb, e.g. `"Text after breacrumb"`                                                        | None
-:separator       | Separator between links, e.g. `" &rsaquo; "`                                                                               | `" &gt; "`
+:style           | How to render the breadcrumbs. Can be `:default`, `:ol`, `:ul`, or `:bootstrap`. See below for more info.                  | `:default`
+:pretext         | Text to be rendered before breadcrumb, e.g. `"You are here: "`.                                                            | None
+:posttext        | Text to be appended after breadcrumb, e.g. `"Text after breacrumb"`,                                                       | None
+:separator       | Separator between links, e.g. `" &rsaquo; "`.                                                                              | `" &rsaquo; "`
 :autoroot        | Whether it should automatically link to the `:root` crumb if no parent is given.                                           | True
 :show_root_alone | Whether it should show `:root` if that is the only link.                                                                   | False
 :link_current    | Whether the current crumb should be linked to.                                                                             | False
@@ -100,6 +101,21 @@ Option           | Description                                                  
 :id              | ID for the breadcrumbs container.                                                                                          | None
 :class           | CSS class for the breadcrumbs container.                                                                                   | `"breadcrumbs"`
 :current_class   | CSS class for the current link or span.                                                                                    | `"current"`
+
+### Styles
+
+These are the styles you can use with `breadcrumb style: :xx`.
+
+Style        | Description
+------------ | -----------
+`:default`   | Renders each link by itself with `&rsaquo` as the seperator.
+`:ol`        | Renders the links in `<li>` elements contained in an outer `<ol>`.
+`:ul`        | Renders the links in `<li>` elements contained in an outer `<ul>`.
+`:bootstrap` | Renders the links for use in [Twitter Bootstrap](http://getbootstrap.com/).
+
+Or you can build the breadcrumbs manually for full customization; see below.
+
+If you add other widely used styles, please submit a [Pull Request](https://github.com/lassebunk/gretel/pulls) so others can use them too.
 
 More examples
 -------------

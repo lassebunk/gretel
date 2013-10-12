@@ -20,9 +20,6 @@ module Gretel
       def load_breadcrumbs
         @crumbs = {}
 
-        # Deprecated in v2.1.0.
-        instance_eval &deprecated_breadcrumbs_block
-
         loaded_file_mtimes.clear
         breadcrumb_files.each do |file|
           instance_eval open(file).read, file

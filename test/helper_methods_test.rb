@@ -10,51 +10,53 @@ class HelperMethodsTest < ActionView::TestCase
     Gretel::Trail.secret = "128107d341e912db791d98bbe874a8250f784b0a0b4dbc5d5032c0fc1ca7bda9c6ece667bd18d23736ee833ea79384176faeb54d2e0d21012898dde78631cdf1"
   end
 
+  # Breadcrumb generation
+
   test "shows basic breadcrumb" do
     breadcrumb :basic
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <span class="current">About</span></div>},
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
                  breadcrumbs
   end
 
   test "shows breadcrumb with root" do
     breadcrumb :with_root
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <span class="current">About</span></div>},
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
                  breadcrumbs
   end
 
   test "shows breadcrumb with parent" do
     breadcrumb :with_parent
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <a href="/about">About</a> &gt; <span class="current">Contact</span></div>},
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/about">About</a> &rsaquo; <span class="current">Contact</span></div>},
                  breadcrumbs
   end
 
   test "shows breadcrumb with autopath" do
     breadcrumb :with_autopath, projects(:one)
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <span class="current">Test Project</span></div>},
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">Test Project</span></div>},
                  breadcrumbs
   end
 
   test "shows breadcrumb with parent object" do
     breadcrumb :with_parent_object, issues(:one)
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <a href="/projects/1">Test Project</a> &gt; <span class="current">Test Issue</span></div>},
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/projects/1">Test Project</a> &rsaquo; <span class="current">Test Issue</span></div>},
                  breadcrumbs
   end
 
   test "shows multiple links" do
     breadcrumb :multiple_links
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <a href="/about/contact">Contact</a> &gt; <span class="current">Contact form</span></div>},
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/about/contact">Contact</a> &rsaquo; <span class="current">Contact form</span></div>},
                  breadcrumbs
   end
 
   test "shows multiple links with parent" do
     breadcrumb :multiple_links_with_parent
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <a href="/about">About</a> &gt; <a href="/about/contact">Contact</a> &gt; <span class="current">Contact form</span></div>},
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/about">About</a> &rsaquo; <a href="/about/contact">Contact</a> &rsaquo; <span class="current">Contact form</span></div>},
                  breadcrumbs
   end
 
   test "shows semantic breadcrumb" do
     breadcrumb :with_root
-    assert_equal %{<div class="breadcrumbs"><div itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/" itemprop="url"><span itemprop="title">Home</span></a></div> &gt; <div itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><span class="current" itemprop="title">About</span></div></div>},
+    assert_equal %{<div class="breadcrumbs"><div itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/" itemprop="url"><span itemprop="title">Home</span></a></div> &rsaquo; <div itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><span class="current" itemprop="title">About</span></div></div>},
                  breadcrumbs(semantic: true)
   end
 
@@ -75,19 +77,19 @@ class HelperMethodsTest < ActionView::TestCase
 
   test "links current breadcrumb" do
     breadcrumb :with_root
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <a href="/about" class="current">About</a></div>},
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/about" class="current">About</a></div>},
                  breadcrumbs(link_current: true)
   end
 
   test "shows pretext" do
     breadcrumb :basic
-    assert_equal %{<div class="breadcrumbs">You are here: <a href="/">Home</a> &gt; <span class="current">About</span></div>},
+    assert_equal %{<div class="breadcrumbs">You are here: <a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
                  breadcrumbs(pretext: "You are here: ")
   end
 
   test "shows posttext" do
     breadcrumb :basic
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <span class="current">About</span> - text after breadcrumbs</div>},
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span> - text after breadcrumbs</div>},
                  breadcrumbs(posttext: " - text after breadcrumbs")
   end
 
@@ -99,44 +101,38 @@ class HelperMethodsTest < ActionView::TestCase
 
   test "shows separator" do
     breadcrumb :with_root
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
-                 breadcrumbs(separator: " &rsaquo; ")
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &raquo; <span class="current">About</span></div>},
+                 breadcrumbs(separator: " &raquo; ")
   end
 
   test "shows element id" do
     breadcrumb :basic
-    assert_equal %{<div class="breadcrumbs" id="custom_id"><a href="/">Home</a> &gt; <span class="current">About</span></div>},
+    assert_equal %{<div class="breadcrumbs" id="custom_id"><a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
                  breadcrumbs(id: "custom_id")
   end
 
   test "shows custom container class" do
     breadcrumb :basic
-    assert_equal %{<div class="custom_class"><a href="/">Home</a> &gt; <span class="current">About</span></div>},
+    assert_equal %{<div class="custom_class"><a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
                  breadcrumbs(class: "custom_class")
   end
 
   test "shows custom current class" do
     breadcrumb :basic
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <span class="custom_current_class">About</span></div>},
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="custom_current_class">About</span></div>},
                  breadcrumbs(current_class: "custom_current_class")
   end
 
   test "unsafe html" do
     breadcrumb :with_unsafe_html
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <span class="current">Test &lt;strong&gt;bold text&lt;/strong&gt;</span></div>},
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">Test &lt;strong&gt;bold text&lt;/strong&gt;</span></div>},
                  breadcrumbs
   end
 
   test "safe html" do
     breadcrumb :with_safe_html
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <span class="current">Test <strong>bold text</strong></span></div>},
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">Test <strong>bold text</strong></span></div>},
                  breadcrumbs
-  end
-
-  test "works with legacy breadcrumb rendering method" do
-    breadcrumb :basic
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <span class="current">About</span></div>},
-                 breadcrumb
   end
 
   test "yields a block containing breadcrumb links array" do
@@ -154,29 +150,76 @@ class HelperMethodsTest < ActionView::TestCase
 
   test "without link" do
     breadcrumb :without_link
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; Also without link &gt; <span class="current">Without link</span></div>},
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; Also without link &rsaquo; <span class="current">Without link</span></div>},
                  breadcrumbs
   end
 
   test "view context" do
     breadcrumb :using_view_helper
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <span class="current">TestTest</span></div>},
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">TestTest</span></div>},
                  breadcrumbs
   end
 
   test "multiple arguments" do
     breadcrumb :with_multiple_arguments, "One", "Two", "Three"
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <a href="/about">First OneOne then TwoTwo then ThreeThree</a> &gt; <span class="current">One and Two and Three</span></div>},
-                 breadcrumb
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/about">First OneOne then TwoTwo then ThreeThree</a> &rsaquo; <span class="current">One and Two and Three</span></div>},
+                 breadcrumbs
   end
 
   test "calling breadcrumbs helper twice" do
     breadcrumb :with_parent
     2.times do
-      assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <a href="/about">About</a> &gt; <span class="current">Contact</span></div>},
+      assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/about">About</a> &rsaquo; <span class="current">Contact</span></div>},
                    breadcrumbs
     end
   end
+
+  # Styles
+
+  test "default style" do
+    breadcrumb :basic
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
+                 breadcrumbs
+  end
+
+  test "ordered list style" do
+    breadcrumb :basic
+    assert_equal %{<ol class="breadcrumbs"><li><a href="/">Home</a></li><li class="current">About</li></ol>},
+                 breadcrumbs(style: :ol)
+  end
+
+  test "unordered list style" do
+    breadcrumb :basic
+    assert_equal %{<ul class="breadcrumbs"><li><a href="/">Home</a></li><li class="current">About</li></ul>},
+                 breadcrumbs(style: :ul)
+  end
+
+  test "bootstrap style" do
+    breadcrumb :basic
+    assert_equal %{<ol class="breadcrumb"><li><a href="/">Home</a></li><li class="active">About</li></ol>},
+                 breadcrumbs(style: :bootstrap)
+  end
+
+  test "custom container and fragment tags" do
+    breadcrumb :basic
+    assert_equal %{<c class="breadcrumbs"><f><a href="/">Home</a></f> &rsaquo; <f class="current">About</f></c>},
+                 breadcrumbs(container_tag: :c, fragment_tag: :f)
+  end
+
+  test "custom semantic container and fragment tags" do
+    breadcrumb :basic
+    assert_equal %{<c class="breadcrumbs"><f itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/" itemprop="url"><span itemprop="title">Home</span></a></f> &rsaquo; <f class="current" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><span itemprop="title">About</span></f></c>},
+                 breadcrumbs(container_tag: :c, fragment_tag: :f, semantic: true)
+  end
+
+  test "unknown style" do
+    breadcrumb :basic
+    assert_raises ArgumentError do
+      breadcrumbs(style: :nonexistent)
+    end
+  end
+
+  # Trails
 
   test "trail helper" do
     breadcrumb :basic
@@ -188,7 +231,7 @@ class HelperMethodsTest < ActionView::TestCase
     params[:trail] = "12MoG3DY5eLzU_W1siYmFzaWMiLCJBYm91dCIsIi9hYm91dCJdXQ=="
     breadcrumb :multiple_links
 
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <a href="/about">About</a> &gt; <a href="/about/contact">Contact</a> &gt; <span class="current">Contact form</span></div>},
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/about">About</a> &rsaquo; <a href="/about/contact">Contact</a> &rsaquo; <span class="current">Contact form</span></div>},
                  breadcrumbs
   end
 
@@ -197,9 +240,11 @@ class HelperMethodsTest < ActionView::TestCase
     params[:mytest] = "12MoG3DY5eLzU_W1siYmFzaWMiLCJBYm91dCIsIi9hYm91dCJdXQ=="
     breadcrumb :multiple_links
 
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &gt; <a href="/about">About</a> &gt; <a href="/about/contact">Contact</a> &gt; <span class="current">Contact form</span></div>},
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/about">About</a> &rsaquo; <a href="/about/contact">Contact</a> &rsaquo; <span class="current">Contact form</span></div>},
                  breadcrumbs
   end
+
+  # Configuration reload
 
   test "reload configuration when file is changed" do
     path = setup_loading_from_tmp_folder
@@ -217,7 +262,7 @@ class HelperMethodsTest < ActionView::TestCase
     end
 
     breadcrumb :about
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &gt; <span class="current">About (loaded)</span></div>}, breadcrumbs
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &rsaquo; <span class="current">About (loaded)</span></div>}, breadcrumbs
 
     sleep 1 # File change interval is 1 second
 
@@ -233,7 +278,7 @@ class HelperMethodsTest < ActionView::TestCase
     end
 
     breadcrumb :about
-    assert_equal %{<div class="breadcrumbs"><a href="/test">Home (reloaded)</a> &gt; <span class="current">About (reloaded)</span></div>}, breadcrumbs
+    assert_equal %{<div class="breadcrumbs"><a href="/test">Home (reloaded)</a> &rsaquo; <span class="current">About (reloaded)</span></div>}, breadcrumbs
   end
 
   test "reload configuration when file is added" do
@@ -262,7 +307,7 @@ class HelperMethodsTest < ActionView::TestCase
     end
 
     breadcrumb :about
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &gt; <span class="current">About (loaded)</span></div>}, breadcrumbs
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &rsaquo; <span class="current">About (loaded)</span></div>}, breadcrumbs
   end
 
   test "reload configuration when file is deleted" do
@@ -290,7 +335,7 @@ class HelperMethodsTest < ActionView::TestCase
     end
 
     breadcrumb :contact
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &gt; <a href="/about">About (loaded)</a> &gt; <span class="current">Contact (loaded)</span></div>}, breadcrumbs
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &rsaquo; <a href="/about">About (loaded)</a> &rsaquo; <span class="current">Contact (loaded)</span></div>}, breadcrumbs
 
     File.delete path.join("pages.rb")
 
@@ -300,7 +345,7 @@ class HelperMethodsTest < ActionView::TestCase
     end
 
     breadcrumb :about
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &gt; <span class="current">About (loaded)</span></div>}, breadcrumbs
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &rsaquo; <span class="current">About (loaded)</span></div>}, breadcrumbs
   end
 
   test "reloads only in development environment" do
@@ -320,7 +365,7 @@ class HelperMethodsTest < ActionView::TestCase
     end
 
     breadcrumb :about
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &gt; <span class="current">About (loaded)</span></div>}, breadcrumbs
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &rsaquo; <span class="current">About (loaded)</span></div>}, breadcrumbs
 
     sleep 1
 
@@ -336,7 +381,7 @@ class HelperMethodsTest < ActionView::TestCase
     end
 
     breadcrumb :about
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &gt; <span class="current">About (loaded)</span></div>}, breadcrumbs
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home (loaded)</a> &rsaquo; <span class="current">About (loaded)</span></div>}, breadcrumbs
   end
 
 private

@@ -4,17 +4,8 @@ module Gretel
     #   <%
     #   breadcrumb :category, @category
     #   %>
-    def breadcrumb(*args)
-      options = args.extract_options!
-
-      if args.any?
-        @_breadcrumb_key = args.shift
-        @_breadcrumb_args = args
-        @_breadcrumb_links = nil
-        @_breadcrumb_trail = nil
-      else
-        breadcrumbs(options)
-      end
+    def breadcrumb(key, *args)
+      @_gretel_renderer = Gretel::Renderer.new(self, key, *args)
     end
 
     # Renders the breadcrumbs HTML, for example in your layout. See the readme for default options.
@@ -29,124 +20,22 @@ module Gretel
     #       <% end %>
     #     <% end %>
     #   <% end %>
-    def breadcrumbs(options = {})
-      options = default_breadcrumb_options.merge(options)
-      links = breadcrumb_links_for_render(options)
+    def breadcrumbs(options = {}, &block)
       if block_given?
-        yield links
+        gretel_renderer.yield_links(options, &block)
       else
-        render_breadcrumbs(links, options)
+        gretel_renderer.render(options)
       end
     end
 
     def breadcrumb_trail
-      @_breadcrumb_trail ||= Gretel::Trail.encode(breadcrumb_links)
+      gretel_renderer.trail
     end
 
     private
 
-    def breadcrumb_links
-      @_breadcrumb_links ||= begin
-        Gretel::Crumbs.reload_if_needed
-        get_breadcrumb_links
-      end
-    end
-
-    def breadcrumb_links_for_render(options = {})
-      links = breadcrumb_links.dup
-
-      # Handle autoroot
-      if options[:autoroot] && links.map(&:key).exclude?(:root) && Gretel::Crumbs.crumb_defined?(:root)
-        links.unshift *Gretel::Crumb.new(self, :root).links
-      end
-
-      # Handle show root alone
-      if links.count == 1 && links.first.key == :root && !options[:show_root_alone]
-        links.shift
-      end
-
-      links
-    end
-
-    # Returns an array of links for the path of the breadcrumb set by +breadcrumb+.
-    def get_breadcrumb_links
-      return [] if @_breadcrumb_key.blank?
-
-      # Get breadcrumb set by the `breadcrumb` method
-      crumb = Gretel::Crumb.new(self, @_breadcrumb_key, *@_breadcrumb_args)
-
-      # Links of first crumb
-      links = crumb.links.dup
-      
-      links.last.tap do |last|
-        last.url = request.try(:fullpath) || last.url
-      end
-
-      if params[Gretel::Trail.trail_param].present?
-        # Decode trail from URL
-        links.unshift *Gretel::Trail.decode(params[Gretel::Trail.trail_param])
-      else
-        # Build parents
-        while crumb = crumb.parent
-          links.unshift *crumb.links
-        end
-      end
-
-      links
-    end
-
-    # Renders breadcrumbs HTML.
-    def render_breadcrumbs(links, options)
-      return "" if links.empty?
-
-      # Array to hold the HTML fragments
-      fragments = []
-
-      # Loop through all but the last (current) link and build HTML of the fragments
-      links[0..-2].each do |link|
-        fragments << render_breadcrumb_fragment(link.text, link.url, options[:semantic])
-      end
-
-      # The current link is handled a little differently, and is only linked if specified in the options
-      current_link = links.last
-      fragments << render_breadcrumb_fragment(current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], class: options[:current_class])
-
-      # Build the final HTML
-      html = (options[:pretext] + fragments.join(options[:separator]) + options[:posttext]).html_safe
-      content_tag(:div, html, id: options[:id], class: options[:class])
-    end
-
-    # Renders HTML for a breadcrumb fragment, i.e. a breadcrumb link.
-    def render_breadcrumb_fragment(text, url, semantic, options = {})
-      if semantic
-        if url.present?
-          content_tag(:div, link_to(content_tag(:span, text, itemprop: "title"), url, class: options[:class], itemprop: "url"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
-        else
-          content_tag(:div, content_tag(:span, text, class: options[:class], itemprop: "title"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
-        end
-      else
-        if url.present?
-          link_to(text, url, class: options[:class])
-        elsif options[:class]
-          content_tag(:span, text, class: options[:class])
-        else
-          text
-        end
-      end
-    end
-
-    # Default options for the breadcrumb rendering.
-    def default_breadcrumb_options
-      { pretext: "",
-        posttext: "",
-        separator: " &gt; ",
-        autoroot: true,
-        show_root_alone: false,
-        link_current: false,
-        semantic: false,
-        class: "breadcrumbs",
-        current_class: "current",
-        id: nil }
+    def gretel_renderer
+      @_gretel_renderer ||= Gretel::Renderer.new(self, nil)
     end
   end
 end
