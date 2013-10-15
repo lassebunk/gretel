@@ -2,14 +2,31 @@ module Gretel
   module Trail
     class Store
       class << self
+        # Save an encoded array to the store. It must return the trail key that
+        # can later be used to retrieve the array from the store.
+        def save(array)
+          raise "#{name} must implement #save to be able to save trails."
+        end
+
+        # Retrieve an encoded array from the store based on the saved key.
+        # It must return either the array, or nil if the key was not found.
+        def retrieve(key)
+          raise "#{name} must implement #retrieve to be able to retrieve trails."
+        end
+
         # Encode array of +links+ to unique trail key.
         def encode(links)
-          raise "#{name} must implement #encode to be able to encode trails."
+          arr = links.map { |link| [link.key, link.text, (link.text.html_safe? ? 1 : 0), link.url] }
+          save(arr)
         end
 
         # Decode unique trail key to array of links.
         def decode(key)
-          raise "#{name} must implement #decode to be able to decode trails."
+          if arr = retrieve(key)
+            arr.map { |key, text, html_safe, url| Link.new(key.to_sym, (html_safe == 1 ? text.html_safe : text), url) }
+          else
+            []
+          end
         end
     
         # Resets all changes made to the store. Used for testing.

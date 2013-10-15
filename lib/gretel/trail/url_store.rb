@@ -9,16 +9,16 @@ module Gretel
         # unencrypted trails would be vulnerable to cross-site scripting attacks.
         attr_accessor :secret
 
-        # Securely encodes array of links to a trail string to be used in URL.
-        def encode(links)
-          base64 = encode_base64(links)
+        # Securely encodes encoded array to a trail string to be used in URL.
+        def save(array)
+          base64 = encode_base64(array)
           hash = generate_hash(base64)
 
           [hash, base64].join("_")
         end
 
-        # Securely decodes a URL trail string to array of links.
-        def decode(key)
+        # Securely decodes a URL trail string to encoded array.
+        def retrieve(key)
           hash, base64 = key.split("_", 2)
 
           if base64.blank?
@@ -35,16 +35,14 @@ module Gretel
         private
 
         # Encodes links array to Base64, internally using JSON for serialization.
-        def encode_base64(links)
-          arr = links.map { |link| [link.key, link.text, (link.text.html_safe? ? 1 : 0), link.url] }
-          Base64.urlsafe_encode64(arr.to_json)
+        def encode_base64(array)
+          Base64.urlsafe_encode64(array.to_json)
         end
 
         # Decodes links array from Base64.
         def decode_base64(base64)
           json = Base64.urlsafe_decode64(base64)
-          arr = JSON.parse(json)
-          arr.map { |key, text, html_safe, url| Link.new(key.to_sym, (html_safe == 1 ? text.html_safe : text), url) }
+          JSON.parse(json)
         rescue
           Rails.logger.info "[Gretel] Trail decode failed: Invalid Base64 '#{base64}' in trail"
           []
