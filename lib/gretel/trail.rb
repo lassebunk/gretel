@@ -1,11 +1,14 @@
 require "gretel/trail/store"
 require "gretel/trail/url_store"
+require "gretel/trail/active_record_store"
 require "gretel/trail/redis_store"
+require "gretel/trail/tasks"
 
 module Gretel
   module Trail
     STORES = {
       url: UrlStore,
+      db: ActiveRecordStore,
       redis: RedisStore
     }
 
@@ -17,7 +20,7 @@ module Gretel
       end
 
       # Sets the store that is used to encode and decode trails.
-      # Can be a subclass of +Gretel::Trail::Store+, or a symbol: +:url+.
+      # Can be a subclass of +Gretel::Trail::Store+, or a symbol: +:url+, +:db+, or +:redis+.
       def store=(value)
         if value.is_a?(Symbol)
           klass = STORES[value]
@@ -38,11 +41,24 @@ module Gretel
         store.decode(key)
       end
 
+      # Deletes expired keys from the store.
+      # Not all stores support expiring keys, and will raise an exception if they don't.
+      def delete_expired
+        store.delete_expired
+      end
+
+      # Returns the current number of trails in the store.
+      # Not all stores support counting keys, and will raise an exception if they don't.
+      def count
+        store.key_count
+      end
+
       # Name of trail param. Default: +:trail+.
       def trail_param
         @trail_param ||= :trail
       end
       
+      # Sets the trail param.
       attr_writer :trail_param
 
       # Resets all changes made to +Gretel::Trail+. Used for testing.

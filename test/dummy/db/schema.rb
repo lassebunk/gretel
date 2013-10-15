@@ -11,19 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130122163051) do
+ActiveRecord::Schema.define(:version => 20131015194052) do
 
-  create_table "issues", force: true do |t|
-    t.string   "title"
-    t.integer  "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "gretel_trails", :force => true do |t|
+    t.string   "key",        :limit => 40
+    t.text     "value"
+    t.datetime "expires_at"
   end
 
-  create_table "projects", force: true do |t|
+  add_index "gretel_trails", ["expires_at"], :name => "index_gretel_trails_on_expires_at"
+  add_index "gretel_trails", ["key"], :name => "index_gretel_trails_on_key", :unique => true
+
+  create_table "issues", :force => true do |t|
+    t.string   "title"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "projects", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

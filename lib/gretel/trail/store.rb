@@ -14,6 +14,16 @@ module Gretel
           raise "#{name} must implement #retrieve to be able to retrieve trails."
         end
 
+        # Deletes expired keys from the store.
+        def delete_expired
+          raise "#{name} doesn't support deleting expired keys."
+        end
+
+        # Gets the number of stored trail keys.
+        def key_count
+          raise "#{name} doesn't support counting trail keys."
+        end
+
         # Encode array of +links+ to unique trail key.
         def encode(links)
           arr = links.map { |link| [link.key, link.text, (link.text.html_safe? ? 1 : 0), link.url] }
