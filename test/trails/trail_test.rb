@@ -8,4 +8,10 @@ class TrailTest < ActiveSupport::TestCase
   test "defaults" do
     assert_equal :trail, Gretel::Trail.trail_param
   end
+
+  test "setting invalid store" do
+    assert_raises ArgumentError do
+      Gretel::Trail.store = :xx
+    end
+  end
 end
