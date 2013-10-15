@@ -7,7 +7,7 @@ class HelperMethodsTest < ActionView::TestCase
 
   setup do
     Gretel.reset!
-    Gretel::Trail.secret = "128107d341e912db791d98bbe874a8250f784b0a0b4dbc5d5032c0fc1ca7bda9c6ece667bd18d23736ee833ea79384176faeb54d2e0d21012898dde78631cdf1"
+    Gretel::Trail::UrlStore.secret = "128107d341e912db791d98bbe874a8250f784b0a0b4dbc5d5032c0fc1ca7bda9c6ece667bd18d23736ee833ea79384176faeb54d2e0d21012898dde78631cdf1"
   end
 
   # Breadcrumb generation

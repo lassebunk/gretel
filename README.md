@@ -252,7 +252,7 @@ This will create an initializer in *config/initializers/gretel.rb* that will con
 If you want to do it manually, you can put the following in *config/initializers/gretel.rb*:
 
 ```
-Gretel::Trail.secret = 'your_key_here' # Must be changed to something else to be secure
+Gretel::Trail::UrlStore.secret = 'your_key_here' # Must be changed to something else to be secure
 ```
 
 You can generate a key using `SecureRandom.hex(64)`.

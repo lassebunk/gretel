@@ -1,17 +1,17 @@
 require 'test_helper'
 
-class TrailTest < ActiveSupport::TestCase
+class UrlStoreTest < ActiveSupport::TestCase
   setup do
-    Gretel::Trail.secret = "128107d341e912db791d98bbe874a8250f784b0a0b4dbc5d5032c0fc1ca7bda9c6ece667bd18d23736ee833ea79384176faeb54d2e0d21012898dde78631cdf1"
+    Gretel.reset!
+    
+    Gretel::Trail.store = :url
+    Gretel::Trail::UrlStore.secret = "128107d341e912db791d98bbe874a8250f784b0a0b4dbc5d5032c0fc1ca7bda9c6ece667bd18d23736ee833ea79384176faeb54d2e0d21012898dde78631cdf1"
+    
     @links = [
       [:root, "Home", "/"],
       [:store, "Store <b>Test</b>".html_safe, "/store"],
       [:search, "Search", "/store/search?q=test"]
     ]
-  end
-
-  test "defaults" do
-    assert_equal :trail, Gretel::Trail.trail_param
   end
 
   test "encoding" do
