@@ -1,9 +1,11 @@
 require "gretel/trail/url_store"
+require "gretel/trail/redis_store"
 
 module Gretel
   module Trail
     STORES = {
-      url: UrlStore
+      url: UrlStore,
+      redis: RedisStore
     }
 
     class << self
