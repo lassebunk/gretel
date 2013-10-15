@@ -1,3 +1,4 @@
+require "gretel/trail/store"
 require "gretel/trail/url_store"
 require "gretel/trail/redis_store"
 

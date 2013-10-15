@@ -1,5 +1,3 @@
-require "gretel/trail/store"
-
 module Gretel
   module Trail
     class UrlStore < Store
