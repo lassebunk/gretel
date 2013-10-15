@@ -28,4 +28,11 @@ class UrlStoreTest < ActiveSupport::TestCase
   test "invalid trail" do
     assert_equal [], Gretel::Trail.decode("28f104524f5eaf6b3bd035710432fd2b9cbfd62c_X1sicm9vdCIsIkhvbWUiLDAsIi8iXSxbInN0b3JlIiwiU3RvcmUiLDAsIi9zdG9yZSJdLFsic2VhcmNoIiwiU2VhcmNoIiwwLCIvc3RvcmUvc2VhcmNoP3E9dGVzdCJdXQ==")
   end
+
+  test "raises error if no secret set" do
+    Gretel::Trail::UrlStore.secret = nil
+    assert_raises RuntimeError do
+      Gretel::Trail.encode(@links.map { |key, text, url| Gretel::Link.new(key, text, url) })
+    end
+  end
 end
