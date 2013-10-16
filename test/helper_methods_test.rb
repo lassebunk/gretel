@@ -153,6 +153,16 @@ class HelperMethodsTest < ActionView::TestCase
                   [:multiple_links_with_parent, "Contact form", "/about/contact/form"]], out
   end
 
+  test "sets current on last link in array" do
+    breadcrumb :multiple_links_with_parent
+
+    out = breadcrumbs do |links|
+      links.map(&:current?)
+    end
+
+    assert_equal [false, false, false, true], out
+  end
+
   test "without link" do
     breadcrumb :without_link
     assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; Also without link &rsaquo; <span class="current">Without link</span></div>},

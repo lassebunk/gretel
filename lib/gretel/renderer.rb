@@ -117,6 +117,9 @@ module Gretel
           # Get trail
           links.unshift *trail_for(crumb)
 
+          # Set last link to current
+          links.last.try(:current!)
+
           links
         else
           []

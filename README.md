@@ -224,7 +224,7 @@ If you supply a block to the `breadcrumbs` method, it will yield an array with t
   <% if links.any? %>
     You are here:
     <% links.each do |link| %>
-      <%= link_to link.text, link.url %> (<%= link.key %>)
+      <%= link_to link.text, link.url, class: (link.current? ? "current" : nil) %> (<%= link.key %>)
     <% end %>
   <% end %>
 <% end %>
