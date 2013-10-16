@@ -1,7 +1,4 @@
-require "gretel/trail/store"
-require "gretel/trail/url_store"
-require "gretel/trail/active_record_store"
-require "gretel/trail/redis_store"
+require "gretel/trail/stores"
 require "gretel/trail/tasks"
 
 module Gretel
