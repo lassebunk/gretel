@@ -172,10 +172,10 @@ module Gretel
     def render_semantic_fragment(fragment_tag, text, url, options = {})
       if fragment_tag
         text = content_tag(:span, text, itemprop: "title")
-        text = link_to(text, url, itemprop: "url") if url.present?
+        text = render_link(text, url, itemprop: "url") if url.present?
         content_tag(fragment_tag, text, class: options[:class], itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
       elsif url.present?
-        content_tag(:div, link_to(content_tag(:span, text, itemprop: "title"), url, class: options[:class], itemprop: "url"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
+        content_tag(:div, render_link(content_tag(:span, text, itemprop: "title"), url, class: options[:class], itemprop: "url"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
       else
         content_tag(:div, content_tag(:span, text, class: options[:class], itemprop: "title"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
       end
@@ -184,15 +184,21 @@ module Gretel
     # Renders regular, non-semantic fragment HTML.
     def render_nonsemantic_fragment(fragment_tag, text, url, options = {})
       if fragment_tag
-        text = link_to(text, url) if url.present?
+        text = render_link(text, url) if url.present?
         content_tag(fragment_tag, text, class: options[:class])
       elsif url.present?
-        link_to(text, url, class: options[:class])
+        render_link(text, url, class: options[:class])
       elsif options[:class].present?
         content_tag(:span, text, class: options[:class])
       else
         text
       end
+    end
+
+    # Renders a link. It is really just a proxy for +link_to+, but this can be
+    # used in plugins that want to change how links are rendered.
+    def render_link(name, url, options = {})
+      link_to(name, url, options)
     end
 
     # Proxy to view context
