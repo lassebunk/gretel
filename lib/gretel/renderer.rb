@@ -148,7 +148,7 @@ module Gretel
 
       # Handle autoroot
       if options[:autoroot] && out.map(&:key).exclude?(:root) && Gretel::Crumbs.crumb_defined?(:root)
-        out.unshift *Gretel::Crumb.new(self, :root).links
+        out.unshift *Gretel::Crumb.new(context, :root).links
       end
 
       # Handle show root alone
