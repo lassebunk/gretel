@@ -17,8 +17,11 @@ New in version 3.0 :muscle:
 * Defining breadcrumbs using `Gretel::Crumbs.layout do ... end` in an initializer has been removed. See below for details on how to upgrade.
 * The `:show_root_alone` option is now called `:display_single_fragment` and can be used to hide the breadcrumbs when there is only one link, also if it is not the root breadcrumb.
   The old `:show_root_alone` option is still supported until Gretel version 4.0 and will show a deprecation warning when it's used.
+* Links yielded from `<%= breadcrumbs do |links| %>` now have a `current?` helper that returns true if the link is the last in the trail.
+* New view helper: `parent_breadcrumb` returns the parent breadcrumb link (with `#key`, `#text`, and `#url`). You can supply options like `:autoroot` etc.
+  If you supply a block, it will yield the parent breadcrumb if it is present.
 
-I hope you find these changes as useful as I did when I made them – if you have more suggestions, please create an [Issue](https://github.com/lassebunk/gretel/issues) or [Pull Request](https://github.com/lassebunk/gretel/pulls).
+I hope you find these changes as useful as I did – if you have more suggestions, please create an [Issue](https://github.com/lassebunk/gretel/issues) or [Pull Request](https://github.com/lassebunk/gretel/pulls).
 
 See below for more info or the [changelog](https://github.com/lassebunk/gretel/blob/master/CHANGELOG.md) for less significant changes.
 
@@ -227,6 +230,21 @@ If you supply a block to the `breadcrumbs` method, it will yield an array with t
       <%= link_to link.text, link.url, class: (link.current? ? "current" : nil) %> (<%= link.key %>)
     <% end %>
   <% end %>
+<% end %>
+```
+
+Getting the parent breadcrumb
+-----------------------------
+
+If you want to add a link to the parent breadcrumb in the trail, you can use the `parent_breadcrumb` view helper.
+By default it returns a link instance that has the properties `#key`, `#text`, and `#url`.
+You can supply options like `autoroot: false` etc.
+
+If you supply a block, it will yield the link if it is present:
+
+```erb
+<% parent_breadcrumb do |parent| %>
+  <%= link_to "Back to #{link.text}", link.url %>
 <% end %>
 ```
 

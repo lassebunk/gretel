@@ -153,6 +153,40 @@ class HelperMethodsTest < ActionView::TestCase
                   [:multiple_links_with_parent, "Contact form", "/about/contact/form"]], out
   end
 
+  test "parent breadcrumb" do
+    breadcrumb :multiple_links_with_parent
+
+    parent = parent_breadcrumb
+    assert_equal [:multiple_links_with_parent, "Contact", "/about/contact"],
+                 [parent.key, parent.text, parent.url]
+  end
+
+  test "yields parent breadcrumb" do
+    breadcrumb :multiple_links_with_parent
+
+    out = parent_breadcrumb do |parent|
+      [parent.key, parent.text, parent.url]
+    end
+    assert_equal [:multiple_links_with_parent, "Contact", "/about/contact"],
+                 out
+  end
+
+  test "parent breadcrumb returns nil if not present" do
+    breadcrumb :basic
+
+    assert_nil parent_breadcrumb(autoroot: false)
+  end
+
+  test "parent breadcrumb yields only if present" do
+    breadcrumb :basic
+
+    out = parent_breadcrumb(autoroot: false) do
+      "yielded"
+    end
+
+    assert_nil out
+  end
+
   test "sets current on last link in array" do
     breadcrumb :multiple_links_with_parent
 

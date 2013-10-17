@@ -11,6 +11,8 @@ Version 3.0
 * Support for rendering the breadcrumbs in different styles like ul- and ol lists, and for use with [Twitter Bootstrap](http://getbootstrap.com/). See the `:style` option in the readme for more info.
 * The `:show_root_alone` option is now called `:display_single_fragment` and can be used to display the breadcrumbs only when there are more than one link, also if it is not the root breadcrumb.
 * Links yielded from `<%= breadcrumbs do |links| %>` now have a `current?` helper that returns true if the link is the last in the trail.
+* New view helper: `parent_breadcrumb` returns the parent breadcrumb link (with `#key`, `#text`, and `#url`). You can supply options like `:autoroot` etc.
+  If you supply a block, it will yield the parent breadcrumb if it is present.
 
 Version 2.1
 -----------
