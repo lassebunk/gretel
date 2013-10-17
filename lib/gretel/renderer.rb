@@ -69,6 +69,11 @@ module Gretel
       @trail ||= Gretel::Trail.encode(links)
     end
 
+    # Proxy for +context.link_to+ that can be overridden by plugins.
+    def link_to(*args)
+      context.link_to(*args)
+    end
+
     private
 
     attr_reader :context, :breadcrumb_key, :breadcrumb_args
