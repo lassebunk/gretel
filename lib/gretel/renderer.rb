@@ -58,10 +58,10 @@ module Gretel
       content_tag(options[:container_tag], html, id: options[:id], class: options[:class])
     end
 
-    # Yields an array of links to be used in a view.
-    def yield_links(options = {}, &block)
+    # Array of links transformed by +options+ (like +:autoroot+ etc.) to be used in a view.
+    def links_with(options = {})
       options = options_for_render(options)
-      yield links_for_render(options)
+      links_for_render(options)
     end
 
     # Returns encoded trail for the breadcrumb.

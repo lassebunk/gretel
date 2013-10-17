@@ -25,7 +25,7 @@ module Gretel
     #   <% end %>
     def breadcrumbs(options = {}, &block)
       if block_given?
-        gretel_renderer.yield_links(options, &block)
+        yield gretel_renderer.links_with(options)
       else
         gretel_renderer.render(options)
       end
