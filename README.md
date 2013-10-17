@@ -299,6 +299,12 @@ The default trail param is `params[:trail]`. You can change it in an initializer
 Gretel.trail_param = :other_param
 ```
 
+### Handling trails automatically
+
+The [gretel-trails](https://github.com/lassebunk/gretel-trails) gem can handle adding and hiding trails from the URL automatically.
+You can apply trails to select links by adding a simple JS selector (`js-append-trail` or something else you choose), and after each page load it hides the trail from the URL, so the server sees it but the users don't.
+Check it out [here](https://github.com/lassebunk/gretel-trails).
+
 ### Note
 
 Please use the trail functionality with care; the trails can get very long.
