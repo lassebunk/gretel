@@ -18,7 +18,8 @@ New in version 3.0 :muscle:
 * The `:show_root_alone` option is now called `:display_single_fragment` and can be used to hide the breadcrumbs when there is only one link, also if it is not the root breadcrumb.
   The old `:show_root_alone` option is still supported until Gretel version 4.0 and will show a deprecation warning when it's used.
 * Links yielded from `<%= breadcrumbs do |links| %>` now have a `current?` helper that returns true if the link is the last in the trail.
-* New view helper: `parent_breadcrumb` returns the parent breadcrumb link (with `#key`, `#text`, and `#url`). You can supply options like `:autoroot` etc.
+* New view helper: `parent_breadcrumb` returns the parent breadcrumb link (with `#key`, `#text`, and `#url`). This can for example be used to create a dynamic back link.
+  You can supply options like `:autoroot` etc.
   If you supply a block, it will yield the parent breadcrumb if it is present.
 
 I hope you find these changes as useful as I did – if you have more suggestions, please create an [Issue](https://github.com/lassebunk/gretel/issues) or [Pull Request](https://github.com/lassebunk/gretel/pulls).
