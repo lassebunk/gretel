@@ -321,6 +321,14 @@ class HelperMethodsTest < ActionView::TestCase
                  breadcrumbs
   end
 
+  test "unknown trail" do
+    params[:trail] = "notfound"
+    breadcrumb :multiple_links
+
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/about/contact">Contact</a> &rsaquo; <span class="current">Contact form</span></div>},
+                 breadcrumbs
+  end
+
   # Configuration reload
 
   test "reload configuration when file is changed" do
