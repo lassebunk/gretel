@@ -65,6 +65,15 @@ module Gretel
     # Sets the Rails environment names with automatic configuration reload. Default is +["development"]+.
     attr_writer :reload_environments
 
+    # Yields this +Gretel+ to be configured.
+    # 
+    #   Gretel.configure do |config|
+    #     config.trail_param = :other_param
+    #   end
+    def configure
+      yield self
+    end
+
     # Resets all changes made to +Gretel+, +Gretel::Crumbs+, and +Gretel::Trail+. Used for testing.
     def reset!
       instance_variables.each { |var| remove_instance_variable var }
