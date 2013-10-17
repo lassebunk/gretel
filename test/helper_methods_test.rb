@@ -313,7 +313,7 @@ class HelperMethodsTest < ActionView::TestCase
   end
 
   test "different trail param" do
-    Gretel::Trail.trail_param = :mytest
+    Gretel.trail_param = :mytest
     params[:mytest] = "667ea523f92bdb3a086494575b18f587170e482b_W1siYmFzaWMiLCJBYm91dCIsMCwiL2Fib3V0Il1d"
     breadcrumb :multiple_links
 

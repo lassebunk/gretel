@@ -295,7 +295,7 @@ The product view will now have the breadcrumb trail from the first page (reviews
 The default trail param is `params[:trail]`. You can change it in an initializer:
 
 ```ruby
-Gretel::Trail.trail_param = :other_param
+Gretel.trail_param = :other_param
 ```
 
 ### Note
