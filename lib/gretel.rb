@@ -19,6 +19,26 @@ module Gretel
       @breadcrumb_paths = paths
     end
 
+    # Param to contain trail. See +Gretel::Trail.trail_param+ for details.
+    def trail_param
+      Gretel::Trail.trail_param
+    end
+
+    # Sets the trail param. See +Gretel::Trail.trail_param+ for details.
+    def trail_param=(param)
+      Gretel::Trail.trail_param = param
+    end
+
+    # Trail store. See +Gretel::Trail.store+ for details.
+    def trail_store
+      Gretel::Trail.store
+    end
+
+    # Sets the trail store. See +Gretel::Trail.store+ for details.
+    def trail_store=(store)
+      Gretel::Trail.store = store
+    end
+
     # Whether to suppress deprecation warnings.
     def suppress_deprecation_warnings?
       !!@suppress_deprecation_warnings
