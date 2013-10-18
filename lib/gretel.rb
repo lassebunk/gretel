@@ -2,7 +2,6 @@ require 'gretel/version'
 require 'gretel/crumbs'
 require 'gretel/crumb'
 require 'gretel/link'
-require 'gretel/trail'
 require 'gretel/renderer'
 require 'gretel/view_helpers'
 require 'gretel/deprecated'
@@ -17,26 +16,6 @@ module Gretel
     # Sets the path from with breadcrumbs are loaded. Default is +config/breadcrumbs.rb+.
     def breadcrumb_paths=(paths)
       @breadcrumb_paths = paths
-    end
-
-    # Param to contain trail. See +Gretel::Trail.trail_param+ for details.
-    def trail_param
-      Gretel::Trail.trail_param
-    end
-
-    # Sets the trail param. See +Gretel::Trail.trail_param+ for details.
-    def trail_param=(param)
-      Gretel::Trail.trail_param = param
-    end
-
-    # Trail store. See +Gretel::Trail.store+ for details.
-    def trail_store
-      Gretel::Trail.store
-    end
-
-    # Sets the trail store. See +Gretel::Trail.store+ for details.
-    def trail_store=(store)
-      Gretel::Trail.store = store
     end
 
     # Whether to suppress deprecation warnings.
@@ -68,7 +47,7 @@ module Gretel
     # Yields this +Gretel+ to be configured.
     # 
     #   Gretel.configure do |config|
-    #     config.trail_param = :other_param
+    #     config.reload_environments << "staging"
     #   end
     def configure
       yield self
@@ -78,7 +57,6 @@ module Gretel
     def reset!
       instance_variables.each { |var| remove_instance_variable var }
       Crumbs.reset!
-      Trail.reset!
     end
   end
 end

@@ -10,9 +10,6 @@ Have fun! And please do write, if you (dis)like it – [lassebunk@gmail.com](mai
 New in version 3.0 :muscle:
 ---------------------------
 
-* You can now set trails via the URL – `params[:trail]`. This makes it possible to link back to a different breadcrumb trail than the one specified in your breadcrumb,
-  for example if you have a store with products that have a default parent to their category, but when visiting from the reviews section, you want to link back to the reviews instead.
-  Read more about trails below.
 * Breadcrumbs can now be rendered in different styles like ul- and ol lists, and for use with the [Twitter Bootstrap](http://getbootstrap.com/) framework. See the `:style` option below for more info.
 * Defining breadcrumbs using `Gretel::Crumbs.layout do ... end` in an initializer has been removed. See below for details on how to upgrade.
 * The `:show_root_alone` option is now called `:display_single_fragment` and can be used to hide the breadcrumbs when there is only one link, also if it is not the root breadcrumb.
@@ -237,7 +234,7 @@ If you supply a block to the `breadcrumbs` method, it will yield an array with t
 Getting the parent breadcrumb
 -----------------------------
 
-If you want to add a link to the parent breadcrumb in the trail, you can use the `parent_breadcrumb` view helper.
+If you want to add a link to the parent breadcrumb, you can use the `parent_breadcrumb` view helper.
 By default it returns a link instance that has the properties `#key`, `#text`, and `#url`.
 You can supply options like `autoroot: false` etc.
 
@@ -248,66 +245,6 @@ If you supply a block, it will yield the link if it is present:
   <%= link_to "Back to #{link.text}", link.url %>
 <% end %>
 ```
-
-Setting breadcrumb trails
---------------------------------
-
-You can set a breadcrumb trail via `params[:trail]`. This makes it possible to link back to a different breadcrumb trail than the one specified in your breadcrumb.
-
-An example is if you have a store with products that have a default parent to their category, but when visiting from the reviews section, you want to link back to the reviews instead.
-
-### Initial setup
-
-To use breadcrumb trails, you must set a secret to be used when encoding the trails.
-
-You can generate it using the installer:
-
-```bash
-$ rails generate gretel:install
-```
-
-This will create an initializer in *config/initializers/gretel.rb* that will contain a random secret key.
-
-If you want to do it manually, you can put the following in *config/initializers/gretel.rb*:
-
-```
-Gretel::Trail::UrlStore.secret = 'your_key_here' # Must be changed to something else to be secure
-```
-
-You can generate a key using `SecureRandom.hex(64)`.
-
-### Example
-
-This example shows how to link to the trail in the view.
-Gretel has a built-in view helper method named `breadcrumb_trail` that contains the current breadcrumb trail ready for use in a URL.
-
-```erb
-<% breadcrumb :reviews %>
-...
-<% @products.each do |product| %>
-  <%= link_to @product.name, product_path(product, trail: breadcrumb_trail) %>
-<% end %>
-```
-
-The product view will now have the breadcrumb trail from the first page (reviews) instead of its default parent.
-
-### Custom trail param
-
-The default trail param is `params[:trail]`. You can change it in an initializer:
-
-```ruby
-Gretel.trail_param = :other_param
-```
-
-### Handling trails automatically
-
-The [gretel-trails](https://github.com/lassebunk/gretel-trails) gem can handle adding and hiding trails from the URL automatically.
-You can apply trails to select links by adding a simple JS selector (`js-append-trail` or something else you choose), and after each page load it hides the trail from the URL, so the server sees it but the users don't.
-Check it out [here](https://github.com/lassebunk/gretel-trails).
-
-### Note
-
-Please use the trail functionality with care; the trails can get very long.
 
 Nice to know
 ------------
@@ -324,6 +261,16 @@ The format is the same as `config/breadcrumbs.rb` which is also loaded.
 ### Automatic reloading of breadcrumb configuration files
 
 Since Gretel version 2.1.0, the breadcrumb configuration files are now reloaded in the Rails development environment if they change. In other environments, like production, the files are loaded once, when first needed.
+
+### Setting breadcrumb trails
+
+The [gretel-trails](https://github.com/lassebunk/gretel-trails) gem can handle adding and hiding trails from the URL automatically. This makes it possible to link back to a different breadcrumb trail than the one specified in your breadcrumb, for example if you have a
+store with products that have a default parent to the category breadcrumb, but when visiting from the reviews section, you want to link back to the reviews instead.
+
+You can apply trails to select links by adding a simple JS selector (`js-append-trail` or another you choose), and after each page load it hides the trail from the URL, so the server sees it but the users don't.
+
+Check out the gem [here](https://github.com/lassebunk/gretel-trails).
+
 
 Upgrading from version 2.0 or below
 -----------------------------------

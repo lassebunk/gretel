@@ -64,11 +64,6 @@ module Gretel
       links_for_render(options)
     end
 
-    # Returns encoded trail for the breadcrumb.
-    def trail
-      @trail ||= Gretel::Trail.encode(links)
-    end
-
     # Proxy for +context.link_to+ that can be overridden by plugins.
     def link_to(*args)
       context.link_to(*args)
@@ -100,6 +95,15 @@ module Gretel
       end
     end
 
+    # Returns parent links for the crumb.
+    def parent_links_for(crumb)
+      links = []
+      while crumb = crumb.parent
+        links.unshift *crumb.links
+      end
+      links
+    end
+
     # Array of links for the path of the breadcrumb.
     # Also reloads the breadcrumb configuration if needed.
     def links
@@ -119,8 +123,8 @@ module Gretel
             links.last.url = request.fullpath
           end
 
-          # Get trail
-          links.unshift *trail_for(crumb)
+          # Get parent links
+          links.unshift *parent_links_for(crumb)
 
           # Set last link to current
           links.last.try(:current!)
@@ -129,21 +133,6 @@ module Gretel
         else
           []
         end
-      end
-    end
-
-    # Returns parent links for the crumb, or the trail from `params[:trail]` if it is set.
-    def trail_for(crumb)
-      if params[Gretel::Trail.trail_param].present?
-        # Decode trail from URL
-        Gretel::Trail.decode(params[Gretel::Trail.trail_param])
-      else
-        # Build parents
-        links = []
-        while crumb = crumb.parent
-          links.unshift *crumb.links
-        end
-        links
       end
     end
 

@@ -14,9 +14,9 @@ class GretelTest < ActiveSupport::TestCase
 
   test "configuration block" do
     Gretel.configure do |config|
-      config.trail_param = :other_param
+      config.reload_environments << "staging"
     end
 
-    assert_equal :other_param, Gretel.trail_param
+    assert_equal ["development", "staging"], Gretel.reload_environments
   end
 end
