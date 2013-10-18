@@ -14,19 +14,19 @@ module Gretel
       id: nil
     }
 
-    STYLES = {
-      # Default style
-      default: { container_tag: :div, separator: " &rsaquo; " },
+    class << self
+      # Registers a style for later use.
+      # 
+      #   Gretel::Renderer.register_style :ul, { container_tag: :ul, fragment_tag: :li }
+      def register_style(style_key, options)
+        styles[style_key] = options
+      end
 
-      # Ordered list
-      ol: { container_tag: :ol, fragment_tag: :li },
-
-      # Unordered list
-      ul: { container_tag: :ul, fragment_tag: :li },
-
-      # Twitter Bootstrap
-      bootstrap: { container_tag: :ol, fragment_tag: :li, class: "breadcrumb", current_class: "active" }
-    }
+      # Hash of registered styles.
+      def styles
+        @styles ||= {}
+      end
+    end
 
     def initialize(context, breadcrumb_key, *breadcrumb_args)
       @context = context
@@ -88,10 +88,10 @@ module Gretel
 
     # Returns options for the given +style_key+ and raises an exception if it's not found.
     def options_for_style(style_key)
-      if style = STYLES[style_key]
+      if style = self.class.styles[style_key]
         style
       else
-        raise ArgumentError, "Breadcrumbs style #{style_key.inspect} not found. Use any of #{STYLES.keys.inspect}."
+        raise ArgumentError, "Breadcrumbs style #{style_key.inspect} not found. Use any of #{self.class.styles.keys.inspect}."
       end
     end
 

@@ -41,6 +41,13 @@ module Gretel
       @reload_environments ||= ["development"]
     end
 
+    # Registers a style for later use.
+    # 
+    #   Gretel.register_style :ul, { container_tag: :ul, fragment_tag: :li }
+    def register_style(style, options)
+      Gretel::Renderer.register_style style, options
+    end
+
     # Sets the Rails environment names with automatic configuration reload. Default is +["development"]+.
     attr_writer :reload_environments
 
@@ -59,6 +66,20 @@ module Gretel
       Crumbs.reset!
     end
   end
+end
+
+Gretel.configure do |config|
+  # Default style
+  config.register_style :default, { container_tag: :div, separator: " &rsaquo; " }
+
+  # Ordered list
+  config.register_style :ol, { container_tag: :ol, fragment_tag: :li }
+
+  # Unordered list
+  config.register_style :ul, { container_tag: :ul, fragment_tag: :li }
+
+  # Twitter Bootstrap
+  config.register_style :bootstrap, { container_tag: :ol, fragment_tag: :li, class: "breadcrumb", current_class: "active" }
 end
 
 ActionView::Base.send :include, Gretel::ViewHelpers
