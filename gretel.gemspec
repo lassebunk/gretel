@@ -20,6 +20,4 @@ Gem::Specification.new do |gem|
   gem.add_dependency "rails", ">= 3.2.0"
   gem.add_development_dependency "rails", "~> 3.2.13"
   gem.add_development_dependency "sqlite3"
-  gem.add_development_dependency "fakeredis", "~> 0.4.2"
-  gem.add_development_dependency "timecop", "~> 0.6.3"
 end
