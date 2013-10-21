@@ -58,16 +58,19 @@ module Gretel
       content_tag(options[:container_tag], html, id: options[:id], class: options[:class])
     end
 
+    # Yields links with applied options.
     def yield_links(options = {})
       options = options_for_render(options)
       yield links_for_render(options)
     end
 
+    # Returns the parent breadcrumb.
     def parent_breadcrumb(options = {})
       options = options_for_render(options)
       links_for_render(options)[-2]
     end
 
+    # Yields the parent breadcrumb if any.
     def yield_parent_breadcrumb(options = {})
       if parent = parent_breadcrumb(options)
         yield parent
