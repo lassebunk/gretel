@@ -74,14 +74,8 @@ module Gretel
       end
     end
 
-    # Array of links transformed by +options+ (like +:autoroot+ etc.) to be used in a view.
-    def links_with(options = {})
-      options = options_for_render(options)
-      links_for_render(options)
-    end
-
     # Proxy for +context.link_to+ that can be overridden by plugins.
-    def link_to(*args)
+    def breadcrumb_link_to(*args)
       context.link_to(*args)
     end
 
@@ -182,10 +176,10 @@ module Gretel
     def render_semantic_fragment(fragment_tag, text, url, options = {})
       if fragment_tag
         text = content_tag(:span, text, itemprop: "title")
-        text = link_to(text, url, itemprop: "url") if url.present?
+        text = breadcrumb_link_to(text, url, itemprop: "url") if url.present?
         content_tag(fragment_tag, text, class: options[:class], itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
       elsif url.present?
-        content_tag(:div, link_to(content_tag(:span, text, itemprop: "title"), url, class: options[:class], itemprop: "url"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
+        content_tag(:div, breadcrumb_link_to(content_tag(:span, text, itemprop: "title"), url, class: options[:class], itemprop: "url"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
       else
         content_tag(:div, content_tag(:span, text, class: options[:class], itemprop: "title"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
       end
@@ -194,10 +188,10 @@ module Gretel
     # Renders regular, non-semantic fragment HTML.
     def render_nonsemantic_fragment(fragment_tag, text, url, options = {})
       if fragment_tag
-        text = link_to(text, url) if url.present?
+        text = breadcrumb_link_to(text, url) if url.present?
         content_tag(fragment_tag, text, class: options[:class])
       elsif url.present?
-        link_to(text, url, class: options[:class])
+        breadcrumb_link_to(text, url, class: options[:class])
       elsif options[:class].present?
         content_tag(:span, text, class: options[:class])
       else
