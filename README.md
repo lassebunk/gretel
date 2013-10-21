@@ -173,8 +173,8 @@ end
 
 # Crumb with multiple links
 crumb :test do
-  link "One", one_link
-  link "Two", two_link
+  link "One", one_path
+  link "Two", two_path
   parent :about
 end
 
