@@ -89,14 +89,7 @@ module Gretel
     # Returns merged options for rendering breadcrumbs.
     def options_for_render(options = {})
       style = options_for_style(options[:style] || DEFAULT_OPTIONS[:style])
-      options = DEFAULT_OPTIONS.merge(style).merge(options)
-      
-      if show_root_alone = options.delete(:show_root_alone)
-        Gretel.show_deprecation_warning "The :show_root_alone option is deprecated. Use `breadcrumbs(display_single_fragment: #{show_root_alone.inspect})` instead."
-        options[:display_single_fragment] = show_root_alone
-      end
-      
-      options
+      DEFAULT_OPTIONS.merge(style).merge(options)
     end
 
     # Returns options for the given +style_key+ and raises an exception if it's not found.
