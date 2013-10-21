@@ -155,26 +155,27 @@ crumb :issue do |issue|
   parent :project_issues, issue.project
 end
 
-# Multiple links per crumb (recursive links for parent categories)
+# Recursive parent categories
 crumb :category do |category|
-  parents = [category]
-
-  parent_category = category
-  while parent_category = parent_category.parent_category
-    parents.unshift parent_category
+  link category.name, category
+  if category.parent
+    parent :category, category.parent
+  else
+    parent :categories
   end
-
-  parents.each do |category|
-    link category.name, category
-  end
-
-  parent :categories
 end
 
-# Product crumb with recursive parent categories
+# Product crumb with recursive parent categories (as defined above)
 crumb :product do |product|
   link product.name, product
   parent :category, product.category
+end
+
+# Crumb with multiple links
+crumb :test do
+  link "One", one_link
+  link "Two", two_link
+  parent :about
 end
 
 # Example of using params to alter the parent, e.g. to
