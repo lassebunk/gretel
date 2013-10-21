@@ -14,20 +14,6 @@ module Gretel
       id: nil
     }
 
-    class << self
-      # Registers a style for later use.
-      # 
-      #   Gretel::Renderer.register_style :ul, { container_tag: :ul, fragment_tag: :li }
-      def register_style(style_key, options)
-        styles[style_key] = options
-      end
-
-      # Hash of registered styles.
-      def styles
-        @styles ||= {}
-      end
-    end
-
     def initialize(context, breadcrumb_key, *breadcrumb_args)
       @context = context
       @breadcrumb_key = breadcrumb_key
@@ -101,13 +87,21 @@ module Gretel
       end
     end
 
-    # Returns parent links for the crumb.
-    def parent_links_for(crumb)
-      links = []
-      while crumb = crumb.parent
-        links.unshift *crumb.links
+    # Array of links with applied options.
+    def links_for_render(options = {})
+      out = links.dup
+
+      # Handle autoroot
+      if options[:autoroot] && out.map(&:key).exclude?(:root) && Gretel::Crumbs.crumb_defined?(:root)
+        out.unshift *Gretel::Crumb.new(context, :root).links
       end
-      links
+
+      # Handle show root alone
+      if out.size == 1 && !options[:display_single_fragment]
+        out.shift
+      end
+
+      out
     end
 
     # Array of links for the path of the breadcrumb.
@@ -142,21 +136,13 @@ module Gretel
       end
     end
 
-    # Array of links with applied options.
-    def links_for_render(options = {})
-      out = links.dup
-
-      # Handle autoroot
-      if options[:autoroot] && out.map(&:key).exclude?(:root) && Gretel::Crumbs.crumb_defined?(:root)
-        out.unshift *Gretel::Crumb.new(context, :root).links
+    # Returns parent links for the crumb.
+    def parent_links_for(crumb)
+      links = []
+      while crumb = crumb.parent
+        links.unshift *crumb.links
       end
-
-      # Handle show root alone
-      if out.size == 1 && !options[:display_single_fragment]
-        out.shift
-      end
-
-      out
+      links
     end
 
     # Renders HTML for a breadcrumb fragment, i.e. a breadcrumb link.
@@ -198,6 +184,20 @@ module Gretel
     # Proxy to view context
     def method_missing(method, *args, &block)
       context.send(method, *args, &block)
+    end
+
+    class << self
+      # Registers a style for later use.
+      # 
+      #   Gretel::Renderer.register_style :ul, { container_tag: :ul, fragment_tag: :li }
+      def register_style(style_key, options)
+        styles[style_key] = options
+      end
+
+      # Hash of registered styles.
+      def styles
+        @styles ||= {}
+      end
     end
   end
 end
