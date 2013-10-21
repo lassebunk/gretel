@@ -7,8 +7,7 @@ Gretel also supports [semantic breadcrumbs](http://support.google.com/webmasters
 
 Have fun! And please do write, if you (dis)like it – [lassebunk@gmail.com](mailto:lassebunk@gmail.com).
 
-New in version 3.0 :muscle:
----------------------------
+## New in version 3.0
 
 * Breadcrumbs can now be rendered in different styles like ul- and ol lists, and for use with the [Twitter Bootstrap](http://getbootstrap.com/) framework. See the `:style` option below for more info.
 * Defining breadcrumbs using `Gretel::Crumbs.layout do ... end` in an initializer has been removed. See below for details on how to upgrade.
@@ -23,8 +22,7 @@ I hope you find these changes as useful as I did – if you have more suggestion
 
 See below for more info or the [changelog](https://github.com/lassebunk/gretel/blob/master/CHANGELOG.md) for less significant changes.
 
-Installation
-------------
+## Installation
 
 In your *Gemfile*:
 
@@ -38,8 +36,7 @@ And run:
 $ bundle install
 ```
 
-Example
--------
+## Example
 
 Start by generating breadcrumbs configuration file:
 
@@ -91,8 +88,7 @@ This will generate the following HTML (indented for readability):
 </div>
 ```
 
-Options
--------
+## Options
 
 You can pass options to `<%= breadcrumbs %>`, e.g. `<%= breadcrumbs pretext: "You are here: " %>`:
 
@@ -127,8 +123,7 @@ Or you can build the breadcrumbs manually for full customization; see below.
 
 If you add other widely used styles, please submit a [Pull Request](https://github.com/lassebunk/gretel/pulls) so others can use them too.
 
-More examples
--------------
+## More examples
 
 In *config/breadcrumbs.rb*:
 
@@ -216,8 +211,7 @@ crumb :user do |user|
 end
 ```
 
-Building the breadcrumbs manually
----------------------------------
+## Building the breadcrumbs manually
 
 If you supply a block to the `breadcrumbs` method, it will yield an array with the breadcrumb links so you can build the breadcrumbs HTML manually:
 
@@ -232,8 +226,7 @@ If you supply a block to the `breadcrumbs` method, it will yield an array with t
 <% end %>
 ```
 
-Getting the parent breadcrumb
------------------------------
+## Getting the parent breadcrumb
 
 If you want to add a link to the parent breadcrumb, you can use the `parent_breadcrumb` view helper.
 By default it returns a link instance that has the properties `#key`, `#text`, and `#url`.
@@ -247,8 +240,7 @@ If you supply a block, it will yield the link if it is present:
 <% end %>
 ```
 
-Nice to know
-------------
+## Nice to know
 
 ### Access to view methods
 
@@ -273,8 +265,7 @@ You can apply trails to select links by adding a simple JS selector (`js-append-
 Check out the gem [here](https://github.com/lassebunk/gretel-trails).
 
 
-Upgrading from version 2.0 or below
------------------------------------
+## Upgrading from version 2.0 or below
 
 Instead of using the initializer that in Gretel version 2.0 and below required restarting the application after breadcrumb configuration changes, the configuration of the breadcrumbs is now loaded from `config/breadcrumbs.rb` (and `config/breadcrumbs/*.rb` if you want to split your breadcrumbs configuration across multiple files).
 In the Rails development environment, these files are automatically reloaded when changed.
@@ -301,19 +292,16 @@ end
 
 in `config/breadcrumbs.rb`.
 
-Documentation
--------------
+## Documentation
 
 * [Full documentation](http://rubydoc.info/gems/gretel)
 * [Changelog](https://github.com/lassebunk/gretel/blob/master/CHANGELOG.md)
 
-Versioning
-----------
+## Versioning
 
 Follows [semantic versioning](http://semver.org/).
 
-Contributors
-------------
+## Contributors
 
 * [See the list of contributors](https://github.com/lassebunk/gretel/graphs/contributors)
 
