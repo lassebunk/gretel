@@ -30,7 +30,7 @@ module Gretel
     # Example:
     #   parent :category, category
     def parent(*args)
-      return @parent unless args.any?
+      return @parent if args.empty?
       key = args.shift
 
       @parent = Gretel::Crumb.new(context, key, *args)
