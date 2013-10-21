@@ -25,7 +25,7 @@ module Gretel
     #   <% end %>
     def breadcrumbs(options = {}, &block)
       if block_given?
-        yield gretel_renderer.links_with(options)
+        gretel_renderer.yield_links(options, &block)
       else
         gretel_renderer.render(options)
       end
@@ -33,11 +33,10 @@ module Gretel
 
     # Returns or yields parent breadcrumb (second-to-last in the trail) if it is present.
     def parent_breadcrumb(options = {}, &block)
-      parent = gretel_renderer.links_with(options)[-2]
-      if block_given? && parent
-        yield parent
+      if block_given?
+        gretel_renderer.yield_parent_breadcrumb(options, &block)
       else
-        parent
+        gretel_renderer.parent_breadcrumb(options)
       end
     end
 

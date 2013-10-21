@@ -58,6 +58,22 @@ module Gretel
       content_tag(options[:container_tag], html, id: options[:id], class: options[:class])
     end
 
+    def yield_links(options = {})
+      options = options_for_render(options)
+      yield links_for_render(options)
+    end
+
+    def parent_breadcrumb(options = {})
+      options = options_for_render(options)
+      links_for_render(options)[-2]
+    end
+
+    def yield_parent_breadcrumb(options = {})
+      if parent = parent_breadcrumb(options)
+        yield parent
+      end
+    end
+
     # Array of links transformed by +options+ (like +:autoroot+ etc.) to be used in a view.
     def links_with(options = {})
       options = options_for_render(options)
