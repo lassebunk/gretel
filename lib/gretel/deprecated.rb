@@ -13,7 +13,7 @@ module Gretel
       #   end
       def layout(&block)
         raise (
-          "Gretel::Crumbs.layout has been deprecated was removed in Gretel version 3.0. " +
+          "Gretel::Crumbs.layout was removed in Gretel version 3.0. " +
           "Please put your breadcrumbs in `config/breadcrumbs.rb`. " +
           "This will also automatically reload your breadcrumbs when you change them in the development environment. " +
           "See https://github.com/lassebunk/gretel/blob/master/README.md for details.")
