@@ -214,6 +214,21 @@ class HelperMethodsTest < ActionView::TestCase
                  breadcrumbs
   end
 
+  test "with_breadcrumb" do
+    breadcrumb :basic
+    
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
+                 breadcrumbs
+
+    with_breadcrumb(:with_parent_object, issues(:one)) do
+      assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/projects/1">Test Project</a> &rsaquo; <span class="current">Test Issue</span></div>},
+                   breadcrumbs
+    end    
+    
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
+                 breadcrumbs
+  end
+
   test "calling breadcrumbs helper twice" do
     breadcrumb :with_parent
     2.times do

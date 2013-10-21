@@ -11,6 +11,24 @@ module Gretel
       @_gretel_renderer = Gretel::Renderer.new(self, key, *args)
     end
 
+    # Yields a block where inside the block you have a different breadcrumb than outsite.
+    # 
+    #   <% breadcrumb :about %>
+    # 
+    #   <%= breadcrumbs # shows the :about breadcrumb %>
+    # 
+    #   <% with_breadcrumb :product, Product.first do %>
+    #     <%= breadcrumbs # shows the :product breadcrumb %>
+    #   <% end %>
+    # 
+    #   <%= breadcrumbs # shows the :about breadcrumb %>
+    def with_breadcrumb(key, *args, &block)
+      original_renderer = @_gretel_renderer
+      @_gretel_renderer = Gretel::Renderer.new(self, key, *args)
+      yield
+      @_gretel_renderer = original_renderer
+    end
+
     # Renders the breadcrumbs HTML, for example in your layout. See the readme for default options.
     #   <%= breadcrumbs pretext: "You are here: " %>
     #
