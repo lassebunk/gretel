@@ -206,6 +206,10 @@ module Gretel
       def styles
         @styles ||= DEFAULT_STYLES
       end
+
+      # Resets all changes made to +Gretel::Renderer+. Used for testing.
+      def reset!
+        instance_variables.each { |var| remove_instance_variable var }
       end
     end
   end

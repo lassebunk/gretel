@@ -60,10 +60,11 @@ module Gretel
       yield self
     end
 
-    # Resets all changes made to +Gretel+, +Gretel::Crumbs+, and +Gretel::Trail+. Used for testing.
+    # Resets all changes made to +Gretel+, +Gretel::Crumbs+, and +Gretel::Renderer+. Used for testing.
     def reset!
       instance_variables.each { |var| remove_instance_variable var }
       Crumbs.reset!
+      Renderer.reset!
     end
   end
 end
