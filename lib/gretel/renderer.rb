@@ -14,6 +14,14 @@ module Gretel
       id: nil
     }
 
+    DEFAULT_STYLES = {
+      default: { container_tag: :div, separator: " &rsaquo; " },
+      ol: { container_tag: :ol, fragment_tag: :li },
+      ul: { container_tag: :ul, fragment_tag: :li },
+      bootstrap: { container_tag: :ol, fragment_tag: :li, class: "breadcrumb", current_class: "active" }
+    }
+
+
     def initialize(context, breadcrumb_key, *breadcrumb_args)
       @context = context
       @breadcrumb_key = breadcrumb_key
@@ -196,7 +204,8 @@ module Gretel
 
       # Hash of registered styles.
       def styles
-        @styles ||= {}
+        @styles ||= DEFAULT_STYLES
+      end
       end
     end
   end

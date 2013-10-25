@@ -310,6 +310,15 @@ class HelperMethodsTest < ActionView::TestCase
     end
   end
 
+  test "register style" do
+    Gretel.register_style :test_style, { container_tag: :one, fragment_tag: :two }
+    
+    breadcrumb :basic
+
+    assert_equal %{<one class="breadcrumbs"><two><a href="/">Home</a></two><two class="current">About</two></one>},
+                 breadcrumbs(style: :test_style)
+  end
+
   # Configuration reload
 
   test "reload configuration when file is changed" do
