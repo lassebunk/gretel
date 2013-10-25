@@ -1,6 +1,8 @@
 module Gretel
   module Crumbs
     class << self
+      include Resettable
+
       # Stores the supplied block for later use.
       def crumb(key, &block)
         crumbs[key] = block
@@ -50,11 +52,6 @@ module Gretel
       # List of breadcrumb configuration files.
       def breadcrumb_files
         Dir[*Gretel.breadcrumb_paths]
-      end
-
-      # Resets all changes made to +Gretel::Crumbs+. Used for testing.
-      def reset!
-        instance_variables.each { |var| remove_instance_variable var }
       end
 
     private

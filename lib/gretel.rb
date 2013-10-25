@@ -1,4 +1,5 @@
 require 'gretel/version'
+require 'gretel/resettable'
 require 'gretel/crumbs'
 require 'gretel/crumb'
 require 'gretel/link'
@@ -8,6 +9,8 @@ require 'gretel/deprecated'
 
 module Gretel
   class << self
+    include Resettable
+
     # Returns the path from with breadcrumbs are loaded. Default is +config/breadcrumbs.rb+.
     def breadcrumb_paths
       @breadcrumb_paths ||= [Rails.root.join("config", "breadcrumbs.rb"), Rails.root.join("config", "breadcrumbs", "**", "*.rb")]
@@ -62,7 +65,7 @@ module Gretel
 
     # Resets all changes made to +Gretel+, +Gretel::Crumbs+, and +Gretel::Renderer+. Used for testing.
     def reset!
-      instance_variables.each { |var| remove_instance_variable var }
+      super
       Crumbs.reset!
       Renderer.reset!
     end

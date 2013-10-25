@@ -195,6 +195,8 @@ module Gretel
     end
 
     class << self
+      include Resettable
+      
       # Registers a style for later use.
       # 
       #   Gretel::Renderer.register_style :ul, { container_tag: :ul, fragment_tag: :li }
@@ -205,11 +207,6 @@ module Gretel
       # Hash of registered styles.
       def styles
         @styles ||= DEFAULT_STYLES
-      end
-
-      # Resets all changes made to +Gretel::Renderer+. Used for testing.
-      def reset!
-        instance_variables.each { |var| remove_instance_variable var }
       end
     end
   end
