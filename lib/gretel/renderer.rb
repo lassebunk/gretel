@@ -72,8 +72,8 @@ module Gretel
     end
 
     # Proxy for +context.link_to+ that can be overridden by plugins.
-    def breadcrumb_link_to(*args)
-      context.link_to(*args)
+    def breadcrumb_link_to(name, url, options = {})
+      context.link_to(name, url, options)
     end
 
     private
