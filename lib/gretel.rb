@@ -62,13 +62,6 @@ module Gretel
     def configure
       yield self
     end
-
-    # Resets all changes made to +Gretel+, +Gretel::Crumbs+, and +Gretel::Renderer+. Used for testing.
-    def reset!
-      super
-      Crumbs.reset!
-      Renderer.reset!
-    end
   end
 end
 
