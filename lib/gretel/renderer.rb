@@ -113,6 +113,9 @@ module Gretel
         out.shift
       end
 
+      # Set last link to current
+      out.last.try(:current!)
+
       out
     end
 
@@ -131,9 +134,6 @@ module Gretel
         
         # Get parent links
         links.unshift *parent_links_for(crumb)
-
-        # Set last link to current
-        links.last.try(:current!)
 
         links
       else
