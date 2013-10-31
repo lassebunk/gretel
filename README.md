@@ -27,7 +27,7 @@ See below for more info or the [changelog](https://github.com/lassebunk/gretel/b
 In your *Gemfile*:
 
 ```ruby
-gem "gretel", "3.0.0.beta5"
+gem "gretel", "3.0.0.beta6"
 ```
 
 And run:
