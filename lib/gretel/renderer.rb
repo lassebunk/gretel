@@ -11,7 +11,8 @@ module Gretel
       semantic: false,
       class: "breadcrumbs",
       current_class: "current",
-      id: nil
+      id: nil,
+      transform_current_path: true
     }
 
     DEFAULT_STYLES = {
@@ -104,6 +105,11 @@ module Gretel
         out.unshift *Gretel::Crumb.new(context, :root).links
       end
 
+      # Set current link to actual path
+      if options[:transform_current_path] && out.any? && request
+        out.last.url = request.fullpath
+      end
+
       # Handle show root alone
       if out.size == 1 && !options[:display_single_fragment]
         out.shift
@@ -125,11 +131,6 @@ module Gretel
         # Links of first crumb
         links = crumb.links.dup
         
-        # Set current link to actual path
-        if links.any? && request
-          links.last.url = request.fullpath
-        end
-
         # Get parent links
         links.unshift *parent_links_for(crumb)
 
