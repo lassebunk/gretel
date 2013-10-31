@@ -11,8 +11,7 @@ module Gretel
       semantic: false,
       class: "breadcrumbs",
       current_class: "current",
-      id: nil,
-      transform_current_path: true
+      id: nil
     }
 
     DEFAULT_STYLES = {
@@ -76,12 +75,6 @@ module Gretel
       context.link_to(name, url, options)
     end
 
-    # Default options to use when rendering breadcrumbs. This can be used by
-    # plugins that want to override the default behavior.
-    def default_options
-      @default_options ||= DEFAULT_OPTIONS.dup
-    end
-
     private
 
     attr_reader :context, :breadcrumb_key, :breadcrumb_args
@@ -89,7 +82,7 @@ module Gretel
     # Returns merged options for rendering breadcrumbs.
     def options_for_render(options = {})
       style = options_for_style(options[:style] || DEFAULT_OPTIONS[:style])
-      default_options.merge(style).merge(options)
+      DEFAULT_OPTIONS.merge(style).merge(options)
     end
 
     # Returns options for the given +style_key+ and raises an exception if it's not found.
@@ -111,7 +104,7 @@ module Gretel
       end
 
       # Set current link to actual path
-      if options[:transform_current_path] && out.any? && request
+      if out.any? && request
         out.last.url = request.fullpath
       end
 

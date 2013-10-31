@@ -265,15 +265,6 @@ class HelperMethodsTest < ActionView::TestCase
     end
   end
 
-  test "default options" do
-    breadcrumb :basic
-
-    gretel_renderer.default_options[:pretext] = "Test pretext: "
-
-    assert_equal %{<div class="breadcrumbs">Test pretext: <a href="/">Home</a> &rsaquo; <span class="current">About</span> - post</div>},
-                 breadcrumbs(posttext: " - post")
-  end
-
   # Styles
 
   test "default style" do
