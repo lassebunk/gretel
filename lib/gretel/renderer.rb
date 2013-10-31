@@ -22,7 +22,6 @@ module Gretel
       bootstrap: { container_tag: :ol, fragment_tag: :li, class: "breadcrumb", current_class: "active" }
     }
 
-
     def initialize(context, breadcrumb_key, *breadcrumb_args)
       @context = context
       @breadcrumb_key = breadcrumb_key
@@ -77,6 +76,12 @@ module Gretel
       context.link_to(name, url, options)
     end
 
+    # Default options to use when rendering breadcrumbs. This can be used by
+    # plugins that want to override the default behavior.
+    def default_options
+      @default_options ||= DEFAULT_OPTIONS.dup
+    end
+
     private
 
     attr_reader :context, :breadcrumb_key, :breadcrumb_args
@@ -84,7 +89,7 @@ module Gretel
     # Returns merged options for rendering breadcrumbs.
     def options_for_render(options = {})
       style = options_for_style(options[:style] || DEFAULT_OPTIONS[:style])
-      DEFAULT_OPTIONS.merge(style).merge(options)
+      default_options.merge(style).merge(options)
     end
 
     # Returns options for the given +style_key+ and raises an exception if it's not found.
