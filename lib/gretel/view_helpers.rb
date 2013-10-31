@@ -11,7 +11,7 @@ module Gretel
       @_gretel_renderer = Gretel::Renderer.new(self, key, *args)
     end
 
-    # Yields a block where inside the block you have a different breadcrumb than outsite.
+    # Yields a block where inside the block you have a different breadcrumb than outside.
     # 
     #   <% breadcrumb :about %>
     # 
