@@ -12,6 +12,9 @@ module Gretel
 
     # Sets link of the breadcrumb.
     def link(text, url = nil)
+      # Transform objects to real paths.
+      url = url_for(url) if url
+      
       links << Gretel::Link.new(key, text, url)
     end
 
@@ -27,7 +30,7 @@ module Gretel
     # Example:
     #   parent :category, category
     def parent(*args)
-      return @parent unless args.any?
+      return @parent if args.empty?
       key = args.shift
 
       @parent = Gretel::Crumb.new(context, key, *args)

@@ -11,4 +11,12 @@ class GretelTest < ActiveSupport::TestCase
     assert_equal ["development"], Gretel.reload_environments
     assert !Gretel.suppress_deprecation_warnings?
   end
+
+  test "configuration block" do
+    Gretel.configure do |config|
+      config.reload_environments << "staging"
+    end
+
+    assert_equal ["development", "staging"], Gretel.reload_environments
+  end
 end

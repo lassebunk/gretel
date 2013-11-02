@@ -1,6 +1,16 @@
 Changelog
 =========
 
+Version 3.0
+-----------
+* Support for defining breadcrumbs using `Gretel::Crumbs.layout do ... end` in an initializer has been removed. See the readme for details on how to upgrade.
+* Breadcrumbs rendering is now done in a separate class to unclutter the view with helpers. The public API is still the same.
+* Support for rendering the breadcrumbs in different styles like ul- and ol lists, and for use with [Twitter Bootstrap](http://getbootstrap.com/). See the `:style` option in the readme for more info.
+* The `:show_root_alone` option is now called `:display_single_fragment` and can be used to display the breadcrumbs only when there are more than one link, also if it is not the root breadcrumb.
+* Links yielded from `<%= breadcrumbs do |links| %>` now have a `current?` helper that returns true if the link is the last in the trail.
+* New view helper: `parent_breadcrumb` returns the parent breadcrumb link (with `#key`, `#text`, and `#url`). This can for example be used to create a dynamic back link. You can supply options like `:autoroot` etc.
+  If you supply a block, it will yield the parent breadcrumb if it is present.
+
 Version 2.1
 -----------
 * Breadcrumbs are now configured in `config/breadcrumbs.rb` and `config/breadcrumbs/**/*.rb` and reloaded when changed in the development environment instead of the initializer that required restart when configuration changed.

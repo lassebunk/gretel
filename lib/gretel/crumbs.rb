@@ -1,6 +1,8 @@
 module Gretel
   module Crumbs
     class << self
+      include Resettable
+
       # Stores the supplied block for later use.
       def crumb(key, &block)
         crumbs[key] = block
@@ -19,9 +21,6 @@ module Gretel
       # Loads the breadcrumb configuration files.
       def load_breadcrumbs
         @crumbs = {}
-
-        # Deprecated in v2.1.0.
-        instance_eval &deprecated_breadcrumbs_block
 
         loaded_file_mtimes.clear
         breadcrumb_files.each do |file|
@@ -53,11 +52,6 @@ module Gretel
       # List of breadcrumb configuration files.
       def breadcrumb_files
         Dir[*Gretel.breadcrumb_paths]
-      end
-
-      # Resets all changes made to +Gretel::Crumbs+. Used for testing.
-      def reset!
-        instance_variables.each { |var| remove_instance_variable var }
       end
 
     private
