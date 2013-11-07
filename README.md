@@ -303,7 +303,7 @@ Follows [semantic versioning](http://semver.org/).
 
 ## Contributing
 
-You are very welcome to help improve Gretel if you have suggestions that other people can use.
+You are very welcome to help improve Gretel if you have suggestions for features that other people can use.
 
 To contribute:
 
