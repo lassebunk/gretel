@@ -8,7 +8,7 @@ module Gretel
         crumbs[key] = block
       end
 
-      # Returns an array of all stored crumb blocks.
+      # Returns a hash of all stored crumb blocks.
       def crumbs
         @crumbs ||= {}
       end
