@@ -301,6 +301,20 @@ in `config/breadcrumbs.rb`.
 
 Follows [semantic versioning](http://semver.org/).
 
+## Contributing
+
+You are very welcome to help improve Gretel if you have suggestions that other people can use.
+
+To contribute:
+
+1. Fork the project
+2. Create your feature branch (git checkout -b my-new-feature)
+3. Commit your changes (git commit -am 'Add new feature')
+4. Push to the branch (git push origin my-new-feature)
+5. Create new pull request
+
+Thanks.
+
 ## Contributors
 
 * [See the list of contributors](https://github.com/lassebunk/gretel/graphs/contributors)
