@@ -110,7 +110,7 @@ Option                   | Description                                          
 
 ### Styles
 
-These are the styles you can use with `breadcrumb style: :xx`.
+These are the styles you can use with `breadcrumbs style: :xx`.
 
 Style        | Description
 ------------ | -----------
