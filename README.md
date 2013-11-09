@@ -5,8 +5,7 @@
 <img src="http://i.imgur.com/CAKEaBM.png" alt="Handle breadcrumb trails... like a boss :)" />
 
 Gretel is a [Ruby on Rails](http://rubyonrails.org) plugin that makes it easy yet flexible to create breadcrumbs.
-It is based around the idea that breadcrumbs are a concern of the view.
-You define a set of breadcrumbs in *config/breadcrumbs.rb* (or multiple files; see below) and specify in the view which breadcrumb to use.
+It is based around the idea that breadcrumbs are a concern of the view, so you define a set of breadcrumbs in *config/breadcrumbs.rb* (or multiple files; see below) and specify in the view which breadcrumb to use.
 Gretel also supports [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417) (those used in Google results).
 
 Have fun! And please do write, if you (dis)like it – [lassebunk@gmail.com](mailto:lassebunk@gmail.com).
