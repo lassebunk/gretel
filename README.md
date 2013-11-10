@@ -1,6 +1,4 @@
-<div style="position: absolute;">
-  <a href="http://travis-ci.org/lassebunk/gretel"><img src="https://secure.travis-ci.org/lassebunk/gretel.png" alt="Build Status" /></a>
-</div>
+<a href="http://travis-ci.org/lassebunk/gretel"><img src="https://secure.travis-ci.org/lassebunk/gretel.png" alt="Build Status" /></a>
 
 <img src="http://i.imgur.com/CAKEaBM.png" alt="Handle breadcrumb trails... like a boss :)" />
 
@@ -321,5 +319,10 @@ Thanks.
 ## Contributors
 
 * [See the list of contributors](https://github.com/lassebunk/gretel/graphs/contributors)
+
+## And then
+
+<img src="http://i.imgur.com/u4Wbt4n.png" alt="After using Gretel, you'll be like this" />
+
 
 Copyright (c) 2010-2013 [Lasse Bunk](http://lassebunk.dk), released under the MIT license
