@@ -324,5 +324,6 @@ Thanks.
 
 <img src="http://i.imgur.com/u4Wbt4n.png" alt="After using Gretel, you'll be like this" />
 
+Have fun!
 
 Copyright (c) 2010-2013 [Lasse Bunk](http://lassebunk.dk), released under the MIT license
