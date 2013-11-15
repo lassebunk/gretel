@@ -7,6 +7,10 @@ module Gretel
     def breadcrumb(key = nil, *args)
       if key.nil? || key.is_a?(Hash)
         raise ArgumentError, "The `breadcrumb` method was called with #{key.inspect} as the key. This method is used to set the breadcrumb. Maybe you meant to call the `breadcrumbs` method (with an 's' in the end) which is used to render the breadcrumbs?"
+      elsif key.is_a?(ActiveRecord::Base)
+        # Enables calling `breadcrumb @product` instead of `breadcrumb :product, @product`
+        args.unshift key
+        key = key.class.model_name.to_s.underscore.to_sym
       end
       @_gretel_renderer = Gretel::Renderer.new(self, key, *args)
     end

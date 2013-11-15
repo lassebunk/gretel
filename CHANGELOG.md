@@ -1,6 +1,10 @@
 Changelog
 =========
 
+Version 3.0.1
+-------------
+* Breadcrumbs can now be inferred if you pass in an ActiveRecord model instance. E.g. `breadcrumb @product` is short for `breadcrumb :product, @product`.
+
 Version 3.0
 -----------
 * Support for defining breadcrumbs using `Gretel::Crumbs.layout do ... end` in an initializer has been removed. See the readme for details on how to upgrade.

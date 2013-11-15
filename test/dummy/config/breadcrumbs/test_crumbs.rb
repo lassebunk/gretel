@@ -69,3 +69,7 @@ end
 crumb :using_view_helper do
   link times_two("Test"), about_path
 end
+
+crumb :project do |project|
+  link project.name, project
+end

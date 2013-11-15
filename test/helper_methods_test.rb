@@ -265,6 +265,12 @@ class HelperMethodsTest < ActionView::TestCase
     end
   end
 
+  test "inferred breadcrumb" do
+    breadcrumb Project.first
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">Test Project</span></div>},
+                 breadcrumbs
+  end
+
   # Styles
 
   test "default style" do
