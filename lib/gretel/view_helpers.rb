@@ -54,6 +54,10 @@ module Gretel
     end
 
     # Returns or yields parent breadcrumb (second-to-last in the trail) if it is present.
+    # 
+    #   <% parent_breadcrumb do |link| %>
+    #     <%= link_to link.text, link.url %> (<%= link.key %>)
+    #   <% end %>
     def parent_breadcrumb(options = {}, &block)
       if block_given?
         gretel_renderer.yield_parent_breadcrumb(options, &block)
