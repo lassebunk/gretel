@@ -256,10 +256,19 @@ The format is the same as `config/breadcrumbs.rb` which is also loaded.
 
 ### Inferring breadcrumbs
 
-Breadcrumbs can be automatically inferred if you pass in an ActiveRecord model instance.
+Breadcrumbs can be automatically inferred if you pass an instance of an object that responds to `model_name` (like an ActiveRecord model instance).
 
-For example `breadcrumb @product` is short for `breadcrumb :product, @product`.
+For example:
 
+```erb
+<% breadcrumb @product %>
+```
+
+is short for
+
+```erb
+<% breadcrumb :product, @product %>
+```
 
 ### Automatic reloading of breadcrumb configuration files
 
