@@ -1,9 +1,12 @@
 module Gretel
   module ViewHelpers
     # Sets the current breadcrumb to be rendered elsewhere. Put it somewhere in the view, preferably in the top, before you render any breadcrumbs HTML:
-    #   <%
-    #   breadcrumb :category, @category
-    #   %>
+    # 
+    #   <% breadcrumb :category, @category %>
+    # 
+    # If you pass an instance of an object that responds to +model_name+ (like an ActiveRecord model instance), the breadcrumb can be automatically inferred, so a shortcut for the above would be:
+    # 
+    #   <% breadcrumb @category %>
     def breadcrumb(key = nil, *args)
       if key.nil? || key.is_a?(Hash)
         raise ArgumentError, "The `breadcrumb` method was called with #{key.inspect} as the key. This method is used to set the breadcrumb. Maybe you meant to call the `breadcrumbs` method (with an 's' in the end) which is used to render the breadcrumbs?"
