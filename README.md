@@ -18,7 +18,7 @@ Have fun! And please do write, if you (dis)like it – [lassebunk@gmail.com](mai
 * New view helper: `parent_breadcrumb` returns the parent breadcrumb link (with `#key`, `#text`, and `#url`). This can for example be used to create a dynamic back link.
   You can supply options like `:autoroot` etc.
   If you supply a block, it will yield the parent breadcrumb if it is present.
-* Breadcrumbs can now be inferred if you pass in an ActiveRecord model instance. E.g. `breadcrumb @product` is short for `breadcrumb :product, @product`.
+* Breadcrumbs can now be inferred if you pass in an instance of an object that responds to `model_name` (like an ActiveRecord model instance). E.g. `breadcrumb @product` is short for `breadcrumb :product, @product`.
 
 
 I hope you find these changes as useful as I did – if you have more suggestions, please create an [Issue](https://github.com/lassebunk/gretel/issues) or [Pull Request](https://github.com/lassebunk/gretel/pulls).
