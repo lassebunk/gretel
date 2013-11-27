@@ -238,7 +238,7 @@ You can supply options like `autoroot: false` etc.
 If you supply a block, it will yield the link if it is present:
 
 ```erb
-<% parent_breadcrumb do |parent| %>
+<% parent_breadcrumb do |link| %>
   <%= link_to "Back to #{link.text}", link.url %>
 <% end %>
 ```
