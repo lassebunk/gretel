@@ -18,7 +18,7 @@ module Gretel
       default: { container_tag: :div, separator: " &rsaquo; " },
       ol: { container_tag: :ol, fragment_tag: :li },
       ul: { container_tag: :ul, fragment_tag: :li },
-      bootstrap: { container_tag: :ol, fragment_tag: :li, class: "breadcrumb", current_class: "active" }
+      bootstrap: { container_tag: :ol, fragment_tag: :li, class: "breadcrumb", current_class: "active" },
       foundation5: { container_tag: :ul, fragment_tag: :li, class: "breadcrumb", current_class: "current" }
     }
 
