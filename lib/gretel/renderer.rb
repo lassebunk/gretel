@@ -19,6 +19,7 @@ module Gretel
       ol: { container_tag: :ol, fragment_tag: :li },
       ul: { container_tag: :ul, fragment_tag: :li },
       bootstrap: { container_tag: :ol, fragment_tag: :li, class: "breadcrumb", current_class: "active" }
+      foundation5: { container_tag: :ul, fragment_tag: :li, class: "breadcrumb", current_class: "current" }
     }
 
     def initialize(context, breadcrumb_key, *breadcrumb_args)
