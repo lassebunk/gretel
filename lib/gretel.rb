@@ -13,7 +13,14 @@ module Gretel
 
     # Returns the path from with breadcrumbs are loaded. Default is +config/breadcrumbs.rb+.
     def breadcrumb_paths
-      @breadcrumb_paths ||= [Rails.root.join("config", "breadcrumbs.rb"), Rails.root.join("config", "breadcrumbs", "**", "*.rb")]
+      return @breadcrumb_paths if @breadcrumb_paths
+
+      @breadcrumb_paths = Rails.root.join("config", "breadcrumbs.rb"), Rails.root.join("config", "breadcrumbs", "**", "*.rb")
+
+      Rails::Application::Railties.engines.map do |engine|
+        @breadcrumb_paths << engine.config.root.join("config", "breadcrumbs.rb")
+        @breadcrumb_paths << engine.config.root.join("config", "breadcrumbs", "**", "*.rb")
+      end
     end
 
     # Sets the path from with breadcrumbs are loaded. Default is +config/breadcrumbs.rb+.
