@@ -360,10 +360,13 @@ You are very welcome to help improve Gretel if you have suggestions for features
 To contribute:
 
 1. Fork the project
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -am 'Add new feature')
-4. Push to the branch (git push origin my-new-feature)
-5. Create new pull request
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Make your changes
+4. Add tests
+5. Run `rake` to make sure all tests pass
+6. Commit your changes (`git commit -am 'Add new feature'`)
+7. Push to the branch (`git push origin my-new-feature`)
+8. Create new pull request
 
 Thanks.
 
