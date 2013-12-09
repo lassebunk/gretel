@@ -35,12 +35,9 @@ module Gretel
 
       return "" if links.empty?
 
-      # Array to hold the HTML fragments
-      fragments = []
-
       # Loop through all but the last (current) link and build HTML of the fragments
-      links[0..-2].each do |link|
-        fragments << render_fragment(options[:fragment_tag], link.text, link.url, options[:semantic])
+      fragments = links[0..-2].map do |link|
+        render_fragment(options[:fragment_tag], link.text, link.url, options[:semantic])
       end
 
       # The current link is handled a little differently, and is only linked if specified in the options
