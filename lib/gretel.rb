@@ -18,9 +18,10 @@ module Gretel
       @breadcrumb_paths ||= begin
         engine_roots = Rails::Application::Railties.engines.map { |e| e.config.root }
         
-        [Rails.root.join("app", "views", "breadcrumbs", "**", "*.rb")] +
         [*engine_roots, Rails.root].map do |root|
-          [root.join("config", "breadcrumbs.rb"), root.join("config", "breadcrumbs", "**", "*.rb")]
+          [root.join("config", "breadcrumbs.rb"),
+           root.join("config", "breadcrumbs", "**", "*.rb"),
+           root.join("app", "views", "breadcrumbs", "**", "*.rb")]
         end.flatten
       end
     end
