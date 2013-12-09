@@ -255,6 +255,11 @@ When configuring breadcrumbs inside a `crumb :xx do ... end` block, you have acc
 If you have a large site and you want to split your breadcrumbs configuration over multiple files, you can create a folder named `config/breadcrumbs` and put your configuration files (e.g. `products.rb` or `frontend.rb`) in there.
 The format is the same as `config/breadcrumbs.rb` which is also loaded.
 
+### Loading breadcrumbs from engines
+
+Breadcrumbs are automatically loaded from any engines' `config/breadcrumbs.rb` and `config/breadcrumbs/**/*.rb`.
+Breadcrumbs defined in your main app will override breadcrumbs from engines.
+
 ### Inferring breadcrumbs
 
 Breadcrumbs can be automatically inferred if you pass an instance of an object that responds to `model_name` (like an ActiveRecord model instance).

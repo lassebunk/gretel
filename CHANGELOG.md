@@ -2,6 +2,7 @@
 
 ## Version 3.0.3
 * Breadcrumbs can now be rendered for use in the [Foundation 5](http://foundation.zurb.com/) framework. Use `breadcrumbs style: :foundation5`.
+* Breadcrumbs are now automatically loaded from any engines' `config/breadcrumbs.rb` and `config/breadcrumbs/**/*.rb`. See the readme for details.
 
 ## Version 3.0.2
 * Inferring breadcrumbs is now supported on all instances of objects that respond to `model_name`.
