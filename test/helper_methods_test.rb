@@ -239,6 +239,12 @@ class HelperMethodsTest < ActionView::TestCase
                  breadcrumbs
   end
 
+  test "from views folder" do
+    breadcrumb :from_views
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">Breadcrumb From View</span></div>},
+                 breadcrumbs
+  end
+
   test "with_breadcrumb" do
     breadcrumb :basic
     
