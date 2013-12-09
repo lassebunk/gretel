@@ -276,6 +276,33 @@ is short for
 <% breadcrumb :product, @product %>
 ```
 
+### Passing options to links
+
+You can pass options to links for use when you render breadcrumbs manually.
+
+In *config/breadcrumbs.rb*:
+
+```ruby
+crumb :something do
+  link "My Link", my_path, title: "My Title", other: "My Other Option"
+end
+```
+
+Example methods you can then use in the view:
+
+```ruby
+breadcrumbs do |links|
+  links.each do |link|
+    link.title?              # => true
+    link.title               # => "My Title"
+    link.other?              # => true
+    link.other               # => "My Other Option"
+    link.nonexisting_option? # => false
+    link.nonexisting_option  # => nil
+  end
+end
+```
+
 ### Automatic reloading of breadcrumb configuration files
 
 Since Gretel version 2.1.0, the breadcrumb configuration files are now reloaded in the Rails development environment if they change. In other environments, like production, the files are loaded once, when first needed.
