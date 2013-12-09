@@ -73,3 +73,8 @@ end
 crumb :project do |project|
   link project.name, project
 end
+
+crumb :with_link_options do
+  link "Test", about_path, title: "My Title", other: "Other Option"
+  link "Other Link", some_option: "Test"
+end

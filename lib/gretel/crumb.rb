@@ -11,11 +11,20 @@ module Gretel
     end
 
     # Sets link of the breadcrumb.
-    def link(text, url = nil)
+    # You can supply an optional options hash that will be available on the links
+    # so you can pass info when rendering the breadcrumbs manually.
+    #
+    #   link "My Link", my_link_path
+    #   link "Without URL"
+    #   link "With Options", my_path, title: "Test", other: "Some other value"
+    def link(*args)
+      options = args.extract_options!
+      text, url = args
+
       # Transform objects to real paths.
       url = url_for(url) if url
       
-      links << Gretel::Link.new(key, text, url)
+      links << Gretel::Link.new(key, text, url, options)
     end
 
     # Holds all of the breadcrumb's links as a breadcrumb can have multiple links.

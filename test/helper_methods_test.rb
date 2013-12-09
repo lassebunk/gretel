@@ -196,6 +196,31 @@ class HelperMethodsTest < ActionView::TestCase
     assert_equal [false, false, false, true], out
   end
 
+  test "passing options to links" do
+    breadcrumb :with_link_options
+
+    breadcrumbs(autoroot: false) do |links|
+      links[0].tap do |link|
+        assert link.title?
+        assert_equal "My Title", link.title
+        
+        assert link.other?
+        assert_equal "Other Option", link.other
+        
+        assert !link.nonexistent?
+        assert_nil link.nonexistent
+      end
+
+      links[1].tap do |link|
+        assert link.some_option?
+        assert_equal "Test", link.some_option
+      end
+    end
+
+    assert_equal %{<div class="breadcrumbs"><a href="/about">Test</a> &rsaquo; <span class="current">Other Link</span></div>},
+                 breadcrumbs(autoroot: false)
+  end
+
   test "without link" do
     breadcrumb :without_link
     assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; Also without link &rsaquo; <span class="current">Without link</span></div>},
