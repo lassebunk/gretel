@@ -11,9 +11,16 @@ module Gretel
   class << self
     include Resettable
 
-    # Returns the path from with breadcrumbs are loaded. Default is +config/breadcrumbs.rb+.
+    # Returns the path from with breadcrumbs are loaded. Default is +config/breadcrumbs.rb+
+    # in the app and all loaded engines. Breadcrumbs set in the app will override
+    # breadcrumbs set in engines.
     def breadcrumb_paths
-      @breadcrumb_paths ||= [Rails.root.join("config", "breadcrumbs.rb"), Rails.root.join("config", "breadcrumbs", "**", "*.rb")]
+      @breadcrumb_paths ||= begin
+        engine_roots = Rails::Application::Railties.engines.map { |e| e.config.root }
+        [*engine_roots, Rails.root].map do |root|
+          [root.join("config", "breadcrumbs.rb"), root.join("config", "breadcrumbs", "**", "*.rb")]
+        end.flatten
+      end
     end
 
     # Sets the path from with breadcrumbs are loaded. Default is +config/breadcrumbs.rb+.
