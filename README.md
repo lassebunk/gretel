@@ -278,7 +278,7 @@ is short for
 
 ### Passing options to links
 
-You can pass options to links for use when you render breadcrumbs manually.
+You can pass options to links to be used when you render breadcrumbs manually.
 
 In *config/breadcrumbs.rb*:
 
