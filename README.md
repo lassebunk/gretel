@@ -115,12 +115,13 @@ Option                   | Description                                          
 
 These are the styles you can use with `breadcrumbs style: :xx`.
 
-Style        | Description
------------- | -----------
-`:default`   | Renders each link by itself with `&rsaquo;` as the seperator.
-`:ol`        | Renders the links in `<li>` elements contained in an outer `<ol>`.
-`:ul`        | Renders the links in `<li>` elements contained in an outer `<ul>`.
-`:bootstrap` | Renders the links for use in [Twitter Bootstrap](http://getbootstrap.com/).
+Style          | Description
+-------------- | -----------
+`:default`     | Renders each link by itself with `&rsaquo;` as the seperator.
+`:ol`          | Renders the links in `<li>` elements contained in an outer `<ol>`.
+`:ul`          | Renders the links in `<li>` elements contained in an outer `<ul>`.
+`:bootstrap`   | Renders the links for use in [Twitter Bootstrap](http://getbootstrap.com/).
+`:foundation5` | Renders the links for use in [Foundation 5](http://foundation.zurb.com/).
 
 Or you can build the breadcrumbs manually for full customization; see below.
 

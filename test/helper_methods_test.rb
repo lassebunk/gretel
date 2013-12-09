@@ -297,6 +297,12 @@ class HelperMethodsTest < ActionView::TestCase
                  breadcrumbs(style: :bootstrap)
   end
 
+  test "foundation5 style" do
+    breadcrumb :basic
+    assert_equal %{<ul class="breadcrumb"><li><a href="/">Home</a></li><li class="current">About</li></ul>},
+	         breadcrumbs(style: :foundation5)
+  end
+
   test "custom container and fragment tags" do
     breadcrumb :basic
     assert_equal %{<c class="breadcrumbs"><f><a href="/">Home</a></f> &rsaquo; <f class="current">About</f></c>},
