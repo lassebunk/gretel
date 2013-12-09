@@ -22,4 +22,11 @@ class DeprecatedTest < ActionView::TestCase
       end
     end
   end
+
+  test ":default style key" do
+    breadcrumb :basic
+
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
+                 breadcrumbs(style: :default)
+  end
 end

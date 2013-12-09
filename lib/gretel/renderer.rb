@@ -1,7 +1,7 @@
 module Gretel
   class Renderer
     DEFAULT_OPTIONS = {
-      style: :default,
+      style: :inline,
       pretext: "",
       posttext: "",
       separator: "",
@@ -15,7 +15,7 @@ module Gretel
     }
 
     DEFAULT_STYLES = {
-      default: { container_tag: :div, separator: " &rsaquo; " },
+      inline: { container_tag: :div, separator: " &rsaquo; " },
       ol: { container_tag: :ol, fragment_tag: :li },
       ul: { container_tag: :ul, fragment_tag: :li },
       bootstrap: { container_tag: :ol, fragment_tag: :li, class: "breadcrumb", current_class: "active" },
