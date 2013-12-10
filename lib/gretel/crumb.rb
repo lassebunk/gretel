@@ -51,7 +51,7 @@ module Gretel
     # The current view context.
     attr_reader :context
 
-    # Proxy to view context
+    # Proxy to view context.
     def method_missing(method, *args, &block)
       context.send(method, *args, &block)
     end
