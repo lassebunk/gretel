@@ -36,11 +36,6 @@ module Gretel
       LinkCollection.new(context, links, options)
     end
 
-    # Yields links with applied options.
-    def yield_links(options = {})
-      yield render(options)
-    end
-
     # Returns the parent breadcrumb.
     def parent_breadcrumb(options = {})
       render(options)[-2]
