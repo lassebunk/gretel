@@ -8,22 +8,15 @@ Gretel also supports [semantic breadcrumbs](http://support.google.com/webmasters
 
 Have fun! And please do write, if you (dis)like it – [lassebunk@gmail.com](mailto:lassebunk@gmail.com).
 
-## New in version 3.0
+## New in version 3.1
 
-* Breadcrumbs can now be rendered in different styles like ul- and ol lists, and for use with the [Twitter Bootstrap](http://getbootstrap.com/) framework. See the `:style` option below for more info.
-* Defining breadcrumbs using `Gretel::Crumbs.layout do ... end` in an initializer has been removed. See below for details on how to upgrade.
-* The `:show_root_alone` option is now called `:display_single_fragment` and can be used to hide the breadcrumbs when there is only one link, also if it is not the root breadcrumb.
-  The old `:show_root_alone` option is still supported until Gretel version 4.0 and will show a deprecation warning when it's used.
-* Links yielded from `<%= breadcrumbs do |links| %>` now have a `current?` helper that returns true if the link is the last in the trail.
-* New view helper: `parent_breadcrumb` returns the parent breadcrumb link (with `#key`, `#text`, and `#url`). This can for example be used to create a dynamic back link.
-  You can supply options like `:autoroot` etc.
-  If you supply a block, it will yield the parent breadcrumb if it is present.
-* Breadcrumbs can now be inferred if you pass in an instance of an object that responds to `model_name` (like an ActiveRecord model instance). E.g. `breadcrumb @product` is short for `breadcrumb :product, @product`.
-
-
-I hope you find these changes as useful as I did – if you have more suggestions, please create an [Issue](https://github.com/lassebunk/gretel/issues) or [Pull Request](https://github.com/lassebunk/gretel/pulls).
+* The `breadcrumbs` method now returns a collection of links that you can use directly as an array. This replaces the need to do `<%= breadcrumbs do |links| ... end %>` to get access to the links. When you do `<%= breadcrumbs %>` it renders the HTML for use in the view as usual.
+  The option for yielding links is still supported until Gretel version 4.0.
+* The `:default` style is now called `:inline`. You can use it like this: `<%= breadcrumbs style: :inline %>`, or just omit it as it is the default. The `:default` style is still supported until Gretel version 4.0.
 
 See below for more info or the [changelog](https://github.com/lassebunk/gretel/blob/master/CHANGELOG.md) for less significant changes.
+
+If you have suggestions, please create an [issue](https://github.com/lassebunk/gretel/issues) or [pull request](https://github.com/lassebunk/gretel/pulls).
 
 ## Installation
 
@@ -97,7 +90,7 @@ You can pass options to `<%= breadcrumbs %>`, e.g. `<%= breadcrumbs pretext: "Yo
 
 Option                   | Description                                                                                                                | Default
 ------------------------ | -------------------------------------------------------------------------------------------------------------------------- | -------
-:style                   | How to render the breadcrumbs. Can be `:default`, `:ol`, `:ul`, or `:bootstrap`. See below for more info.                  | `:default`
+:style                   | How to render the breadcrumbs. Can be `:inline`, `:ol`, `:ul`, `:bootstrap` or `:foundation5`. See below for more info.    | `:inline`
 :pretext                 | Text to be rendered before breadcrumb, e.g. `"You are here: "`.                                                            | None
 :posttext                | Text to be appended after breadcrumb, e.g. `"Text after breacrumb"`,                                                       | None
 :separator               | Separator between links, e.g. `" &rsaquo; "`.                                                                              | `" &rsaquo; "`
@@ -217,10 +210,10 @@ end
 
 ## Building the breadcrumbs manually
 
-If you supply a block to the `breadcrumbs` method, it will yield an array with the breadcrumb links so you can build the breadcrumbs HTML manually:
+You can use the `breadcrumbs` method directly as an array. It will return an array with the breadcrumb links so you can build the breadcrumbs HTML manually:
 
 ```erb
-<% breadcrumbs do |links| %>
+<% breadcrumbs.tap do |links| %>
   <% if links.any? %>
     You are here:
     <% links.each do |link| %>

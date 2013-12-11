@@ -2,7 +2,10 @@
 
 ## Version 3.1.0
 
-* The `:default` style is now called `:inline`. You can use it like this `<%= breadcrumbs style: :inline %>`, or just omit it as it is the default.
+* The `breadcrumbs` method now returns a collection of links that you can use directly as an array. This replaces the need to do `<%= breadcrumbs do |links| ... end %>` to get access to the links.
+  You can get the same result by using `tap` like this: `<%= breadcrumbs.tap do |links| ... end %>` instead. When you do `<%= breadcrumbs %>` it renders the HTML for use in the view as usual.
+  The option for yielding links is still supported until Gretel version 4.0.
+* The `:default` style is now called `:inline`. You can use it like this: `<%= breadcrumbs style: :inline %>`, or just omit it as it is the default. The `:default` style is still supported until Gretel version 4.0.
 
 ## Version 3.0.3
 * Breadcrumbs can now be rendered for use in the [Foundation 5](http://foundation.zurb.com/) framework. Use `breadcrumbs style: :foundation5`.
