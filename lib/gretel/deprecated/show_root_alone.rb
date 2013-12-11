@@ -1,4 +1,4 @@
-Gretel::Renderer.class_eval do
+Gretel::LinkRenderer.class_eval do
   def options_for_render_with_show_root_alone(options = {})
     options = options_for_render_without_show_root_alone(options)
     if show_root_alone = options.delete(:show_root_alone)

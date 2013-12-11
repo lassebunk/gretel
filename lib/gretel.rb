@@ -3,7 +3,7 @@ require 'gretel/resettable'
 require 'gretel/crumbs'
 require 'gretel/crumb'
 require 'gretel/link'
-require 'gretel/renderer'
+require 'gretel/link_renderer'
 require 'gretel/view_helpers'
 require 'gretel/deprecated'
 
@@ -58,7 +58,7 @@ module Gretel
     # 
     #   Gretel.register_style :ul, { container_tag: :ul, fragment_tag: :li }
     def register_style(style, options)
-      Gretel::Renderer.register_style style, options
+      Gretel::LinkRenderer.register_style style, options
     end
 
     # Sets the Rails environment names with automatic configuration reload. Default is +["development"]+.

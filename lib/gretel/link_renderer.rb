@@ -1,5 +1,5 @@
 module Gretel
-  class Renderer
+  class LinkRenderer
     DEFAULT_OPTIONS = {
       style: :inline,
       pretext: "",
@@ -133,7 +133,7 @@ module Gretel
       
       # Registers a style for later use.
       # 
-      #   Gretel::Renderer.register_style :ul, { container_tag: :ul, fragment_tag: :li }
+      #   Gretel::LinkRenderer.register_style :ul, { container_tag: :ul, fragment_tag: :li }
       def register_style(style_key, options)
         styles[style_key] = options
       end
