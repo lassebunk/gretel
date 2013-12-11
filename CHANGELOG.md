@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 3.1.0
+
+* The `:default` style is now called `:inline`. You can use it like this `<%= breadcrumbs style: :inline %>`, or just omit it as it is the default.
+
 ## Version 3.0.3
 * Breadcrumbs can now be rendered for use in the [Foundation 5](http://foundation.zurb.com/) framework. Use `breadcrumbs style: :foundation5`.
 * Breadcrumbs are now automatically loaded from any engines' `config/breadcrumbs.rb` and `config/breadcrumbs/**/*.rb`. See the readme for details.
