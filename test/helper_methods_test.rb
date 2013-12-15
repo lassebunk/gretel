@@ -299,7 +299,7 @@ class HelperMethodsTest < ActionView::TestCase
 
   test "foundation5 style" do
     breadcrumb :basic
-    assert_equal %{<ul class="breadcrumb"><li><a href="/">Home</a></li><li class="current">About</li></ol>},
+    assert_equal %{<ul class="breadcrumb"><li><a href="/">Home</a></li><li class="current">About</li></ul>},
 	         breadcrumbs(style: :foundation5)
   end
 
