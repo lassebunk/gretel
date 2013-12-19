@@ -8,6 +8,7 @@ module Gretel
       autoroot: true,
       display_single_fragment: false,
       link_current: false,
+      link_last_to_current_path: true,
       semantic: false,
       class: "breadcrumbs",
       current_class: "current",
@@ -77,7 +78,7 @@ module Gretel
       end
 
       # Set current link to actual path
-      if out.any? && request
+      if options[:link_last_to_current_path] && out.any? && request
         out.last.url = request.fullpath
       end
 
