@@ -354,9 +354,14 @@ To contribute:
 1. Fork the project
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Make your changes
-4. Add/Fix tests
-5. Prepare database for testing: `cd test/dummy; rake db:migrate; rake db:test:prepare; cd ../..`
-6. Run `rake` to make sure all tests pass
+4. Add tests
+5. Prep test database:
+    - `cd test/dummy/`
+    - `rake db:create test`
+    - `rake db:migrate test`
+6. Run `rake test` to make sure all tests pass
+    - `cd ../../`
+    - `rake test`
 7. Commit your changes (`git commit -am 'Add new feature'`)
 8. Push to the branch (`git push origin my-new-feature`)
 9. Create new pull request

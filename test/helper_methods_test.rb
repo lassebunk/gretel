@@ -298,6 +298,13 @@ class HelperMethodsTest < ActionView::TestCase
     assert_equal "/testpath?a=1&b=2", breadcrumbs.last.url
   end
 
+  test "current link url is not set to fullpath using link_last_to_current_path=false" do
+    self.request = OpenStruct.new(fullpath: "/testpath?a=1&b=2")
+
+    breadcrumb :basic
+    assert_equal "/about", breadcrumbs(:link_last_to_current_path => false).last.url
+  end
+
   test "calling the breadcrumb method with wrong arguments" do
     assert_nothing_raised do
       breadcrumb :basic, test: 1
