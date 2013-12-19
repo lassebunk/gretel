@@ -363,10 +363,16 @@ To contribute:
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Make your changes
 4. Add tests
-5. Run `rake` to make sure all tests pass
-6. Commit your changes (`git commit -am 'Add new feature'`)
-7. Push to the branch (`git push origin my-new-feature`)
-8. Create new pull request
+5. Prep test database:
+    - `cd test/dummy`
+    - `rake db:test:prepare`
+    - `rake db:migrate`
+6. Run `rake` to make sure all tests pass
+    - `cd test`
+    - `rake`
+7. Commit your changes (`git commit -am 'Add new feature'`)
+8. Push to the branch (`git push origin my-new-feature`)
+9. Create new pull request
 
 Thanks.
 
