@@ -55,7 +55,7 @@ class HelperMethodsTest < ActionView::TestCase
 
   test "shows semantic breadcrumb" do
     breadcrumb :with_root
-    assert_equal %{<div class="breadcrumbs"><div itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/" itemprop="url"><span itemprop="title">Home</span></a></div> &rsaquo; <div itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><span class="current" itemprop="title">About</span></div></div>},
+    assert_equal %{<div class="breadcrumbs"><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/" itemprop="url"><span itemprop="title">Home</span></a></span> &rsaquo; <span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><span class="current" itemprop="title">About</span></span></div>},
                  breadcrumbs(semantic: true).to_s
   end
 
