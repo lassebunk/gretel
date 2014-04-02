@@ -88,14 +88,14 @@ class HelperMethodsTest < ActionView::TestCase
 
   test "shows pretext" do
     breadcrumb :basic
-    assert_equal %{<div class="breadcrumbs">You are here: <a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
-                 breadcrumbs(pretext: "You are here: ").to_s
+    assert_equal %{<div class="breadcrumbs"><span class="pretext">You are here:</span> <a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
+                 breadcrumbs(pretext: "You are here:").to_s
   end
 
   test "shows posttext" do
     breadcrumb :basic
-    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span> - text after breadcrumbs</div>},
-                 breadcrumbs(posttext: " - text after breadcrumbs").to_s
+    assert_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span> <span class="posttext">text after breadcrumbs</span></div>},
+                 breadcrumbs(posttext: "text after breadcrumbs").to_s
   end
 
   test "autoroot disabled" do

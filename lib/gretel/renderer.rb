@@ -177,7 +177,19 @@ module Gretel
         fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], class: options[:current_class])
 
         # Build the final HTML
-        html = (options[:pretext] + fragments.join(options[:separator]) + options[:posttext]).html_safe
+        html_fragments = []
+
+        if options[:pretext].present?
+          html_fragments << content_tag(:span, options[:pretext], class: "pretext")
+        end
+
+        html_fragments << fragments.join(options[:separator])
+
+        if options[:posttext].present?
+          html_fragments << content_tag(:span, options[:posttext], class: "posttext")
+        end
+
+        html = html_fragments.join(" ").html_safe
         content_tag(options[:container_tag], html, id: options[:id], class: options[:class])
       end
 
