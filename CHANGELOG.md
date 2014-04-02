@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 3.0.6
+* Pretext and posttext are now enclosed in spans with `<span class="pretext">` and `<span class="posttext">`.
+* Semantic breadcrumbs are now rendered in spans instead of divs to enable easier styling.
+
 ## Version 3.0.3
 * Breadcrumbs can now be rendered for use in the [Foundation 5](http://foundation.zurb.com/) framework. Use `breadcrumbs style: :foundation5`.
 * Breadcrumbs are now automatically loaded from any engines' `config/breadcrumbs.rb` and `config/breadcrumbs/**/*.rb`. See the readme for details.
