@@ -97,7 +97,7 @@ You can pass options to `<%= breadcrumbs %>`, e.g. `<%= breadcrumbs pretext: "Yo
 
 Option                   | Description                                                                                                                | Default
 ------------------------ | -------------------------------------------------------------------------------------------------------------------------- | -------
-:style                   | How to render the breadcrumbs. Can be `:default`, `:ol`, `:ul`, or `:bootstrap`. See below for more info.                  | `:default`
+:style                   | How to render the breadcrumbs. Can be `:inline`, `:ol`, `:ul`, or `:bootstrap`. See below for more info.                   | `:inline`
 :pretext                 | Text to be rendered before breadcrumb, e.g. `"You are here: "`.                                                            | None
 :posttext                | Text to be appended after breadcrumb, e.g. `"Text after breacrumb"`,                                                       | None
 :separator               | Separator between links, e.g. `" &rsaquo; "`.                                                                              | `" &rsaquo; "`
@@ -117,7 +117,7 @@ These are the styles you can use with `breadcrumbs style: :xx`.
 
 Style          | Description
 -------------- | -----------
-`:default`     | Renders each link by itself with `&rsaquo;` as the seperator.
+`:inline`      | Renders each link by itself with `&rsaquo;` as the seperator.
 `:ol`          | Renders the links in `<li>` elements contained in an outer `<ol>`.
 `:ul`          | Renders the links in `<li>` elements contained in an outer `<ul>`.
 `:bootstrap`   | Renders the links for use in [Twitter Bootstrap](http://getbootstrap.com/).
