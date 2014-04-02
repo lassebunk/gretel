@@ -8,11 +8,10 @@ module Gretel
       autoroot: true,
       display_single_fragment: false,
       link_current: false,
+      link_last_to_current_path: true,
       semantic: false,
       class: "breadcrumbs",
       current_class: "current",
-      pretext_class: "pretext",
-      posttext_class: "posttext",
       id: nil
     }
 
@@ -84,7 +83,7 @@ module Gretel
       end
 
       # Set current link to actual path
-      if out.any? && request
+      if options[:link_last_to_current_path] && out.any? && request
         out.last.url = request.fullpath
       end
 
@@ -175,22 +174,10 @@ module Gretel
 
         # The current link is handled a little differently, and is only linked if specified in the options
         current_link = links.last
-        fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], class: options[:current_class], current_link: current_link.url)
+        fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], class: options[:current_class])
 
         # Build the final HTML
-        html_fragments = []
-
-        if options[:pretext].present?
-          html_fragments << content_tag(:span, options[:pretext], class: options[:pretext_class])
-        end
-
-        html_fragments << fragments.join(options[:separator])
-
-        if options[:posttext].present?
-          html_fragments << content_tag(:span, options[:posttext], class: options[:posttext_class])
-        end
-
-        html = html_fragments.join(" ").html_safe
+        html = (options[:pretext] + fragments.join(options[:separator]) + options[:posttext]).html_safe
         content_tag(options[:container_tag], html, id: options[:id], class: options[:class])
       end
 
@@ -209,19 +196,12 @@ module Gretel
       def render_semantic_fragment(fragment_tag, text, url, options = {})
         if fragment_tag
           text = content_tag(:span, text, itemprop: "title")
-
-          if url.present?
-            text = breadcrumb_link_to(text, url, itemprop: "url")
-          elsif options[:current_link].present?
-            current_url = "#{root_url}#{options[:current_link].gsub(/^\//, '')}"
-            text = text + tag(:meta, itemprop: "url", content: current_url)
-          end
-
+          text = breadcrumb_link_to(text, url, itemprop: "url") if url.present?
           content_tag(fragment_tag, text, class: options[:class], itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
         elsif url.present?
-          content_tag(:span, breadcrumb_link_to(content_tag(:span, text, itemprop: "title"), url, class: options[:class], itemprop: "url"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
+          content_tag(:div, breadcrumb_link_to(content_tag(:span, text, itemprop: "title"), url, class: options[:class], itemprop: "url"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
         else
-          content_tag(:span, content_tag(:span, text, class: options[:class], itemprop: "title"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
+          content_tag(:div, content_tag(:span, text, class: options[:class], itemprop: "title"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
         end
       end
 
