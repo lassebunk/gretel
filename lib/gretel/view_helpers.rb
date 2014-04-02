@@ -15,7 +15,7 @@ module Gretel
         args.unshift key
         key = key.class.model_name.to_s.underscore.to_sym
       end
-      @_gretel_renderer = Gretel::LinkRenderer.new(self, key, *args)
+      @_gretel_renderer = Gretel::Renderer.new(self, key, *args)
     end
 
     # Yields a block where inside the block you have a different breadcrumb than outside.
@@ -31,7 +31,7 @@ module Gretel
     #   <%= breadcrumbs # shows the :about breadcrumb %>
     def with_breadcrumb(key, *args, &block)
       original_renderer = @_gretel_renderer
-      @_gretel_renderer = Gretel::LinkRenderer.new(self, key, *args)
+      @_gretel_renderer = Gretel::Renderer.new(self, key, *args)
       yield
       @_gretel_renderer = original_renderer
     end
@@ -69,7 +69,7 @@ module Gretel
 
     # Reference to the Gretel breadcrumbs renderer.
     def gretel_renderer
-      @_gretel_renderer ||= Gretel::LinkRenderer.new(self, nil)
+      @_gretel_renderer ||= Gretel::Renderer.new(self, nil)
     end
   end
 end
