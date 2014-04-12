@@ -16,7 +16,11 @@ module Gretel
     # breadcrumbs set in engines.
     def breadcrumb_paths
       @breadcrumb_paths ||= begin
-        engine_roots = Rails::Application::Railties.engines.map { |e| e.config.root }
+        engine_roots = if Rails::Application::Railties.respond_to?(:engines)
+          Rails::Application::Railties.engines # Rails < 4.1
+        else
+          Rails::Application::Railties.new._all # Rails >= 4.1
+        end.map { |e| e.config.root if e.config.respond_to?( :root ) }.compact
         
         [*engine_roots, Rails.root].map do |root|
           [root.join("config", "breadcrumbs.rb"),
