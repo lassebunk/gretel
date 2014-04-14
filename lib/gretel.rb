@@ -16,8 +16,8 @@ module Gretel
     # breadcrumbs set in engines.
     def breadcrumb_paths
       @breadcrumb_paths ||= begin
-        engine_roots = Rails::Application::Railties.engines.map { |e| e.config.root }
-        
+        engine_roots = Rails::Engine.subclasses.map(&:instance).map { |e| e.config.root }
+
         [*engine_roots, Rails.root].map do |root|
           [root.join("config", "breadcrumbs.rb"),
            root.join("config", "breadcrumbs", "**", "*.rb"),
