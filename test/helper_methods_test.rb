@@ -12,6 +12,11 @@ class HelperMethodsTest < ActionView::TestCase
     Gretel.reset!
   end
 
+  def itemscope_value
+    ActionView::Helpers::TagHelper::BOOLEAN_ATTRIBUTES.include?("itemscope") ?
+      "itemscope" : ""
+  end
+
   # Breadcrumb generation
 
   test "shows basic breadcrumb" do
@@ -58,7 +63,7 @@ class HelperMethodsTest < ActionView::TestCase
 
   test "shows semantic breadcrumb" do
     breadcrumb :with_root
-    assert_equal %{<div class="breadcrumbs"><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/" itemprop="url"><span itemprop="title">Home</span></a></span> &rsaquo; <span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><span class="current" itemprop="title">About</span></span></div>},
+    assert_equal %Q{<div class="breadcrumbs"><span itemscope="#{itemscope_value}" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/" itemprop="url"><span itemprop="title">Home</span></a></span> &rsaquo; <span itemscope="#{itemscope_value}" itemtype="http://data-vocabulary.org/Breadcrumb"><span class="current" itemprop="title">About</span></span></div>},
                  breadcrumbs(semantic: true).to_s
   end
 
@@ -341,7 +346,7 @@ class HelperMethodsTest < ActionView::TestCase
 
   test "custom semantic container and fragment tags" do
     breadcrumb :basic
-    assert_equal %{<c class="breadcrumbs"><f itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/" itemprop="url"><span itemprop="title">Home</span></a></f> &rsaquo; <f class="current" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><span itemprop="title">About</span></f></c>},
+    assert_equal %Q{<c class="breadcrumbs"><f itemscope="#{itemscope_value}" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/" itemprop="url"><span itemprop="title">Home</span></a></f> &rsaquo; <f class="current" itemscope="#{itemscope_value}" itemtype="http://data-vocabulary.org/Breadcrumb"><span itemprop="title">About</span></f></c>},
                  breadcrumbs(container_tag: :c, fragment_tag: :f, semantic: true).to_s
   end
 
