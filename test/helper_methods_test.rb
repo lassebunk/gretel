@@ -2,7 +2,10 @@ require 'test_helper'
 
 class HelperMethodsTest < ActionView::TestCase
   include Gretel::ViewHelpers
+
+  self.fixture_path = File.expand_path("../../test/fixtures", __FILE__)
   fixtures :all
+
   helper :application
 
   setup do
