@@ -106,8 +106,8 @@ Option                   | Description                                          
 :link_current            | Whether the current crumb should be linked to.                                                                             | False
 :semantic                | Whether it should generate [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417). | False
 :id                      | ID for the breadcrumbs container.                                                                                          | None
-:class                   | CSS class for the breadcrumbs container.                                                                                   | `"breadcrumbs"`
-:current_class           | CSS class for the current link or span.                                                                                    | `"current"`
+:class                   | CSS class for the breadcrumbs container. Can be set to `nil` for no class.                                                 | `"breadcrumbs"`
+:current_class           | CSS class for the current link or span. Can be set to `nil` for no class.                                                  | `"current"`
 :container_tag           | Tag type that contains the breadcrumbs.                                                                                    | `:div`
 :fragment_tag            | Tag type to contain each breadcrumb fragment/link.                                                                         | None
 
