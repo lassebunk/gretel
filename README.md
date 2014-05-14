@@ -108,6 +108,8 @@ Option                   | Description                                          
 :id                      | ID for the breadcrumbs container.                                                                                          | None
 :class                   | CSS class for the breadcrumbs container. Can be set to `nil` for no class.                                                 | `"breadcrumbs"`
 :current_class           | CSS class for the current link or span. Can be set to `nil` for no class.                                                  | `"current"`
+:pretext_class           | CSS class for the pretext, if given. Can be set to `nil` for no class.                                                     | `"pretext"`
+:posttext_class          | CSS class for the posttext, if given. Can be set to `nil` for no class.                                                    | `"posttext"`
 :container_tag           | Tag type that contains the breadcrumbs.                                                                                    | `:div`
 :fragment_tag            | Tag type to contain each breadcrumb fragment/link.                                                                         | None
 
