@@ -11,6 +11,8 @@ module Gretel
       semantic: false,
       class: "breadcrumbs",
       current_class: "current",
+      pretext_class: "pretext",
+      posttext_class: "posttext",
       id: nil
     }
 
@@ -179,13 +181,13 @@ module Gretel
         html_fragments = []
 
         if options[:pretext].present?
-          html_fragments << content_tag(:span, options[:pretext], class: "pretext")
+          html_fragments << content_tag(:span, options[:pretext], class: options[:pretext_class])
         end
 
         html_fragments << fragments.join(options[:separator])
 
         if options[:posttext].present?
-          html_fragments << content_tag(:span, options[:posttext], class: "posttext")
+          html_fragments << content_tag(:span, options[:posttext], class: options[:posttext_class])
         end
 
         html = html_fragments.join(" ").html_safe

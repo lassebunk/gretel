@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 3.0.7
+* Pretext and posttext classes are now customizable with `<%= breadcrumbs pretext_class: "some-class" %>` and `<%= breadcrumbs posttext_class: "some-other-class" %>`.
+
 ## Version 3.0.6
 * Pretext and posttext are now enclosed in spans with `<span class="pretext">` and `<span class="posttext">`.
 * Semantic breadcrumbs are now rendered in spans instead of divs to enable easier styling.

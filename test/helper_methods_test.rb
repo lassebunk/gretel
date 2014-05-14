@@ -135,6 +135,18 @@ class HelperMethodsTest < ActionView::TestCase
                  breadcrumbs(current_class: "custom_current_class").to_s
   end
 
+  test "custom pretext class" do
+    breadcrumb :basic
+    assert_dom_equal %{<div class="breadcrumbs"><span class="custom_pretext_class">You are here:</span> <a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
+                 breadcrumbs(pretext: "You are here:", pretext_class: "custom_pretext_class").to_s
+  end
+
+  test "custom posttext class" do
+    breadcrumb :basic
+    assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span> <span class="custom_posttext_class">after breadcrumbs</span></div>},
+                 breadcrumbs(posttext: "after breadcrumbs", posttext_class: "custom_posttext_class").to_s
+  end
+
   test "unsafe html" do
     breadcrumb :with_unsafe_html
     assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">Test &lt;strong&gt;bold text&lt;/strong&gt;</span></div>},
