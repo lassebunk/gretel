@@ -8,23 +8,6 @@ Gretel also supports [semantic breadcrumbs](http://support.google.com/webmasters
 
 Have fun! And please do write, if you (dis)like it – [lassebunk@gmail.com](mailto:lassebunk@gmail.com).
 
-## New in version 3.0
-
-* Breadcrumbs can now be rendered in different styles like ul- and ol lists, and for use with the [Twitter Bootstrap](http://getbootstrap.com/) framework. See the `:style` option below for more info.
-* Defining breadcrumbs using `Gretel::Crumbs.layout do ... end` in an initializer has been removed. See below for details on how to upgrade.
-* The `:show_root_alone` option is now called `:display_single_fragment` and can be used to hide the breadcrumbs when there is only one link, also if it is not the root breadcrumb.
-  The old `:show_root_alone` option is still supported until Gretel version 4.0 and will show a deprecation warning when it's used.
-* Links yielded from `<%= breadcrumbs do |links| %>` now have a `current?` helper that returns true if the link is the last in the trail.
-* New view helper: `parent_breadcrumb` returns the parent breadcrumb link (with `#key`, `#text`, and `#url`). This can for example be used to create a dynamic back link.
-  You can supply options like `:autoroot` etc.
-  If you supply a block, it will yield the parent breadcrumb if it is present.
-* Breadcrumbs can now be inferred if you pass in an instance of an object that responds to `model_name` (like an ActiveRecord model instance). E.g. `breadcrumb @product` is short for `breadcrumb :product, @product`.
-
-
-I hope you find these changes as useful as I did – if you have more suggestions, please create an [Issue](https://github.com/lassebunk/gretel/issues) or [Pull Request](https://github.com/lassebunk/gretel/pulls).
-
-See below for more info or the [changelog](https://github.com/lassebunk/gretel/blob/master/CHANGELOG.md) for less significant changes.
-
 ## Installation
 
 In your *Gemfile*:
