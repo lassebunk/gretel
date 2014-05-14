@@ -67,7 +67,7 @@ This will generate the following HTML (indented for readability):
 
 ```html
 <div class="breadcrumbs">
-  You are here:
+  <span class="pretext">You are here:</span>
   <a href="/">Home</a> &rsaquo;
   <a href="/issues">All issues</a> &rsaquo;
   <span class="current">My Issue</span>
