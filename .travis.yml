@@ -2,6 +2,10 @@ language: ruby
 rvm:
   - 2.0.0
   - 1.9.3
+gemfile:
+  - gemfiles/Gemfile-rails.3.2.x
+  - gemfiles/Gemfile-rails.4.0.x
+  - gemfiles/Gemfile-rails.4.1.x
 before_script:
   - "cd test/dummy; rake db:migrate; rake db:test:prepare; cd ../.."
 notifications:
