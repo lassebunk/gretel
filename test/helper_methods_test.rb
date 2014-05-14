@@ -19,49 +19,49 @@ class HelperMethodsTest < ActionView::TestCase
 
   # Breadcrumb generation
 
-  test "shows basic breadcrumb" do
+  test "basic breadcrumb" do
     breadcrumb :basic
     assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
                  breadcrumbs.to_s
   end
 
-  test "shows breadcrumb with root" do
+  test "breadcrumb with root" do
     breadcrumb :with_root
     assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
                  breadcrumbs.to_s
   end
 
-  test "shows breadcrumb with parent" do
+  test "breadcrumb with parent" do
     breadcrumb :with_parent
     assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/about">About</a> &rsaquo; <span class="current">Contact</span></div>},
                  breadcrumbs.to_s
   end
 
-  test "shows breadcrumb with autopath" do
+  test "breadcrumb with autopath" do
     breadcrumb :with_autopath, projects(:one)
     assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">Test Project</span></div>},
                  breadcrumbs.to_s
   end
 
-  test "shows breadcrumb with parent object" do
+  test "breadcrumb with parent object" do
     breadcrumb :with_parent_object, issues(:one)
     assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/projects/1">Test Project</a> &rsaquo; <span class="current">Test Issue</span></div>},
                  breadcrumbs.to_s
   end
 
-  test "shows multiple links" do
+  test "multiple links" do
     breadcrumb :multiple_links
     assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/about/contact">Contact</a> &rsaquo; <span class="current">Contact form</span></div>},
                  breadcrumbs.to_s
   end
 
-  test "shows multiple links with parent" do
+  test "multiple links with parent" do
     breadcrumb :multiple_links_with_parent
     assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/about">About</a> &rsaquo; <a href="/about/contact">Contact</a> &rsaquo; <span class="current">Contact form</span></div>},
                  breadcrumbs.to_s
   end
 
-  test "shows semantic breadcrumb" do
+  test "semantic breadcrumb" do
     breadcrumb :with_root
     assert_dom_equal %Q{<div class="breadcrumbs"><span itemscope="#{itemscope_value}" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/" itemprop="url"><span itemprop="title">Home</span></a></span> &rsaquo; <span itemscope="#{itemscope_value}" itemtype="http://data-vocabulary.org/Breadcrumb"><span class="current" itemprop="title">About</span></span></div>},
                  breadcrumbs(semantic: true).to_s
@@ -84,7 +84,7 @@ class HelperMethodsTest < ActionView::TestCase
                  breadcrumbs(autoroot: false, display_single_fragment: true).to_s
   end
 
-  test "shows no breadcrumb" do
+  test "no breadcrumb" do
     assert_dom_equal "", breadcrumbs.to_s
   end
 
@@ -94,13 +94,13 @@ class HelperMethodsTest < ActionView::TestCase
                  breadcrumbs(link_current: true).to_s
   end
 
-  test "shows pretext" do
+  test "pretext" do
     breadcrumb :basic
     assert_dom_equal %{<div class="breadcrumbs"><span class="pretext">You are here:</span> <a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
                  breadcrumbs(pretext: "You are here:").to_s
   end
 
-  test "shows posttext" do
+  test "posttext" do
     breadcrumb :basic
     assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span> <span class="posttext">text after breadcrumbs</span></div>},
                  breadcrumbs(posttext: "text after breadcrumbs").to_s
@@ -111,25 +111,25 @@ class HelperMethodsTest < ActionView::TestCase
     assert_dom_equal "", breadcrumbs(autoroot: false).to_s
   end
 
-  test "shows separator" do
+  test "separator" do
     breadcrumb :with_root
     assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &raquo; <span class="current">About</span></div>},
                  breadcrumbs(separator: " &raquo; ").to_s
   end
 
-  test "shows element id" do
+  test "element id" do
     breadcrumb :basic
     assert_dom_equal %{<div class="breadcrumbs" id="custom_id"><a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
                  breadcrumbs(id: "custom_id").to_s
   end
 
-  test "shows custom container class" do
+  test "custom container class" do
     breadcrumb :basic
     assert_dom_equal %{<div class="custom_class"><a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
                  breadcrumbs(class: "custom_class").to_s
   end
 
-  test "shows custom current class" do
+  test "custom current class" do
     breadcrumb :basic
     assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="custom_current_class">About</span></div>},
                  breadcrumbs(current_class: "custom_current_class").to_s
