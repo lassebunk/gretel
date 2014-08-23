@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 3.0.8
+* Parent breadcrumbs can now also be inferred from models responding to `model_name`.
+
 ## Version 3.0.7
 * Pretext and posttext classes are now customizable with `<%= breadcrumbs pretext_class: "some-class" %>` and `<%= breadcrumbs posttext_class: "some-other-class" %>`.
 

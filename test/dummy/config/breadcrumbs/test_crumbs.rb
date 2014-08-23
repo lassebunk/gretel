@@ -78,3 +78,8 @@ crumb :with_link_options do
   link "Test", about_path, title: "My Title", other: "Other Option"
   link "Other Link", some_option: "Test"
 end
+
+crumb :with_inferred_parent do
+  link "Test", about_path
+  parent Project.first
+end
