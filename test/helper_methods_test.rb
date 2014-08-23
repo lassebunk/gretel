@@ -318,6 +318,13 @@ class HelperMethodsTest < ActionView::TestCase
                  breadcrumbs.to_s
   end
 
+  test "inferred parent" do
+    breadcrumb :with_inferred_parent
+
+    assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/projects/1">Test Project</a> &rsaquo; <span class="current">Test</span></div>},
+                     breadcrumbs.to_s
+  end
+
   # Styles
 
   test "default style" do

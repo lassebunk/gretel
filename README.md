@@ -130,7 +130,7 @@ end
 # Parent crumbs
 crumb :project_issues do |project|
   link "Issues", project_issues_path(project)
-  parent :project, project
+  parent project # inferred to :project
 end
 
 # Child 
@@ -143,7 +143,7 @@ end
 crumb :category do |category|
   link category.name, category
   if category.parent
-    parent :category, category.parent
+    parent category.parent # inferred to :category
   else
     parent :categories
   end
@@ -152,7 +152,7 @@ end
 # Product crumb with recursive parent categories (as defined above)
 crumb :product do |product|
   link product.name, product
-  parent :category, product.category
+  parent product.category # inferred to :category
 end
 
 # Crumb with multiple links
@@ -173,7 +173,7 @@ crumb :product do |product|
   if keyword = params[:q].presence
     parent :search, keyword
   else # default
-    parent :category, product.category
+    parent product.category # inferred to :category
   end
 end
 
