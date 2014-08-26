@@ -333,6 +333,7 @@ in `config/breadcrumbs.rb`.
 
 * [Full documentation](http://rubydoc.info/gems/gretel)
 * [Changelog](https://github.com/lassebunk/gretel/blob/master/CHANGELOG.md)
+* [Tutorial on using Gretel](http://www.sitepoint.com/breadcrumbs-rails-gretel/) (Sitepoint)
 
 ## Versioning
 
