@@ -372,4 +372,4 @@ Thanks.
 
 Have fun!
 
-Copyright (c) 2010-2013 [Lasse Bunk](http://lassebunk.dk), released under the MIT license
+Copyright (c) 2010-2014 [Lasse Bunk](http://lassebunk.dk), released under the MIT license
