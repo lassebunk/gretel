@@ -351,11 +351,11 @@ To contribute:
 4. Add tests
 5. Prep test database:
     - `cd test/dummy`
-    - `rake db:test:prepare`
-    - `rake db:migrate`
+    - `rake db:create test`
+    - `rake db:migrate test`
 6. Run `rake` to make sure all tests pass
-    - `cd test`
-    - `rake`
+    - `cd ../../`
+    - `rake test`
 7. Commit your changes (`git commit -am 'Add new feature'`)
 8. Push to the branch (`git push origin my-new-feature`)
 9. Create new pull request
