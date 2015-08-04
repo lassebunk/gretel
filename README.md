@@ -339,6 +339,14 @@ in `config/breadcrumbs.rb`.
 
 Follows [semantic versioning](http://semver.org/).
 
+
+## Local Setup
+
+- `gem install bundler`
+- `bundle install`
+- `cd test/dummy && rake db:test:prepare && cd ../..`
+
+
 ## Contributing
 
 You are very welcome to help improve Gretel if you have suggestions for features that other people can use.
