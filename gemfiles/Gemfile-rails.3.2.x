@@ -3,6 +3,7 @@ source "https://rubygems.org"
 gem "gretel",  :path => ".."
 
 gem "rails", "~> 3.2.0"
+gem "test-unit", "~> 3.0"
 gem "sqlite3"
 
 # jquery-rails is used by the dummy application
