@@ -133,7 +133,7 @@ crumb :project_issues do |project|
   parent project # inferred to :project
 end
 
-# Child 
+# Child
 crumb :issue do |issue|
   link issue.name, issue_path(issue)
   parent :project_issues, issue.project
@@ -366,4 +366,4 @@ Thanks.
 
 Have fun!
 
-Copyright (c) 2010-2014 [Lasse Bunk](http://lassebunk.dk), released under the MIT license
+Copyright (c) 2010-2016 [Lasse Bunk](http://lassebunk.dk), released under the MIT license
