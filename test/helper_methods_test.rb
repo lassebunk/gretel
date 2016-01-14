@@ -372,7 +372,7 @@ class HelperMethodsTest < ActionView::TestCase
 
   test "custom semantic container and fragment tags" do
     breadcrumb :basic
-    assert_dom_equal %Q{<c class="breadcrumbs"><f itemscope="#{itemscope_value}" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/" itemprop="url"><span itemprop="title">Home</span></a></f> &rsaquo; <f class="current" itemscope="#{itemscope_value}" itemtype="http://data-vocabulary.org/Breadcrumb"><span itemprop="title">About</span></f></c>},
+    assert_dom_equal %Q{<c class="breadcrumbs"><f itemscope="#{itemscope_value}" itemtype="http://data-vocabulary.org/Breadcrumb"><a itemprop="url" href="/"><span itemprop="title">Home</span></a></f> &rsaquo; <f class="current" itemscope="#{itemscope_value}" itemtype="http://data-vocabulary.org/Breadcrumb"><span itemprop="title">About</span><meta itemprop="url" content="http://test.host/about" /></f></c>},
                  breadcrumbs(container_tag: :c, fragment_tag: :f, semantic: true).to_s
   end
 
