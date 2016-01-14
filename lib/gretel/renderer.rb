@@ -175,7 +175,7 @@ module Gretel
 
         # The current link is handled a little differently, and is only linked if specified in the options
         current_link = links.last
-        fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], class: options[:current_class])
+        fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], class: options[:current_class], current_link: current_link.url)
 
         # Build the final HTML
         html_fragments = []
@@ -209,7 +209,14 @@ module Gretel
       def render_semantic_fragment(fragment_tag, text, url, options = {})
         if fragment_tag
           text = content_tag(:span, text, itemprop: "title")
-          text = breadcrumb_link_to(text, url, itemprop: "url") if url.present?
+
+          if url.present?
+            text = breadcrumb_link_to(text, url, itemprop: "url")
+          elsif options[:current_link].present?
+            current_url = "#{root_url}#{options[:current_link].gsub(/^\//, '')}"
+            text = text + tag(:meta, itemprop: "url", content: current_url)
+          end
+
           content_tag(fragment_tag, text, class: options[:class], itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
         elsif url.present?
           content_tag(:span, breadcrumb_link_to(content_tag(:span, text, itemprop: "title"), url, class: options[:class], itemprop: "url"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
