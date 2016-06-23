@@ -1,3 +1,9 @@
+**Update 23th June 2016**
+
+I am looking for a new maintainer of this project. It's still a great project and very useful, however I don't do much frontend in Rails anymore and don't have the time to support it. So if you are interested and have some experience in developing gems for Rails, please drop me an email at [lassebunk@gmail.com](mailto:lassebunk@gmail.com). Thanks in advance.
+
+----
+
 <a href="http://travis-ci.org/lassebunk/gretel"><img src="https://secure.travis-ci.org/lassebunk/gretel.png" alt="Build Status" /></a>
 
 <img src="http://i.imgur.com/CAKEaBM.png" alt="Handle breadcrumb trails... like a boss :)" />
