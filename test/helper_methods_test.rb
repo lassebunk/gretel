@@ -63,7 +63,7 @@ class HelperMethodsTest < ActionView::TestCase
 
   test "semantic breadcrumb" do
     breadcrumb :with_root
-    assert_dom_equal %Q{<div class="breadcrumbs"><span itemscope="#{itemscope_value}" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/" itemprop="url"><span itemprop="title">Home</span></a></span> &rsaquo; <span itemscope="#{itemscope_value}" itemtype="http://data-vocabulary.org/Breadcrumb"><span class="current" itemprop="title">About</span></span></div>},
+    assert_dom_equal %Q{<div class="breadcrumbs" itemscope="#{itemscope_value}" itemtype="http://schema.org/BreadcrumbList"><span itemscope="#{itemscope_value}" itemtype="http://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/"><span itemprop="name">Home</span></a><meta itemprop="position" content="1" /></span> &rsaquo; <span itemscope="#{itemscope_value}" itemtype="http://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name" class="current">About</span><meta itemprop="position" content="2" /></span></div>},
                  breadcrumbs(semantic: true).to_s
   end
 
@@ -365,8 +365,8 @@ class HelperMethodsTest < ActionView::TestCase
 
   test "custom semantic container and fragment tags" do
     breadcrumb :basic
-    assert_dom_equal %Q{<c class="breadcrumbs"><f itemscope="#{itemscope_value}" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/" itemprop="url"><span itemprop="title">Home</span></a></f> &rsaquo; <f class="current" itemscope="#{itemscope_value}" itemtype="http://data-vocabulary.org/Breadcrumb"><span itemprop="title">About</span></f></c>},
-                 breadcrumbs(container_tag: :c, fragment_tag: :f, semantic: true).to_s
+    assert_dom_equal %Q{<c class="breadcrumbs" itemscope="#{itemscope_value}" itemtype="http://schema.org/BreadcrumbList"><f itemscope="#{itemscope_value}" itemtype="http://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/"><span itemprop="name">Home</span></a><meta itemprop="position" content="1" /></f> &rsaquo; <f itemscope="#{itemscope_value}" itemtype="http://schema.org/ListItem" itemprop="itemListElement" class="current"><span itemprop="name">About</span><meta itemprop="position" content="2" /></f></c>},
+            breadcrumbs(container_tag: :c, fragment_tag: :f, semantic: true).to_s
   end
 
   test "unknown style" do
