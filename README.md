@@ -93,6 +93,7 @@ Option                   | Description                                          
 :autoroot                | Whether it should automatically link to the `:root` crumb if no parent is given.                                           | True
 :display_single_fragment | Whether it should display the breadcrumb if it includes only one link.                                                     | False
 :link_current            | Whether the current crumb should be linked to.                                                                             | False
+:link_current_to_request_path            | Whether the current crumb should always link to the current request path. *Note:* This option will have no effect unless `:link_current` is set to `true`.                                                                             | True
 :semantic                | Whether it should generate [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417). | False
 :id                      | ID for the breadcrumbs container.                                                                                          | None
 :class                   | CSS class for the breadcrumbs container. Can be set to `nil` for no class.                                                 | `"breadcrumbs"`
