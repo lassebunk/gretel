@@ -219,10 +219,10 @@ class HelperMethodsTest < ActionView::TestCase
       links[0].tap do |link|
         assert link.title?
         assert_equal "My Title", link.title
-        
+
         assert link.other?
         assert_equal "Other Option", link.other
-        
+
         assert !link.nonexistent?
         assert_nil link.nonexistent
       end
@@ -263,15 +263,15 @@ class HelperMethodsTest < ActionView::TestCase
 
   test "with_breadcrumb" do
     breadcrumb :basic
-    
+
     assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
                  breadcrumbs.to_s
 
     with_breadcrumb(:with_parent_object, issues(:one)) do
       assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/projects/1">Test Project</a> &rsaquo; <span class="current">Test Issue</span></div>},
                    breadcrumbs.to_s
-    end    
-    
+    end
+
     assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span></div>},
                  breadcrumbs.to_s
   end
@@ -296,6 +296,13 @@ class HelperMethodsTest < ActionView::TestCase
 
     breadcrumb :basic
     assert_equal "/testpath?a=1&b=2", breadcrumbs.last.url
+  end
+
+  test "current link url is not set to fullpath using link_current_to_request_path=false" do
+    self.request = OpenStruct.new(fullpath: "/testpath?a=1&b=2")
+
+    breadcrumb :basic
+    assert_equal "/about", breadcrumbs(:link_current_to_request_path => false).last.url
   end
 
   test "calling the breadcrumb method with wrong arguments" do
@@ -378,7 +385,7 @@ class HelperMethodsTest < ActionView::TestCase
 
   test "register style" do
     Gretel.register_style :test_style, { container_tag: :one, fragment_tag: :two }
-    
+
     breadcrumb :basic
 
     assert_dom_equal %{<one class="breadcrumbs"><two><a href="/">Home</a></two><two class="current">About</two></one>},

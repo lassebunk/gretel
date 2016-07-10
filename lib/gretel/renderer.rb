@@ -8,6 +8,7 @@ module Gretel
       autoroot: true,
       display_single_fragment: false,
       link_current: false,
+      link_current_to_request_path: true,
       semantic: false,
       class: "breadcrumbs",
       current_class: "current",
@@ -84,7 +85,7 @@ module Gretel
       end
 
       # Set current link to actual path
-      if out.any? && request
+      if options[:link_current_to_request_path] && out.any? && request
         out.last.url = request.fullpath
       end
 
@@ -111,7 +112,7 @@ module Gretel
 
         # Links of first crumb
         links = crumb.links.dup
-        
+
         # Get parent links
         links.unshift *parent_links_for(crumb)
 
@@ -137,9 +138,9 @@ module Gretel
 
     class << self
       include Resettable
-      
+
       # Registers a style for later use.
-      # 
+      #
       #   Gretel::Renderer.register_style :ul, { container_tag: :ul, fragment_tag: :li }
       def register_style(style_key, options)
         styles[style_key] = options
