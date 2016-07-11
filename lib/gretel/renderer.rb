@@ -22,6 +22,7 @@ module Gretel
       ol: { container_tag: :ol, fragment_tag: :li },
       ul: { container_tag: :ul, fragment_tag: :li },
       bootstrap: { container_tag: :ol, fragment_tag: :li, class: "breadcrumb", current_class: "active" },
+      bootstrap4: { container_tag: :ol, fragment_tag: :li, class: "breadcrumb", fragment_class: "breadcrumb-item", current_class: "active" },
       foundation5: { container_tag: :ul, fragment_tag: :li, class: "breadcrumbs", current_class: "current" }
     }
 
