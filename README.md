@@ -97,6 +97,7 @@ Option                   | Description                                          
 :semantic                | Whether it should generate [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417). | False
 :id                      | ID for the breadcrumbs container.                                                                                          | None
 :class                   | CSS class for the breadcrumbs container. Can be set to `nil` for no class.                                                 | `"breadcrumbs"`
+:fragment_class          | CSS class for the fragment link or span. Can be set to `nil` for no class.                                                 | None
 :current_class           | CSS class for the current link or span. Can be set to `nil` for no class.                                                  | `"current"`
 :pretext_class           | CSS class for the pretext, if given. Can be set to `nil` for no class.                                                     | `"pretext"`
 :posttext_class          | CSS class for the posttext, if given. Can be set to `nil` for no class.                                                    | `"posttext"`
