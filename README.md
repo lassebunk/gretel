@@ -360,7 +360,7 @@ Thanks.
 
 ## Contributors
 
-Gretel was created by @lassebunk and is maintained by @WilHall.
+Gretel was created by [@lassebunk](https://github.com/lassebunk) and is maintained by [@WilHall](https://github.com/WilHall).
 
 [See the list of contributors](https://github.com/lassebunk/gretel/graphs/contributors)
 
