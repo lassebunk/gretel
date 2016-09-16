@@ -383,6 +383,12 @@ class HelperMethodsTest < ActionView::TestCase
     end
   end
 
+  test "autoroot with custom root_key" do
+    breadcrumb :basic
+    assert_dom_equal %Q{<div class="breadcrumbs"><a href="/">Admin</a> &rsaquo; <span class="current">About</span></div>},
+                      breadcrumbs(root_key: :admin_root).to_s
+  end
+
   test "register style" do
     Gretel.register_style :test_style, { container_tag: :one, fragment_tag: :two }
 
