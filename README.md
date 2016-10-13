@@ -206,7 +206,7 @@ end
 If you supply a block to the `breadcrumbs` method, it will yield an array with the breadcrumb links so you can build the breadcrumbs HTML manually:
 
 ```erb
-<% breadcrumbs do |links| %>
+<% breadcrumbs(autoroot: false).tap do |links| %>
   <% if links.any? %>
     You are here:
     <% links.each do |link| %>
