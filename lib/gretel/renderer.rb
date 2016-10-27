@@ -6,6 +6,7 @@ module Gretel
       posttext: "",
       separator: "",
       autoroot: true,
+      root_key: nil,
       display_single_fragment: false,
       link_current: false,
       link_current_to_request_path: true,
@@ -79,9 +80,11 @@ module Gretel
     def links_for_render(options = {})
       out = links.dup
 
+      root_key = options[:root_key] || :root
+
       # Handle autoroot
-      if options[:autoroot] && out.map(&:key).exclude?(:root) && Gretel::Crumbs.crumb_defined?(:root)
-        out.unshift *Gretel::Crumb.new(context, :root).links
+      if options[:autoroot] && out.map(&:key).exclude?(root_key) && Gretel::Crumbs.crumb_defined?(root_key)
+        out.unshift *Gretel::Crumb.new(context, root_key).links
       end
 
       # Set current link to actual path
