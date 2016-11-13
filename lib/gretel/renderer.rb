@@ -219,7 +219,7 @@ module Gretel
           text = content_tag(:span, text, itemprop: "name")
 
           if url.present?
-            text = breadcrumb_link_to(text, url, itemprop: "item", itemscope: "", itemtype: "http://schema.org/Thing")
+            text = breadcrumb_link_to(text, url, itemprop: "item")
           elsif options[:current_link].present?
             current_url = "#{root_url}#{options[:current_link].gsub(/^\//, '')}"
             text = text + tag(:meta, itemprop: "url", content: current_url)
@@ -227,7 +227,7 @@ module Gretel
           text = text + tag_position
           content_tag(fragment_tag, text, class: options[:class], itemscope: "", itemtype: "http://schema.org/ListItem", itemprop: "itemListElement")
         elsif url.present?
-          content_tag(:span, breadcrumb_link_to(content_tag(:span, text, itemprop: "name"), url, class: options[:class], itemprop: "item", itemscope: "", itemtype: "http://schema.org/Thing") + tag_position, itemscope: "", itemtype: "http://schema.org/ListItem", itemprop: "itemListElement")
+          content_tag(:span, breadcrumb_link_to(content_tag(:span, text, itemprop: "name"), url, class: options[:class], itemprop: "item") + tag_position, itemscope: "", itemtype: "http://schema.org/ListItem", itemprop: "itemListElement")
         else
           content_tag(:span, content_tag(:span, text, class: options[:class], itemprop: "name")+tag_position, itemscope: "", itemtype: "http://schema.org/ListItem", itemprop: "itemListElement")
         end
