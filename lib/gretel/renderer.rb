@@ -220,10 +220,8 @@ module Gretel
 
           if url.present?
             text = breadcrumb_link_to(text, url, itemprop: "item")
-          elsif options[:current_link].present?
-            current_url = "#{root_url}#{options[:current_link].gsub(/^\//, '')}"
-            text = text + tag(:meta, itemprop: "url", content: current_url)
           end
+
           text = text + tag_position
           content_tag(fragment_tag, text, class: options[:class], itemscope: "", itemtype: "http://schema.org/ListItem", itemprop: "itemListElement")
         elsif url.present?
