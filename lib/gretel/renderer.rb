@@ -171,12 +171,12 @@ module Gretel
 
         # Loop through all but the last (current) link and build HTML of the fragments
         fragments = links[0..-2].map do |link|
-          render_fragment(options[:fragment_tag], link.text, link.url, options[:semantic])
+          render_fragment(options[:fragment_tag], link.text, link.url, links.index(link) + 1, options[:semantic])
         end
 
         # The current link is handled a little differently, and is only linked if specified in the options
         current_link = links.last
-        fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], class: options[:current_class], current_link: current_link.url)
+        fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), links.index(current_link) + 1, options[:semantic], class: options[:current_class], current_link: current_link.url)
 
         # Build the final HTML
         html_fragments = []
@@ -192,37 +192,43 @@ module Gretel
         end
 
         html = html_fragments.join(" ").html_safe
-        content_tag(options[:container_tag], html, id: options[:id], class: options[:class])
+        if options[:semantic]
+          content_tag(options[:container_tag], html, id: options[:id], class: options[:class], itemscope: "", itemtype: "http://schema.org/BreadcrumbList")
+        else
+          content_tag(options[:container_tag], html, id: options[:id], class: options[:class])
+        end
       end
 
       alias :to_s :render
 
       # Renders HTML for a breadcrumb fragment, i.e. a breadcrumb link.
-      def render_fragment(fragment_tag, text, url, semantic, options = {})
+      def render_fragment(fragment_tag, text, url, position, semantic, options = {})
         if semantic
-          render_semantic_fragment(fragment_tag, text, url, options)
+          render_semantic_fragment(fragment_tag, text, url, position, options)
         else
           render_nonsemantic_fragment(fragment_tag, text, url, options)
         end
       end
 
       # Renders semantic fragment HTML.
-      def render_semantic_fragment(fragment_tag, text, url, options = {})
+      def render_semantic_fragment(fragment_tag, text, url, position, options = {})
+        tag_position = tag(:meta, itemprop: "position", content: position)
+
         if fragment_tag
-          text = content_tag(:span, text, itemprop: "title")
+          text = content_tag(:span, text, itemprop: "name")
 
           if url.present?
-            text = breadcrumb_link_to(text, url, itemprop: "url")
+            text = breadcrumb_link_to(text, url, itemprop: "item")
           elsif options[:current_link].present?
             current_url = "#{root_url}#{options[:current_link].gsub(/^\//, '')}"
-            text = text + tag(:meta, itemprop: "url", content: current_url)
+            text = text + tag(:meta, itemprop: "item", content: current_url)
           end
 
-          content_tag(fragment_tag, text, class: options[:class], itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
+          content_tag(fragment_tag, text, class: options[:class], itemscope: "", itemtype: "http://schema.org/ListItem")
         elsif url.present?
-          content_tag(:span, breadcrumb_link_to(content_tag(:span, text, itemprop: "title"), url, class: options[:class], itemprop: "url"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
+          content_tag(:span, breadcrumb_link_to(content_tag(:span, text, itemprop: "name"), url, class: options[:class], itemprop: "item") + tag_position, itemscope: "", itemtype: "http://schema.org/ListItem", itemprop: "itemListElement")
         else
-          content_tag(:span, content_tag(:span, text, class: options[:class], itemprop: "title"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
+          content_tag(:span, content_tag(:span, text, class: options[:class], itemprop: "name") + tag_position, itemscope: "", itemtype: "http://schema.org/ListItem", itemprop: "itemListElement")
         end
       end
 
