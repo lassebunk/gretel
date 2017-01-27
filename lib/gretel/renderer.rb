@@ -25,6 +25,8 @@ module Gretel
       foundation5: { container_tag: :ul, fragment_tag: :li, class: "breadcrumbs", current_class: "current" }
     }
 
+    attr_reader :context, :breadcrumb_key, :breadcrumb_args
+
     def initialize(context, breadcrumb_key, *breadcrumb_args)
       @context = context
       @breadcrumb_key = breadcrumb_key
@@ -57,8 +59,6 @@ module Gretel
     end
 
     private
-
-    attr_reader :context, :breadcrumb_key, :breadcrumb_args
 
     # Returns merged options for rendering breadcrumbs.
     def options_for_render(options = {})
@@ -192,7 +192,7 @@ module Gretel
         end
 
         html = html_fragments.join(" ").html_safe
-        content_tag(options[:container_tag], html, id: options[:id], class: options[:class])
+        content_tag(options[:container_tag], html, id: options[:id], class: options[:class], itemtype: container_item_type)
       end
 
       alias :to_s :render
@@ -209,7 +209,7 @@ module Gretel
       # Renders semantic fragment HTML.
       def render_semantic_fragment(fragment_tag, text, url, options = {})
         if fragment_tag
-          text = content_tag(:span, text, itemprop: "title")
+          text = content_tag(:span, text, itemprop: "name")
 
           if url.present?
             text = breadcrumb_link_to(text, url, itemprop: "url")
@@ -218,11 +218,15 @@ module Gretel
             text = text + tag(:meta, itemprop: "url", content: current_url)
           end
 
-          content_tag(fragment_tag, text, class: options[:class], itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
+          content_tag(fragment_tag, text, class: options[:class], itemscope: "", itemtype: item_type)
+
         elsif url.present?
-          content_tag(:span, breadcrumb_link_to(content_tag(:span, text, itemprop: "title"), url, class: options[:class], itemprop: "url"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
+          content = breadcrumb_link_to(content_tag(:span, text, itemprop: "name"), url, class: options[:class], itemprop: "url")
+          content_tag(:span, content, itemscope: "", itemtype: item_type)
+
         else
-          content_tag(:span, content_tag(:span, text, class: options[:class], itemprop: "title"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
+          content = content_tag(:span, text, class: options[:class], itemprop: "name")
+          content_tag(:span, content, itemscope: "", itemtype: item_type)
         end
       end
 
@@ -238,6 +242,15 @@ module Gretel
         else
           text
         end
+      end
+
+      def item_type
+        'http://schema.org/ListItem'
+      end
+
+      def container_item_type
+        return unless options[:semantic]
+        'http://schema.org/BreadcrumbList'
       end
 
       # Proxy for +context.link_to+ that can be overridden by plugins.
