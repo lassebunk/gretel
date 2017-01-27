@@ -25,6 +25,8 @@ module Gretel
       foundation5: { container_tag: :ul, fragment_tag: :li, class: "breadcrumbs", current_class: "current" }
     }
 
+    attr_reader :context, :breadcrumb_key, :breadcrumb_args
+
     def initialize(context, breadcrumb_key, *breadcrumb_args)
       @context = context
       @breadcrumb_key = breadcrumb_key
@@ -57,8 +59,6 @@ module Gretel
     end
 
     private
-
-    attr_reader :context, :breadcrumb_key, :breadcrumb_args
 
     # Returns merged options for rendering breadcrumbs.
     def options_for_render(options = {})
