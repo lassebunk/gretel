@@ -87,6 +87,7 @@ Option                   | Description                                          
 :autoroot                | Whether it should automatically link to the `:root` crumb if no parent is given.                                           | True
 :display_single_fragment | Whether it should display the breadcrumb if it includes only one link.                                                     | False
 :link_current            | Whether the current crumb should be linked to.                                                                             | False
+:link_current_to_request_path            | Whether the current crumb should always link to the current request path. *Note:* This option will have no effect unless `:link_current` is set to `true`.                                                                             | True
 :semantic                | Whether it should generate [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417). | False
 :id                      | ID for the breadcrumbs container.                                                                                          | None
 :class                   | CSS class for the breadcrumbs container. Can be set to `nil` for no class.                                                 | `"breadcrumbs"`
@@ -133,7 +134,7 @@ crumb :project_issues do |project|
   parent project # inferred to :project
 end
 
-# Child 
+# Child
 crumb :issue do |issue|
   link issue.name, issue_path(issue)
   parent :project_issues, issue.project
@@ -348,17 +349,20 @@ To contribute:
 1. Fork the project
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Make your changes
-4. Add tests
-5. Run `rake` to make sure all tests pass
-6. Commit your changes (`git commit -am 'Add new feature'`)
-7. Push to the branch (`git push origin my-new-feature`)
-8. Create new pull request
+4. Add/Fix tests
+5. Prepare database for testing: `cd test/dummy; rake db:migrate; rake db:test:prepare; cd ../..`
+6. Run `rake` to make sure all tests pass
+7. Commit your changes (`git commit -am 'Add new feature'`)
+8. Push to the branch (`git push origin my-new-feature`)
+9. Create new pull request
 
 Thanks.
 
 ## Contributors
 
-* [See the list of contributors](https://github.com/lassebunk/gretel/graphs/contributors)
+Gretel was created by [@lassebunk](https://github.com/lassebunk) and is maintained by [@WilHall](https://github.com/WilHall).
+
+[See the list of contributors](https://github.com/lassebunk/gretel/graphs/contributors)
 
 ## And then
 
@@ -366,4 +370,4 @@ Thanks.
 
 Have fun!
 
-Copyright (c) 2010-2014 [Lasse Bunk](http://lassebunk.dk), released under the MIT license
+Copyright (c) 2010-2016 [Lasse Bunk](http://lassebunk.dk), released under the MIT license

@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 3.0.9
+* Adds breadcrumbs option `link_current_to_request_path` to link the current breadcrumb to the request path(#28 via #29)
+* Fixes semantic breadcrumbs when the last item has no link (via #55)
+* Downgrades Rails dependency to 3.1 (via #56)
+* Fixes jRuby issue with `Rails::Application` constant (via #50)
+* Fixes deprecation warnings for `alias_method_chain` (via #66)
+* Updated coprights (via #63)
+
 ## Version 3.0.8
 * Parent breadcrumbs can now also be inferred from models responding to `model_name`.
 
