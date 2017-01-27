@@ -8,6 +8,7 @@ module Gretel
       autoroot: true,
       display_single_fragment: false,
       link_current: false,
+      link_current_to_request_path: true,
       semantic: false,
       class: "breadcrumbs",
       current_class: "current",
@@ -84,7 +85,7 @@ module Gretel
       end
 
       # Set current link to actual path
-      if out.any? && request
+      if options[:link_current_to_request_path] && out.any? && request
         out.last.url = request.fullpath
       end
 
@@ -175,7 +176,7 @@ module Gretel
 
         # The current link is handled a little differently, and is only linked if specified in the options
         current_link = links.last
-        fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], class: options[:current_class])
+        fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], class: options[:current_class], current_link: current_link.url)
 
         # Build the final HTML
         html_fragments = []

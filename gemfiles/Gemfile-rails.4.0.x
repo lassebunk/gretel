@@ -15,3 +15,5 @@ gem "jquery-rails"
 
 # To use debugger
 # gem 'debugger'
+
+gem 'test-unit', '~> 3.0' if RUBY_VERSION >= "2.2"
