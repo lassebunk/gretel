@@ -10,6 +10,6 @@ gemfile:
   - gemfiles/Gemfile-rails.5.0.x
   - gemfiles/Gemfile-rails.5.1.x
 before_script:
-  - "cd test/dummy; rake db:migrate; rake db:test:prepare; cd ../.."
+  - "cd test/dummy; bundle exec rake db:migrate; bundle exec rake db:test:prepare; cd ../.."
 notifications:
   email: false
