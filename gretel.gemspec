@@ -17,6 +17,6 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^test/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency "rails", ">= 3.1.0"
+  gem.add_dependency "rails", ">= 4.1.0", "<= 5.1.0rc1"
   gem.add_development_dependency "sqlite3"
 end
