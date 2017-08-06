@@ -12,6 +12,7 @@ module Gretel
       semantic: false,
       class: "breadcrumbs",
       current_class: "current",
+      element_class: nil,
       pretext_class: "pretext",
       posttext_class: "posttext",
       id: nil
@@ -22,6 +23,7 @@ module Gretel
       ol: { container_tag: :ol, fragment_tag: :li },
       ul: { container_tag: :ul, fragment_tag: :li },
       bootstrap: { container_tag: :ol, fragment_tag: :li, class: "breadcrumb", current_class: "active" },
+      bootstrap4: { container_tag: :ol, fragment_tag: :li, class: "breadcrumb", current_class: "active", element_class: "breadcrumb-item" },
       foundation5: { container_tag: :ul, fragment_tag: :li, class: "breadcrumbs", current_class: "current" }
     }
 
@@ -171,12 +173,12 @@ module Gretel
 
         # Loop through all but the last (current) link and build HTML of the fragments
         fragments = links[0..-2].map do |link|
-          render_fragment(options[:fragment_tag], link.text, link.url, options[:semantic])
+          render_fragment(options[:fragment_tag], link.text, link.url, options[:semantic], class: options[:element_class])
         end
 
         # The current link is handled a little differently, and is only linked if specified in the options
         current_link = links.last
-        fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], class: options[:current_class], current_link: current_link.url)
+        fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], class: "#{options[:element_class]} #{options[:current_class]}", current_link: current_link.url)
 
         # Build the final HTML
         html_fragments = []
