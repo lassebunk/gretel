@@ -129,6 +129,12 @@ class HelperMethodsTest < ActionView::TestCase
                  breadcrumbs(class: "custom_class").to_s
   end
 
+  test "custom fragment class" do
+    breadcrumb :basic
+    assert_dom_equal %{<div class="breadcrumbs"><a class="custom_fragment_class" href="/">Home</a> &rsaquo; <span class="custom_fragment_class current">About</span></div>},
+                 breadcrumbs(fragment_class: "custom_fragment_class").to_s
+  end
+
   test "custom current class" do
     breadcrumb :basic
     assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="custom_current_class">About</span></div>},
@@ -356,6 +362,12 @@ class HelperMethodsTest < ActionView::TestCase
     breadcrumb :basic
     assert_dom_equal %{<ol class="breadcrumb"><li><a href="/">Home</a></li><li class="active">About</li></ol>},
                  breadcrumbs(style: :bootstrap).to_s
+  end
+
+  test "bootstrap4 style" do
+    breadcrumb :basic
+    assert_dom_equal %{<ol class="breadcrumb"><li class="breadcrumb-item"><a href="/">Home</a></li><li class="breadcrumb-item active">About</li></ol>},
+                 breadcrumbs(style: :bootstrap4).to_s
   end
 
   test "foundation5 style" do

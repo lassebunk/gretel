@@ -91,6 +91,7 @@ Option                   | Description                                          
 :semantic                | Whether it should generate [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417). | False
 :id                      | ID for the breadcrumbs container.                                                                                          | None
 :class                   | CSS class for the breadcrumbs container. Can be set to `nil` for no class.                                                 | `"breadcrumbs"`
+:fragment_class          | CSS class for the fragment link or span. Can be set to `nil` for no class.                                                 | None
 :current_class           | CSS class for the current link or span. Can be set to `nil` for no class.                                                  | `"current"`
 :pretext_class           | CSS class for the pretext, if given. Can be set to `nil` for no class.                                                     | `"pretext"`
 :posttext_class          | CSS class for the posttext, if given. Can be set to `nil` for no class.                                                    | `"posttext"`
@@ -107,6 +108,7 @@ Style          | Description
 `:ol`          | Renders the links in `<li>` elements contained in an outer `<ol>`.
 `:ul`          | Renders the links in `<li>` elements contained in an outer `<ul>`.
 `:bootstrap`   | Renders the links for use in [Twitter Bootstrap](http://getbootstrap.com/).
+`:bootstrap4`  | Renders the links for use in [Bootstrap v4](https://getbootstrap.com/).
 `:foundation5` | Renders the links for use in [Foundation 5](http://foundation.zurb.com/).
 
 Or you can build the breadcrumbs manually for full customization; see below.

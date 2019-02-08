@@ -22,6 +22,7 @@ module Gretel
       ol: { container_tag: :ol, fragment_tag: :li },
       ul: { container_tag: :ul, fragment_tag: :li },
       bootstrap: { container_tag: :ol, fragment_tag: :li, class: "breadcrumb", current_class: "active" },
+      bootstrap4: { container_tag: :ol, fragment_tag: :li, class: "breadcrumb", fragment_class: "breadcrumb-item", current_class: "active" },
       foundation5: { container_tag: :ul, fragment_tag: :li, class: "breadcrumbs", current_class: "current" }
     }
 
@@ -171,12 +172,12 @@ module Gretel
 
         # Loop through all but the last (current) link and build HTML of the fragments
         fragments = links[0..-2].map do |link|
-          render_fragment(options[:fragment_tag], link.text, link.url, options[:semantic])
+          render_fragment(options[:fragment_tag], link.text, link.url, options[:semantic], fragment_class: options[:fragment_class])
         end
 
         # The current link is handled a little differently, and is only linked if specified in the options
         current_link = links.last
-        fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], class: options[:current_class], current_link: current_link.url)
+        fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], fragment_class: options[:fragment_class], class: options[:current_class], current_link: current_link.url)
 
         # Build the final HTML
         html_fragments = []
@@ -208,6 +209,9 @@ module Gretel
 
       # Renders semantic fragment HTML.
       def render_semantic_fragment(fragment_tag, text, url, options = {})
+        fragment_class = [options[:fragment_class], options[:class]].join(' ').strip
+        fragment_class = nil if fragment_class.blank?
+
         if fragment_tag
           text = content_tag(:span, text, itemprop: "title")
 
@@ -218,23 +222,26 @@ module Gretel
             text = text + tag(:meta, itemprop: "url", content: current_url)
           end
 
-          content_tag(fragment_tag, text, class: options[:class], itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
+          content_tag(fragment_tag, text, class: fragment_class, itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
         elsif url.present?
-          content_tag(:span, breadcrumb_link_to(content_tag(:span, text, itemprop: "title"), url, class: options[:class], itemprop: "url"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
+          content_tag(:span, breadcrumb_link_to(content_tag(:span, text, itemprop: "title"), url, class: fragment_class, itemprop: "url"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
         else
-          content_tag(:span, content_tag(:span, text, class: options[:class], itemprop: "title"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
+          content_tag(:span, content_tag(:span, text, class: fragment_class, itemprop: "title"), itemscope: "", itemtype: "http://data-vocabulary.org/Breadcrumb")
         end
       end
 
       # Renders regular, non-semantic fragment HTML.
       def render_nonsemantic_fragment(fragment_tag, text, url, options = {})
+        fragment_class = [options[:fragment_class], options[:class]].join(' ').strip
+        fragment_class = nil if fragment_class.blank?
+
         if fragment_tag
           text = breadcrumb_link_to(text, url) if url.present?
-          content_tag(fragment_tag, text, class: options[:class])
+          content_tag(fragment_tag, text, class: fragment_class)
         elsif url.present?
-          breadcrumb_link_to(text, url, class: options[:class])
+          breadcrumb_link_to(text, url, class: fragment_class)
         elsif options[:class].present?
-          content_tag(:span, text, class: options[:class])
+          content_tag(:span, text, class: fragment_class)
         else
           text
         end
