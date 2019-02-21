@@ -229,8 +229,9 @@ module Gretel
       # Renders regular, non-semantic fragment HTML.
       def render_nonsemantic_fragment(fragment_tag, text, url, options = {})
         if fragment_tag
+          title = text
           text = breadcrumb_link_to(text, url) if url.present?
-          content_tag(fragment_tag, text, class: options[:class])
+          content_tag(fragment_tag, text, class: options[:class], title: title)
         elsif url.present?
           breadcrumb_link_to(text, url, class: options[:class])
         elsif options[:class].present?
