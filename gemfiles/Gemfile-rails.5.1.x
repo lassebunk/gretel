@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gem "gretel",  :path => ".."
 
-gem "rails", "~> 4.0.0"
+gem "rails", github: "rails/rails", branch: "5-1-stable"
 gem "sqlite3"
 
 # jquery-rails is used by the dummy application
@@ -17,3 +17,4 @@ gem "jquery-rails"
 # gem 'debugger'
 
 gem 'test-unit', '~> 3.0' if RUBY_VERSION >= "2.2"
+
