@@ -79,4 +79,6 @@ module Gretel
   end
 end
 
-ActionView::Base.send :include, Gretel::ViewHelpers
+ActiveSupport.on_load(:action_view) do
+  ActionView::Base.send :include, Gretel::ViewHelpers
+end
