@@ -29,7 +29,7 @@ module Gretel
 
       # Transform objects to real paths.
       url = url_for(url) if url
-      
+
       links << Gretel::Link.new(key, text, url, options)
     end
 
