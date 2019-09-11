@@ -14,3 +14,9 @@ before_script:
   - "cd test/dummy; rake db:migrate; rake db:test:prepare; cd ../.."
 notifications:
   email: false
+matrix:
+  exclude:
+    - rvm: 1.9.3
+      gemfile: gemfiles/Gemfile-rails.4.0.x
+    - rvm: 1.9.3
+      gemfile: gemfiles/Gemfile-rails.4.1.x
