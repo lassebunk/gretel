@@ -358,9 +358,10 @@ To contribute:
 4. Add/Fix tests
 5. Prepare database for testing: `cd test/dummy; rake db:migrate; rake db:test:prepare; cd ../..`
 6. Run `rake` to make sure all tests pass
-7. Commit your changes (`git commit -am 'Add new feature'`)
-8. Push to the branch (`git push origin my-new-feature`)
-9. Create new pull request
+7. Be sure to check in the changes to `coverage/coverage.txt`
+8. Commit your changes (`git commit -am 'Add new feature'`)
+9. Push to the branch (`git push origin my-new-feature`)
+10. Create new pull request
 
 Thanks.
 

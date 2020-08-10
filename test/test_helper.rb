@@ -1,3 +1,16 @@
+require "simplecov"
+require "simplecov-erb"
+
+SimpleCov.start do
+  enable_coverage :branch
+  formatter SimpleCov::Formatter::MultiFormatter.new([
+    SimpleCov::Formatter::ERBFormatter,
+    SimpleCov::Formatter::HTMLFormatter
+  ])
+end
+
+SimpleCov.minimum_coverage 95 # TODO: Get to 100!
+
 # Configure Rails Environment
 ENV["RAILS_ENV"] = "test"
 
