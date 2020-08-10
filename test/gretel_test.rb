@@ -11,7 +11,6 @@ class GretelTest < ActiveSupport::TestCase
                   Rails.root.join("app", "views", "breadcrumbs", "**", "*.rb")],
                  Gretel.breadcrumb_paths[-3..-1]
     assert_equal ["development"], Gretel.reload_environments
-    assert !Gretel.suppress_deprecation_warnings?
   end
 
   test "configuration block" do
