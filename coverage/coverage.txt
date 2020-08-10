@@ -2,9 +2,6 @@
 Incomplete test coverage
 --------------------------------------------------------------------------------
 
-/lib/gretel.rb: 91.67% (missed: 51,52,53)
-/lib/gretel/deprecated/default_style_key.rb: 53.33% (missed: 2,3,4,5,6,8,11)
-/lib/gretel/deprecated/show_root_alone.rb: 52.94% (missed: 2,3,4,5,6,7,9,12)
-/lib/gretel/deprecated/yield_links.rb: 53.33% (missed: 2,4,5,6,15,17,21)
+/lib/gretel.rb: 85.71% (missed: 42,47,48,49,50)
 /lib/gretel/renderer.rb: 99.12% (missed: 45)
 /test/helper_methods_test.rb: 99.24% (missed: 17,196)
