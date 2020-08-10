@@ -4,10 +4,10 @@ rvm:
   - 2.7
   - 2.6
   - 2.5
-gemfile:
-  - gemfiles/Gemfile-rails.5.1.x
-  - gemfiles/Gemfile-rails.5.2.x
-  - gemfiles/Gemfile-rails.6.0.x
+env:
+  - RAILS="~> '5.1.0'"
+  - RAILS="~> '5.2.0'"
+  - RAILS="~> '6.0.0'"
 before_script:
   - "cd test/dummy; rake db:migrate; rake db:test:prepare; cd ../.."
 notifications:
