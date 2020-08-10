@@ -16,9 +16,7 @@ module Gretel
     # breadcrumbs set in engines.
     def breadcrumb_paths
       @breadcrumb_paths ||= begin
-        engines = Rails::Engine::Railties.respond_to?(:engines) ?
-          Rails::Engine::Railties.engines :
-          Rails::Engine.subclasses.map(&:instance)
+        engines = Rails::Engine.subclasses.map(&:instance)
 
         engine_roots = engines.map { |e| e.config.root }
         
