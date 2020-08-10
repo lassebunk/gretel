@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gem "gretel",  :path => ".."
 
-gem "rails", "~> 3.2.0"
+gem "rails", "~> 5.2.0"
 gem "sqlite3", "~> 1.3.6"
 
 # jquery-rails is used by the dummy application
