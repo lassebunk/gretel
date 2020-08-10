@@ -32,24 +32,6 @@ module Gretel
       @breadcrumb_paths = paths
     end
 
-    # Whether to suppress deprecation warnings.
-    def suppress_deprecation_warnings?
-      !!@suppress_deprecation_warnings
-    end
-
-    # Sets whether to suppress deprecation warnings.
-    def suppress_deprecation_warnings=(value)
-      @suppress_deprecation_warnings = value
-    end
-
-    # Shows a deprecation warning.
-    def show_deprecation_warning(message)
-      return if suppress_deprecation_warnings?
-      message = "[Gretel] #{message}"
-      puts message
-      Rails.logger.warn message
-    end
-
     # Array of Rails environment names with automatic configuration reload. Default is +["development"]+.
     def reload_environments
       @reload_environments ||= ["development"]
