@@ -1,7 +1,7 @@
 module Gretel
   class Crumb
     # Initializes a new crumb from the given +key+.
-    # It finds the breadcrumb created in +Gretel::Crumbs.layout+ and renders the block using the arguments supplied in +args+.
+    # It finds the breadcrumb created in +config/breadcrumbs.rb+ and renders the block using the arguments supplied in +args+.
     def initialize(context, key, *args)
       if key.class.respond_to?(:model_name)
         # Enables calling `breadcrumb @product` instead of `breadcrumb :product, @product`
