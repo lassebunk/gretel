@@ -5,7 +5,6 @@ require 'gretel/crumb'
 require 'gretel/link'
 require 'gretel/renderer'
 require 'gretel/view_helpers'
-require 'gretel/deprecated'
 
 module Gretel
   class << self
