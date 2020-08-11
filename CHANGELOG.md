@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+* Drop support Ruby < 2.5
+* Drop support Rails < 5.1
+
 ## Version 3.0.9
 * Adds breadcrumbs option `link_current_to_request_path` to link the current breadcrumb to the request path(#28 via #29)
 * Fixes semantic breadcrumbs when the last item has no link (via #55)

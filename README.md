@@ -1,8 +1,4 @@
-# This gem is no longer maintained
-
-Consider using [loaf](https://github.com/piotrmurach/loaf) instead.
-
-<a href="http://travis-ci.org/lassebunk/gretel"><img src="https://secure.travis-ci.org/lassebunk/gretel.png" alt="Build Status" /></a>
+<a href="http://travis-ci.org/kzkn/gretel"><img src="https://secure.travis-ci.org/kzkn/gretel.png" alt="Build Status" /></a>
 
 <img src="http://i.imgur.com/CAKEaBM.png" alt="Handle breadcrumb trails... like a boss :)" />
 
