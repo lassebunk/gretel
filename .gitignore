@@ -7,7 +7,6 @@ Gemfile.lock
 gemfiles/*.lock
 InstalledFiles
 _yardoc
-coverage
 doc/
 lib/bundler/man
 pkg
@@ -22,3 +21,8 @@ test/dummy/log/*.log
 test/dummy/tmp/
 test/dummy/.sass-cache
 .DS_Store
+
+/coverage/index.html
+/coverage/assets
+/coverage/*.json
+/coverage/*.json.lock
