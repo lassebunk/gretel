@@ -1,6 +1,8 @@
 # Changelog
 
 ## Unreleased
+* Support Bootstrap 4. See the `:style` option in the readme for more info
+* CSS class for fragment link or span is now customizable. See the `:fragment_class` option in the readme for more info
 * Drop support Ruby < 2.5
 * Drop support Rails < 5.1
 * Deprecated codes have been removed:
