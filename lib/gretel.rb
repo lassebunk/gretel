@@ -5,7 +5,6 @@ require 'gretel/crumb'
 require 'gretel/link'
 require 'gretel/renderer'
 require 'gretel/view_helpers'
-require 'gretel/deprecated'
 
 module Gretel
   class << self
@@ -31,24 +30,6 @@ module Gretel
     # Sets the path from with breadcrumbs are loaded. Default is +config/breadcrumbs.rb+.
     def breadcrumb_paths=(paths)
       @breadcrumb_paths = paths
-    end
-
-    # Whether to suppress deprecation warnings.
-    def suppress_deprecation_warnings?
-      !!@suppress_deprecation_warnings
-    end
-
-    # Sets whether to suppress deprecation warnings.
-    def suppress_deprecation_warnings=(value)
-      @suppress_deprecation_warnings = value
-    end
-
-    # Shows a deprecation warning.
-    def show_deprecation_warning(message)
-      return if suppress_deprecation_warnings?
-      message = "[Gretel] #{message}"
-      puts message
-      Rails.logger.warn message
     end
 
     # Array of Rails environment names with automatic configuration reload. Default is +["development"]+.
