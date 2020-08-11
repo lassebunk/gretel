@@ -113,7 +113,7 @@ Style          | Description
 
 Or you can build the breadcrumbs manually for full customization; see below.
 
-If you add other widely used styles, please submit a [Pull Request](https://github.com/lassebunk/gretel/pulls) so others can use them too.
+If you add other widely used styles, please submit a [Pull Request](https://github.com/kzkn/gretel/pulls) so others can use them too.
 
 ## More examples
 
@@ -335,7 +335,7 @@ in `config/breadcrumbs.rb`.
 ## Documentation
 
 * [Full documentation](http://rubydoc.info/gems/gretel)
-* [Changelog](https://github.com/lassebunk/gretel/blob/master/CHANGELOG.md)
+* [Changelog](https://github.com/kzkn/gretel/blob/master/CHANGELOG.md)
 * [Tutorial on using Gretel](http://www.sitepoint.com/breadcrumbs-rails-gretel/) (Sitepoint)
 
 ## Versioning
@@ -363,9 +363,10 @@ Thanks.
 
 ## Contributors
 
-Gretel was created by [@lassebunk](https://github.com/lassebunk) and is maintained by [@WilHall](https://github.com/WilHall).
+Gretel was created by [@lassebunk](https://github.com/lassebunk) and was maintained by [@WilHall](https://github.com/WilHall).
+And it is maintained by [@kzkn](https://github.com/kzkn).
 
-[See the list of contributors](https://github.com/lassebunk/gretel/graphs/contributors)
+[See the list of contributors](https://github.com/kzkn/gretel/graphs/contributors)
 
 ## And then
 
