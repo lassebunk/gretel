@@ -6,7 +6,7 @@
 It is based around the idea that breadcrumbs are a concern of the view, so you define a set of breadcrumbs in *config/breadcrumbs.rb* (or multiple files; see below) and specify in the view which breadcrumb to use.
 Gretel also supports [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417) (those used in Google results).
 
-Have fun! And please do write, if you (dis)like it – [lassebunk@gmail.com](mailto:lassebunk@gmail.com).
+Have fun!
 
 ## Installation
 
@@ -113,7 +113,7 @@ Style          | Description
 
 Or you can build the breadcrumbs manually for full customization; see below.
 
-If you add other widely used styles, please submit a [Pull Request](https://github.com/lassebunk/gretel/pulls) so others can use them too.
+If you add other widely used styles, please submit a [Pull Request](https://github.com/kzkn/gretel/pulls) so others can use them too.
 
 ## More examples
 
@@ -208,7 +208,7 @@ end
 If you supply a block to the `breadcrumbs` method, it will yield an array with the breadcrumb links so you can build the breadcrumbs HTML manually:
 
 ```erb
-<% breadcrumbs do |links| %>
+<% breadcrumbs.tap do |links| %>
   <% if links.any? %>
     You are here:
     <% links.each do |link| %>
@@ -335,7 +335,7 @@ in `config/breadcrumbs.rb`.
 ## Documentation
 
 * [Full documentation](http://rubydoc.info/gems/gretel)
-* [Changelog](https://github.com/lassebunk/gretel/blob/master/CHANGELOG.md)
+* [Changelog](https://github.com/kzkn/gretel/blob/master/CHANGELOG.md)
 * [Tutorial on using Gretel](http://www.sitepoint.com/breadcrumbs-rails-gretel/) (Sitepoint)
 
 ## Versioning
@@ -363,9 +363,10 @@ Thanks.
 
 ## Contributors
 
-Gretel was created by [@lassebunk](https://github.com/lassebunk) and is maintained by [@WilHall](https://github.com/WilHall).
+Gretel was created by [@lassebunk](https://github.com/lassebunk) and was maintained by [@WilHall](https://github.com/WilHall).
+And it is maintained by [@kzkn](https://github.com/kzkn).
 
-[See the list of contributors](https://github.com/lassebunk/gretel/graphs/contributors)
+[See the list of contributors](https://github.com/kzkn/gretel/graphs/contributors)
 
 ## And then
 
@@ -373,4 +374,4 @@ Gretel was created by [@lassebunk](https://github.com/lassebunk) and is maintain
 
 Have fun!
 
-Copyright (c) 2010-2016 [Lasse Bunk](http://lassebunk.dk), released under the MIT license
+Copyright (c) 2010-2020 [Lasse Bunk](http://lassebunk.dk), released under the MIT license
