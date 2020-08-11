@@ -205,7 +205,7 @@ end
 
 ## Building the breadcrumbs manually
 
-The `breadcrumbs` method returns an array with the breadcrumb links. If you call `tap` method of the array and supply a block to it, you can build the breadcrumbs HTML manually with the array:
+You can use the `breadcrumbs` method directly as an array. It will return an array with the breadcrumb links so you can build the breadcrumbs HTML manually:
 
 ```erb
 <% breadcrumbs.tap do |links| %>
