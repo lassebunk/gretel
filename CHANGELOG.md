@@ -3,6 +3,10 @@
 ## Unreleased
 * Drop support Ruby < 2.5
 * Drop support Rails < 5.1
+* Deprecated codes have been removed:
+  * `breadcrumbs` is no longer accept block, use `tap` instead
+  * `breadcrumbs` is no longer accept `style: :default`, use `style: :inline` instead
+  * `breadcrumbs` is no longer accept `:show_root_alone` option, use `:display_single_fragment` option instead
 
 ## Version 3.0.9
 * Adds breadcrumbs option `link_current_to_request_path` to link the current breadcrumb to the request path(#28 via #29)
