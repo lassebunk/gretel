@@ -374,4 +374,4 @@ And it is maintained by [@kzkn](https://github.com/kzkn).
 
 Have fun!
 
-Copyright (c) 2010-2016 [Lasse Bunk](http://lassebunk.dk), released under the MIT license
+Copyright (c) 2010-2020 [Lasse Bunk](http://lassebunk.dk), released under the MIT license
