@@ -6,11 +6,11 @@ require 'gretel/version'
 Gem::Specification.new do |gem|
   gem.name          = "gretel"
   gem.version       = Gretel::VERSION
-  gem.authors       = ["Lasse Bunk"]
-  gem.email         = ["lassebunk@gmail.com"]
+  gem.authors       = ["Lasse Bunk", "Kazuki Nishikawa"]
+  gem.email         = ["kzkn@users.noreply.github.com"]
   gem.description   = %q{Gretel is a Ruby on Rails plugin that makes it easy yet flexible to create breadcrumbs.}
   gem.summary       = %q{Flexible Ruby on Rails breadcrumbs plugin.}
-  gem.homepage      = "http://github.com/lassebunk/gretel"
+  gem.homepage      = "http://github.com/kzkn/gretel"
   gem.license       = "MIT"
 
   gem.files         = `git ls-files`.split($/)
