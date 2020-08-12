@@ -1,6 +1,6 @@
 # Changelog
 
-## 4.0.0
+## Version 4.0.0
 * Support Bootstrap 4. See the `:style` option in the readme for more info
 * CSS class for fragment link or span is now customizable. See the `:fragment_class` option in the readme for more info
 * Drop support Ruby < 2.5
