@@ -4,7 +4,7 @@
 
 ([TL;DR](http://i.imgur.com/nH25yiH.png)) Gretel is a [Ruby on Rails](http://rubyonrails.org) plugin that makes it easy yet flexible to create breadcrumbs.
 It is based around the idea that breadcrumbs are a concern of the view, so you define a set of breadcrumbs in *config/breadcrumbs.rb* (or multiple files; see below) and specify in the view which breadcrumb to use.
-Gretel also supports [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417) (those used in Google results).
+Gretel also supports [semantic breadcrumbs](https://developers.google.com/search/docs/data-types/breadcrumb) (those used in Google results).
 
 Have fun!
 
@@ -88,7 +88,7 @@ Option                   | Description                                          
 :display_single_fragment | Whether it should display the breadcrumb if it includes only one link.                                                     | False
 :link_current            | Whether the current crumb should be linked to.                                                                             | False
 :link_current_to_request_path            | Whether the current crumb should always link to the current request path. *Note:* This option will have no effect unless `:link_current` is set to `true`.                                                                             | True
-:semantic                | Whether it should generate [semantic breadcrumbs](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417). | False
+:semantic                | Whether it should generate [semantic breadcrumbs](https://developers.google.com/search/docs/data-types/breadcrumb). | False
 :id                      | ID for the breadcrumbs container.                                                                                          | None
 :class                   | CSS class for the breadcrumbs container. Can be set to `nil` for no class.                                                 | `"breadcrumbs"`
 :fragment_class          | CSS class for the fragment link or span. Can be set to `nil` for no class.                                                 | None
