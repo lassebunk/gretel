@@ -188,7 +188,9 @@ class HelperMethodsTest < ActionView::TestCase
     breadcrumb :basic
 
     out = parent_breadcrumb(autoroot: false) do
+      # :nocov:
       "yielded"
+      # :nocov:
     end
 
     assert_nil out
