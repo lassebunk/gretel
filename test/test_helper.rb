@@ -9,7 +9,7 @@ SimpleCov.start do
   ])
 end
 
-SimpleCov.minimum_coverage 99 # TODO: Get to 100!
+SimpleCov.minimum_coverage 100
 
 # Configure Rails Environment
 ENV["RAILS_ENV"] = "test"

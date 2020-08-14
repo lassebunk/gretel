@@ -2,5 +2,4 @@
 Incomplete test coverage
 --------------------------------------------------------------------------------
 
-/lib/gretel/renderer.rb: 99.12% (missed: 45)
-/test/helper_methods_test.rb: 99.24% (missed: 17,196)
+100% test coverage. You're all set, friend!
