@@ -12,11 +12,6 @@ class HelperMethodsTest < ActionView::TestCase
     Gretel.reset!
   end
 
-  def itemscope_value
-    ActionView::Helpers::TagHelper::BOOLEAN_ATTRIBUTES.include?("itemscope") ?
-      "itemscope" : ""
-  end
-
   # Breadcrumb generation
 
   test "basic breadcrumb" do
@@ -63,7 +58,7 @@ class HelperMethodsTest < ActionView::TestCase
 
   test "semantic breadcrumb" do
     breadcrumb :with_root
-    assert_dom_equal %{<div class="breadcrumbs" itemscope="#{itemscope_value}" itemtype="https://schema.org/BreadcrumbList"><span itemprop="itemListElement" itemscope="#{itemscope_value}" itemtype="https://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">Home</span></a><meta itemprop="position" content="1" /></span> &rsaquo; <span class="current" itemprop="itemListElement" itemscope="#{itemscope_value}" itemtype="https://schema.org/ListItem"><span itemprop="name">About</span><meta itemprop="item" content="http://test.host/about" /><meta itemprop="position" content="2" /></span></div>},
+    assert_dom_equal %{<div class="breadcrumbs" itemscope="itemscope" itemtype="https://schema.org/BreadcrumbList"><span itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">Home</span></a><meta itemprop="position" content="1" /></span> &rsaquo; <span class="current" itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><span itemprop="name">About</span><meta itemprop="item" content="http://test.host/about" /><meta itemprop="position" content="2" /></span></div>},
                  breadcrumbs(semantic: true).to_s
   end
 
@@ -384,7 +379,7 @@ class HelperMethodsTest < ActionView::TestCase
 
   test "custom semantic container and fragment tags" do
     breadcrumb :basic
-    assert_dom_equal %{<c class="breadcrumbs" itemscope="#{itemscope_value}" itemtype="https://schema.org/BreadcrumbList"><f itemprop="itemListElement" itemscope="#{itemscope_value}" itemtype="https://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">Home</span></a><meta itemprop="position" content="1" /></f> &rsaquo; <f class="current" itemprop="itemListElement" itemscope="#{itemscope_value}" itemtype="https://schema.org/ListItem"><span itemprop="name">About</span><meta itemprop="item" content="http://test.host/about" /><meta itemprop="position" content="2" /></f></c>},
+    assert_dom_equal %{<c class="breadcrumbs" itemscope="itemscope" itemtype="https://schema.org/BreadcrumbList"><f itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a itemprop="item" href="/"><span itemprop="name">Home</span></a><meta itemprop="position" content="1" /></f> &rsaquo; <f class="current" itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><span itemprop="name">About</span><meta itemprop="item" content="http://test.host/about" /><meta itemprop="position" content="2" /></f></c>},
                  breadcrumbs(container_tag: :c, fragment_tag: :f, semantic: true).to_s
   end
 
