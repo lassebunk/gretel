@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## Version 4.0.1
 * Replaces data-vocabulary markup as google doesn't support it and now uses schema.org markup (via #17)
 
 ## Version 4.0.0
