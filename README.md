@@ -292,16 +292,6 @@ breadcrumbs do |links|
 end
 ```
 
-### Setting breadcrumb trails
-
-The [gretel-trails](https://github.com/lassebunk/gretel-trails) gem can handle adding and hiding trails from the URL automatically. This makes it possible to link back to a different breadcrumb trail than the one specified in your breadcrumb, for example if you have a
-store with products that have a default parent to the category breadcrumb, but when visiting from the reviews section, you want to link back to the reviews instead.
-
-You can apply trails to select links by adding a simple JS selector (`js-append-trail` or another you choose), and after each page load it hides the trail from the URL, so the server sees it but the users don't.
-
-Check out the gem [here](https://github.com/lassebunk/gretel-trails).
-
-
 ## Documentation
 
 * [Full documentation](https://rubydoc.info/gems/gretel)
