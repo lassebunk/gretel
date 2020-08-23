@@ -1,4 +1,5 @@
-<a href="http://travis-ci.org/kzkn/gretel"><img src="https://secure.travis-ci.org/kzkn/gretel.png" alt="Build Status" /></a>
+[![Gem Version](https://badge.fury.io/rb/gretel.svg)](http://badge.fury.io/rb/gretel)
+[![Build Status](https://travis-ci.org/kzkn/gretel.svg?branch=develop)](https://travis-ci.org/kzkn/gretel)
 
 <img src="http://i.imgur.com/CAKEaBM.png" alt="Handle breadcrumb trails... like a boss :)" />
 
@@ -107,9 +108,9 @@ Style          | Description
 `:inline`      | Renders each link by itself with `&rsaquo;` as the seperator.
 `:ol`          | Renders the links in `<li>` elements contained in an outer `<ol>`.
 `:ul`          | Renders the links in `<li>` elements contained in an outer `<ul>`.
-`:bootstrap`   | Renders the links for use in [Twitter Bootstrap](http://getbootstrap.com/).
+`:bootstrap`   | Renders the links for use in [Bootstrap v3](https://getbootstrap.com/docs/3.4/).
 `:bootstrap4`  | Renders the links for use in [Bootstrap v4](https://getbootstrap.com/).
-`:foundation5` | Renders the links for use in [Foundation 5](http://foundation.zurb.com/).
+`:foundation5` | Renders the links for use in [Foundation 5](https://get.foundation/).
 
 Or you can build the breadcrumbs manually for full customization; see below.
 
@@ -334,13 +335,13 @@ in `config/breadcrumbs.rb`.
 
 ## Documentation
 
-* [Full documentation](http://rubydoc.info/gems/gretel)
+* [Full documentation](https://rubydoc.info/gems/gretel)
 * [Changelog](https://github.com/kzkn/gretel/blob/master/CHANGELOG.md)
-* [Tutorial on using Gretel](http://www.sitepoint.com/breadcrumbs-rails-gretel/) (Sitepoint)
+* [Tutorial on using Gretel](https://www.sitepoint.com/breadcrumbs-rails-gretel/) (Sitepoint)
 
 ## Versioning
 
-Follows [semantic versioning](http://semver.org/).
+Follows [semantic versioning](https://semver.org/).
 
 ## Contributing
 
@@ -352,7 +353,7 @@ To contribute:
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Make your changes
 4. Add/Fix tests
-5. Prepare database for testing: `cd test/dummy; rake db:migrate; rake db:test:prepare; cd ../..`
+5. Prepare database for testing: `cd spec/dummy; rake db:migrate; rake db:test:prepare; cd ../..`
 6. Run `rake` to make sure all tests pass
 7. Be sure to check in the changes to `coverage/coverage.txt`
 8. Commit your changes (`git commit -am 'Add new feature'`)

@@ -1,7 +1,4 @@
-# -*- encoding: utf-8 -*-
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'gretel/version'
+require_relative 'lib/gretel/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "gretel"
@@ -13,14 +10,14 @@ Gem::Specification.new do |gem|
   gem.homepage      = "http://github.com/kzkn/gretel"
   gem.license       = "MIT"
 
-  gem.files         = `git ls-files`.split($/)
-  gem.test_files    = gem.files.grep(%r{^test/})
+  gem.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
+    `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  end
   gem.require_paths = ["lib"]
 
   gem.add_dependency "rails", ">= 5.1"
   gem.add_development_dependency "sqlite3"
-  gem.add_development_dependency "jquery-rails"
-  gem.add_development_dependency "test-unit", "~> 3.0"
-  gem.add_development_dependency "simplecov", "~> 0.18.0"
-  gem.add_development_dependency "simplecov-erb", "~> 0.1"
+  gem.add_development_dependency "rspec-rails"
+  gem.add_development_dependency "simplecov"
+  gem.add_development_dependency "simplecov-erb"
 end
