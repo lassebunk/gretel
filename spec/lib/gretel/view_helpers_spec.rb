@@ -1,10 +1,13 @@
-require("spec_helper")
-class HelperMethodsTest < ActionView::TestCase
-  include(Gretel::ViewHelpers)
-  self.fixture_path = File.expand_path("../../test/fixtures", "test/helper_methods_test.rb")
-  fixtures(:all)
-  helper(:application)
-  before { Gretel.reset! }
+require("rails_helper")
+
+describe Gretel::ViewHelpers, type: :helper do
+  helper :application
+  fixtures :all
+
+  before do
+    Gretel.reset!
+  end
+
   it("basic breadcrumb") do
     breadcrumb(:basic)
     assert_dom_equal("<div class=\"breadcrumbs\"><a href=\"/\">Home</a> &rsaquo; <span class=\"current\">About</span></div>", breadcrumbs.to_s)
