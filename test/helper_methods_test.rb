@@ -83,6 +83,14 @@ class HelperMethodsTest < ActionView::TestCase
     assert_dom_equal "", breadcrumbs.to_s
   end
 
+  test "html_safe?" do
+    breadcrumb :basic
+    assert breadcrumbs.html_safe?
+    assert breadcrumbs.to_s.html_safe?
+    assert breadcrumbs(semantic: true).html_safe?
+    assert breadcrumbs(semantic: true).to_s.html_safe?
+  end
+
   test "links current breadcrumb" do
     breadcrumb :with_root
     assert_dom_equal %{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/about" class="current">About</a></div>},
