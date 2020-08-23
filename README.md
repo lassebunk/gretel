@@ -352,7 +352,7 @@ To contribute:
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Make your changes
 4. Add/Fix tests
-5. Prepare database for testing: `cd test/dummy; rake db:migrate; rake db:test:prepare; cd ../..`
+5. Prepare database for testing: `cd spec/dummy; rake db:migrate; rake db:test:prepare; cd ../..`
 6. Run `rake` to make sure all tests pass
 7. Be sure to check in the changes to `coverage/coverage.txt`
 8. Commit your changes (`git commit -am 'Add new feature'`)
