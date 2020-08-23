@@ -14,13 +14,10 @@ Gem::Specification.new do |gem|
   gem.license       = "MIT"
 
   gem.files         = `git ls-files`.split($/)
-  gem.test_files    = gem.files.grep(%r{^test/})
   gem.require_paths = ["lib"]
 
   gem.add_dependency "rails", ">= 5.1"
   gem.add_development_dependency "sqlite3"
-  gem.add_development_dependency "jquery-rails"
-  gem.add_development_dependency "test-unit", "~> 3.0"
   gem.add_development_dependency "rspec-rails"
   gem.add_development_dependency "simplecov"
   gem.add_development_dependency "simplecov-erb"
