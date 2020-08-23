@@ -108,9 +108,9 @@ Style          | Description
 `:inline`      | Renders each link by itself with `&rsaquo;` as the seperator.
 `:ol`          | Renders the links in `<li>` elements contained in an outer `<ol>`.
 `:ul`          | Renders the links in `<li>` elements contained in an outer `<ul>`.
-`:bootstrap`   | Renders the links for use in [Twitter Bootstrap](http://getbootstrap.com/).
+`:bootstrap`   | Renders the links for use in [Bootstrap v3](https://getbootstrap.com/docs/3.4/).
 `:bootstrap4`  | Renders the links for use in [Bootstrap v4](https://getbootstrap.com/).
-`:foundation5` | Renders the links for use in [Foundation 5](http://foundation.zurb.com/).
+`:foundation5` | Renders the links for use in [Foundation 5](https://get.foundation/).
 
 Or you can build the breadcrumbs manually for full customization; see below.
 
@@ -335,13 +335,13 @@ in `config/breadcrumbs.rb`.
 
 ## Documentation
 
-* [Full documentation](http://rubydoc.info/gems/gretel)
+* [Full documentation](https://rubydoc.info/gems/gretel)
 * [Changelog](https://github.com/kzkn/gretel/blob/master/CHANGELOG.md)
-* [Tutorial on using Gretel](http://www.sitepoint.com/breadcrumbs-rails-gretel/) (Sitepoint)
+* [Tutorial on using Gretel](https://www.sitepoint.com/breadcrumbs-rails-gretel/) (Sitepoint)
 
 ## Versioning
 
-Follows [semantic versioning](http://semver.org/).
+Follows [semantic versioning](https://semver.org/).
 
 ## Contributing
 
