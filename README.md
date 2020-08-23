@@ -292,10 +292,6 @@ breadcrumbs do |links|
 end
 ```
 
-### Automatic reloading of breadcrumb configuration files
-
-Since Gretel version 2.1.0, the breadcrumb configuration files are now reloaded in the Rails development environment if they change. In other environments, like production, the files are loaded once, when first needed.
-
 ### Setting breadcrumb trails
 
 The [gretel-trails](https://github.com/lassebunk/gretel-trails) gem can handle adding and hiding trails from the URL automatically. This makes it possible to link back to a different breadcrumb trail than the one specified in your breadcrumb, for example if you have a
@@ -305,33 +301,6 @@ You can apply trails to select links by adding a simple JS selector (`js-append-
 
 Check out the gem [here](https://github.com/lassebunk/gretel-trails).
 
-
-## Upgrading from version 2.0 or below
-
-Instead of using the initializer that in Gretel version 2.0 and below required restarting the application after breadcrumb configuration changes, the configuration of the breadcrumbs is now loaded from `config/breadcrumbs.rb` (and `config/breadcrumbs/*.rb` if you want to split your breadcrumbs configuration across multiple files).
-In the Rails development environment, these files are automatically reloaded when changed.
-
-Using the initializer (e.g. `config/initializers/breadcrumbs.rb`) was deprecated in Gretel version 2.1.0 and removed in version 3.0. It raises an error if you try to use it.
-
-To update to the latest version of Gretel, use `bundle update gretel`. Then remove the `Gretel::Crumbs.layout do ... end` block, so instead of:
-
-```ruby
-Gretel::Crumbs.layout do
-  crumb :root do
-    link "Home", root_path
-  end
-end
-```
-
-in the initializer, you write:
-
-```ruby
-crumb :root do
-  link "Home", root_path
-end
-```
-
-in `config/breadcrumbs.rb`.
 
 ## Documentation
 
