@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/gretel.svg)](http://badge.fury.io/rb/gretel)
 [![Build Status](https://travis-ci.org/kzkn/gretel.svg?branch=develop)](https://travis-ci.org/kzkn/gretel)
 
 <img src="http://i.imgur.com/CAKEaBM.png" alt="Handle breadcrumb trails... like a boss :)" />
