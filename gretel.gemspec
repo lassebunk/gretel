@@ -21,6 +21,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "sqlite3"
   gem.add_development_dependency "jquery-rails"
   gem.add_development_dependency "test-unit", "~> 3.0"
+  gem.add_development_dependency "rspec-rails"
   gem.add_development_dependency "simplecov", "~> 0.18.0"
   gem.add_development_dependency "simplecov-erb", "~> 0.1"
 end
