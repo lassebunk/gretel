@@ -105,7 +105,7 @@ These are the styles you can use with `breadcrumbs style: :xx`.
 
 Style          | Description
 -------------- | -----------
-`:inline`      | Renders each link by itself with `&rsaquo;` as the seperator.
+`:inline`      | Default. Renders each link by itself with `&rsaquo;` as the seperator.
 `:ol`          | Renders the links in `<li>` elements contained in an outer `<ol>`.
 `:ul`          | Renders the links in `<li>` elements contained in an outer `<ul>`.
 `:bootstrap`   | Renders the links for use in [Bootstrap v3](https://getbootstrap.com/docs/3.4/).
