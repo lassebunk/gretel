@@ -9,6 +9,6 @@ env:
   - RAILS="~> '5.2.0'"
   - RAILS="~> '6.0.0'"
 before_script:
-  - "cd test/dummy; rake db:migrate; rake db:test:prepare; cd ../.."
+  - "cd spec/dummy; rake db:migrate; rake db:test:prepare; cd ../.."
 notifications:
   email: false
