@@ -1,4 +1,4 @@
-<a href="http://travis-ci.org/kzkn/gretel"><img src="https://secure.travis-ci.org/kzkn/gretel.png" alt="Build Status" /></a>
+[![Build Status](https://travis-ci.org/kzkn/gretel.svg?branch=develop)](https://travis-ci.org/kzkn/gretel)
 
 <img src="http://i.imgur.com/CAKEaBM.png" alt="Handle breadcrumb trails... like a boss :)" />
 
