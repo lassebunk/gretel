@@ -1,7 +1,4 @@
-# -*- encoding: utf-8 -*-
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'gretel/version'
+require_relative 'lib/gretel/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "gretel"
@@ -13,7 +10,9 @@ Gem::Specification.new do |gem|
   gem.homepage      = "http://github.com/kzkn/gretel"
   gem.license       = "MIT"
 
-  gem.files         = `git ls-files`.split($/)
+  gem.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
+    `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  end
   gem.require_paths = ["lib"]
 
   gem.add_dependency "rails", ">= 5.1"
