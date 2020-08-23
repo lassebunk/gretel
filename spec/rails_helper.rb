@@ -1,3 +1,16 @@
+require 'simplecov'
+require 'simplecov-erb'
+
+SimpleCov.start do
+  enable_coverage :branch
+  formatter SimpleCov::Formatter::MultiFormatter.new([
+    SimpleCov::Formatter::ERBFormatter,
+    SimpleCov::Formatter::HTMLFormatter
+  ])
+end
+
+SimpleCov.minimum_coverage 100
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
