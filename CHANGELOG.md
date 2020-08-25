@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+* The return value of `breadcrumbs` is `html_safe` now (via #22)
+  * For the slim template engine users: You don't need to use `==` instead of `=` for `breadcrumbs`
+
 ## Version 4.0.1
 * Replaces data-vocabulary markup as google doesn't support it and now uses schema.org markup (via #17)
 
