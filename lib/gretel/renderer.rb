@@ -195,8 +195,7 @@ module Gretel
         else
           content_tag(options[:container_tag], html, id: options[:id], class: options[:class])
         end
-
-     end
+      end
 
       alias :to_s :render
 
@@ -252,6 +251,11 @@ module Gretel
       # Proxy to view context.
       def method_missing(method, *args, &block)
         context.send(method, *args, &block)
+      end
+
+      # Avoid unnecessary html escaping by template engines.
+      def html_safe?
+        true
       end
     end
   end

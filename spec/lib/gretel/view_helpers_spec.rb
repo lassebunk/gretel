@@ -131,6 +131,20 @@ describe Gretel::ViewHelpers, type: :helper do
       assert_dom_equal(%{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">Test <strong>bold text</strong></span></div>}, breadcrumbs.to_s)
     end
 
+    it "html_safe?" do
+      with_breadcrumb(:with_unsafe_html) do
+        expect(breadcrumbs).to be_html_safe
+        expect(breadcrumbs.to_s).to be_html_safe
+        expect(breadcrumbs(semantic: true).to_s).to be_html_safe
+      end
+
+      with_breadcrumb(:with_safe_html) do
+        expect(breadcrumbs).to be_html_safe
+        expect(breadcrumbs.to_s).to be_html_safe
+        expect(breadcrumbs(semantic: true).to_s).to be_html_safe
+      end
+    end
+
     it "parent breadcrumb" do
       breadcrumb :multiple_links_with_parent
       parent = parent_breadcrumb
