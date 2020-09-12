@@ -15,7 +15,7 @@ module Gretel
       raise ArgumentError, "Breadcrumb :#{key} not found." unless block
       @key = key
       @context = context
-      instance_exec *args, &block
+      instance_exec(*args, &block)
     end
 
     # Sets link of the breadcrumb.
