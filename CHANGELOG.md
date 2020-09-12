@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+* Depends only `railties` and `actionview`, not `rails`
+
 ## Version 4.0.2
 * The return value of `breadcrumbs` is `html_safe` now (via #22)
   * For the slim template engine users: You don't need to use `==` instead of `=` for `breadcrumbs`
