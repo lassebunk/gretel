@@ -15,8 +15,8 @@ Gem::Specification.new do |gem|
   end
   gem.require_paths = ["lib"]
 
-  gem.add_dependency "railties", ">= 5.1"
-  gem.add_dependency "actionview", ">= 5.1"
+  gem.add_dependency "railties", [">= 5.1", "< 7.0"]
+  gem.add_dependency "actionview", [">= 5.1", "< 7.0"]
   gem.add_development_dependency "sqlite3"
   gem.add_development_dependency "rspec-rails"
   gem.add_development_dependency "simplecov"
