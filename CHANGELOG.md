@@ -1,7 +1,8 @@
 # Changelog
 
 ## Unreleased
-* Depends only `railties` and `actionview`, not `rails`
+* Fix multithreaded environment issue (via #13)
+* Depends only `railties` and `actionview`, not `rails` (via #7)
 * Include `Gretel::ViewHelpers` module in `ActiveSupport.on_load(:action_view)` block
 
 ## Version 4.0.2
