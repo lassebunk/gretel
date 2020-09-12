@@ -1,3 +1,5 @@
+require 'gretel/link'
+
 module Gretel
   class Crumb
     # Initializes a new crumb from the given +key+.

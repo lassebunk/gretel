@@ -1,3 +1,6 @@
+require 'gretel/crumbs'
+require 'gretel/crumb'
+
 module Gretel
   class Renderer
     DEFAULT_OPTIONS = {

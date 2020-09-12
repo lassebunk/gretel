@@ -1,3 +1,5 @@
+require 'gretel/renderer'
+
 module Gretel
   module ViewHelpers
     # Sets the current breadcrumb to be rendered elsewhere. Put it somewhere in the view, preferably in the top, before you render any breadcrumbs HTML:

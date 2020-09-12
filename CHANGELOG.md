@@ -2,6 +2,7 @@
 
 ## Unreleased
 * Depends only `railties` and `actionview`, not `rails`
+* Include `Gretel::ViewHelpers` module in `ActiveSupport.on_load(:action_view)` block
 
 ## Version 4.0.2
 * The return value of `breadcrumbs` is `html_safe` now (via #22)

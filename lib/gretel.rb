@@ -1,10 +1,6 @@
 require 'gretel/version'
 require 'gretel/resettable'
-require 'gretel/crumbs'
-require 'gretel/crumb'
-require 'gretel/link'
-require 'gretel/renderer'
-require 'gretel/view_helpers'
+require 'gretel/railtie'
 
 module Gretel
   class << self
@@ -57,5 +53,3 @@ module Gretel
     end
   end
 end
-
-ActionView::Base.send :include, Gretel::ViewHelpers
