@@ -4,6 +4,7 @@ describe Gretel::ViewHelpers, type: :helper do
   helper :application
   fixtures :all
 
+  before(:context) { ActionView::Base } # fire `run_load_hooks :action_view`
   before { Gretel.reset! }
 
   describe "Breadcrumb generation" do
