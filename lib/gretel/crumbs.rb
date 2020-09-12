@@ -3,11 +3,6 @@ module Gretel
     class << self
       include Resettable
 
-      # Stores the supplied block for later use.
-      def crumb(key, &block)
-        crumbs[key] = block
-      end
-
       # Returns a hash of all stored crumb blocks.
       def crumbs
         @crumbs ||= {}
@@ -20,14 +15,15 @@ module Gretel
 
       # Loads the breadcrumb configuration files.
       def load_breadcrumbs
-        @crumbs = {}
+        builder = Builder.new
 
         loaded_file_mtimes.clear
         breadcrumb_files.each do |file|
-          instance_eval open(file).read, file
+          builder.instance_eval open(file).read, file
           loaded_file_mtimes << File.mtime(file)
         end
 
+        @crumbs = builder.crumbs
         @loaded = true
       end
 
@@ -58,6 +54,19 @@ module Gretel
 
       def loaded_file_mtimes
         @loaded_file_mtimes ||= []
+      end
+
+      class Builder
+        attr_reader :crumbs
+
+        def initialize
+          @crumbs = {}
+        end
+
+        # Stores the supplied block for later use.
+        def crumb(key, &block)
+          crumbs[key] = block
+        end
       end
     end
   end
