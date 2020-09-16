@@ -31,7 +31,7 @@ module Gretel
 
       # Transform objects to real paths.
       url = url_for(url) if url
-      
+
       links << Gretel::Link.new(key, text, url, options)
     end
 
@@ -66,5 +66,6 @@ module Gretel
     def method_missing(method, *args, &block)
       context.send(method, *args, &block)
     end
+    ruby2_keywords(:method_missing) if respond_to?(:ruby2_keywords, true)
   end
 end
