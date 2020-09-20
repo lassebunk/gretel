@@ -67,6 +67,16 @@ module Gretel
         def crumb(key, &block)
           crumbs[key] = block
         end
+
+        # Returns a hash of all stored crumb blocks.
+        def crumbs
+          @crumbs ||= {}
+        end
+
+        # Returns true if a crumb with the given key has been set.
+        def crumb_defined?(key)
+          crumbs.has_key?(key)
+        end
       end
     end
   end

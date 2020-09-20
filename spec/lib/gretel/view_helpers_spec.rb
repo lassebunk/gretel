@@ -285,6 +285,16 @@ describe Gretel::ViewHelpers, type: :helper do
       breadcrumb :with_inferred_parent
       assert_dom_equal(%{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <a href="/projects/1">Test Project</a> &rsaquo; <span class="current">Test</span></div>}, breadcrumbs.to_s)
     end
+
+    it "conditional branching by crumb_defined?" do
+      breadcrumb :home1
+      assert_dom_equal(%{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">Home1</span></div>}, breadcrumbs.to_s)
+
+      expect do
+        breadcrumb :home3
+        breadcrumbs
+      end.to raise_error(ArgumentError)
+    end
   end
 
   describe 'Styles' do
