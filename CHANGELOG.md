@@ -1,9 +1,11 @@
 # Changelog
 
 ## Unreleased
-* Fix multithreaded environment issue (via #13)
 * Depends only `railties` and `actionview`, not `rails` (via #7)
 * Include `Gretel::ViewHelpers` module in `ActiveSupport.on_load(:action_view)` block
+* Fix ruby 2.7 keywords warning (via #24, thanks @aki77)
+* Fix multithreaded environment issue (via #13)
+  * `breadcrumbs.rb` is now evaluated in a instance of `Gretel::Crumbs::Builder`. If you call methods other than `crumb`, `crumbs` and `crumb_defined?`, you need to call it via full reference like `Gretel::Crumbs.xxxx`
 
 ## Version 4.0.2
 * The return value of `breadcrumbs` is `html_safe` now (via #22)
