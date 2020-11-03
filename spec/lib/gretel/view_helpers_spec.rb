@@ -489,6 +489,42 @@ describe Gretel::ViewHelpers, type: :helper do
     end
   end
 
+  describe 'Structured data' do
+    # https://developers.google.com/search/docs/data-types/breadcrumb#year-genre%20example
+    it "returns an object with the correct structure" do
+      breadcrumb :with_parent
+
+      expected_result = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://example.com/"
+          },
+           {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "About",
+            "item": "https://example.com/about"
+          },
+           {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Contact",
+            "item": "https://example.com/about/contact"
+          }
+        ]
+      }
+
+      expect(breadcrumbs.structured_data(url_base: "https://example.com")).to eq(expected_result)
+      # Ensure there's no extra trailing slashes
+      expect(breadcrumbs.structured_data(url_base: "https://example.com/")).to eq(expected_result)
+    end
+  end
+
   private
 
   def setup_loading_from_tmp_folder

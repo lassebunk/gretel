@@ -159,6 +159,27 @@ module Gretel
         concat links
       end
 
+      # Returns a hash matching the JSON-LD Structured Data schema
+      # https://developers.google.com/search/docs/data-types/breadcrumb#json-ld
+      def structured_data(url_base:)
+        url_base = url_base.chomp("/") # Remove trailing `/`, if present
+
+        items = @links.each_with_index.map do |link, i|
+          {
+            "@type": "ListItem",
+            "position": i + 1,
+            "name": link.text,
+            "item": "#{url_base}#{link.url}"
+          }
+        end
+
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": items
+        }
+      end
+
       # Helper for returning all link keys to allow for simple testing.
       def keys
         map(&:key)
@@ -192,7 +213,7 @@ module Gretel
         end
 
         html = html_fragments.join(" ").html_safe
-        
+
         if options[:semantic]
           content_tag(options[:container_tag], html, id: options[:id], class: options[:class], itemscope: "", itemtype: "https://schema.org/BreadcrumbList")
         else

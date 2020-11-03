@@ -219,6 +219,23 @@ You can use the `breadcrumbs` method directly as an array. It will return an arr
 <% end %>
 ```
 
+If you use this approach, you lose the built-in semantic breadcrumb functionality. One way to
+add them back is to use JSON-LD structured data:
+
+```erb
+<script type="application/ld+json">
+  <%= breadcrumbs.structured_data(url_base: "https://example.com")) %>
+</script>
+```
+
+Or, you can infer `url_base` from `request`:
+
+```erb
+<script type="application/ld+json">
+  <%= breadcrumbs.structured_data(url_base: "#{request.protocol}#{request.host_with_port}")) %>
+</script>
+```
+
 ## Getting the parent breadcrumb
 
 If you want to add a link to the parent breadcrumb, you can use the `parent_breadcrumb` view helper.
