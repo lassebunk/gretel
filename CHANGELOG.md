@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## Version 4.2.0
 * Support generating JSON-LD structured data. See the readme for more info (via #26, thanks @dkniffin)
 
 ## Version 4.1.0
