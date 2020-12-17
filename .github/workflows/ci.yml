@@ -1,0 +1,42 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rails_version: [5.1.0, 5.2.0, 6.0.0, 6.1.0, master]
+        ruby_version: [2.7.x, 2.6.x, 2.5.x]
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby_version }}
+
+    - uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: gems-build-rails-${{ matrix.rails_version }}-ruby-${{ matrix.ruby_version }}-${{ hashFiles('**/Gemfile.lock') }}
+
+    - name: Run test
+      run: |
+        gem install bundler
+        bundle update
+        cd spec/dummy; rake db:migrate db:test:prepare; cd ../..
+        bundle exec rake
+
+    - name: Upload coverage
+      uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: coverage-ruby-${{ matrix.ruby_version }}-rails-${{ matrix.rails_version }}
+        path: coverage
+
+    - name: Show coverage
+      if: always()
+      run: |
+        cat coverage/coverage.txt
