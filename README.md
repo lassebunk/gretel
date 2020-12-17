@@ -202,6 +202,11 @@ end
 crumb :user do |user|
   link user_name_for(user), user
 end
+
+# I18n
+crumb :home do
+  link t("breadcrumbs.home"), root_path
+end
 ```
 
 ## Building the breadcrumbs manually
