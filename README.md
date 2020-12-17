@@ -1,5 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/gretel.svg)](http://badge.fury.io/rb/gretel)
-[![Build Status](https://travis-ci.org/kzkn/gretel.svg?branch=master)](https://travis-ci.org/kzkn/gretel)
+![](https://github.com/kzkn/gretel/workflows/CI/badge.svg)
 
 <img src="http://i.imgur.com/CAKEaBM.png" alt="Handle breadcrumb trails... like a boss :)" />
 
