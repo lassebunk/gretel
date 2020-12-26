@@ -26,3 +26,4 @@ spec/dummy/.sass-cache
 /coverage/assets
 /coverage/*.json
 /coverage/*.json.lock
+/.ruby-version
