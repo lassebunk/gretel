@@ -1,6 +1,10 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * 0'
 
 jobs:
   test:
@@ -8,15 +12,22 @@ jobs:
     strategy:
       matrix:
         rails_version: [5.1.0, 5.2.0, 6.0.0, 6.1.0, master]
-        ruby_version: [3.0.x, 2.7.x, 2.6.x, 2.5.x]
+        ruby_version: [3.0, 2.7, 2.6, 2.5]
         exclude:
-          - ruby_version: 3.0.x
+          - ruby_version: 2.5
+            rails_version: master
+          - ruby_version: 2.6
+            rails_version: master
+          - ruby_version: 3.0
+            rails_version: 5.1.0
+          - ruby_version: 3.0
+            rails_version: 5.2.0
 
     steps:
     - uses: actions/checkout@v2
 
     - name: Setup Ruby
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby_version }}
 
@@ -24,7 +35,6 @@ jobs:
       env:
         RAILS_VERSION: ${{ matrix.rails_version }}
       run: |
-        gem install bundler
         bundle update
         cd spec/dummy; rake db:migrate db:test:prepare; cd ../..
         bundle exec rake
