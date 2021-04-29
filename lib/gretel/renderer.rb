@@ -17,7 +17,8 @@ module Gretel
       current_class: "current",
       pretext_class: "pretext",
       posttext_class: "posttext",
-      id: nil
+      id: nil,
+      aria_current: "page"
     }
 
     DEFAULT_STYLES = {
@@ -197,7 +198,7 @@ module Gretel
         # The current link is handled a little differently, and is only linked if specified in the options
         current_link = links.last
         position = links.size
-        fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], position, fragment_class: options[:fragment_class], class: options[:current_class], current_link: current_link.url)
+        fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], position, fragment_class: options[:fragment_class], class: options[:current_class], current_link: current_link.url, aria_current: options[:aria_current])
 
         # Build the final HTML
         html_fragments = []
@@ -239,15 +240,17 @@ module Gretel
         fragment_tag = fragment_tag || 'span'
         text = content_tag(:span, text, itemprop: "name")
 
+        aria_current = options[:aria_current]
         if url.present?
-          text = breadcrumb_link_to(text, url, itemprop: "item")
+          text = breadcrumb_link_to(text, url, itemprop: "item", "aria-current": aria_current)
+          aria_current = nil
         elsif options[:current_link].present?
           current_url = "#{root_url}#{options[:current_link].gsub(/^\//, '')}"
           text = text + tag(:meta, itemprop: "item", content: current_url)
         end
 
         text = text + tag(:meta, itemprop:"position", content: "#{position}")
-        content_tag(fragment_tag.to_sym, text, class: fragment_class, itemprop: "itemListElement", itemscope: "", itemtype: "https://schema.org/ListItem")
+        content_tag(fragment_tag.to_sym, text, class: fragment_class, itemprop: "itemListElement", itemscope: "", itemtype: "https://schema.org/ListItem", "aria-current": aria_current)
       end
 
       # Renders regular, non-semantic fragment HTML.
@@ -256,12 +259,16 @@ module Gretel
         fragment_class = nil if fragment_class.blank?
 
         if fragment_tag
-          text = breadcrumb_link_to(text, url) if url.present?
-          content_tag(fragment_tag, text, class: fragment_class)
+          if url.present?
+            text = breadcrumb_link_to(text, url, "aria-current": options[:aria_current])
+            content_tag(fragment_tag, text, class: fragment_class)
+          else
+            content_tag(fragment_tag, text, class: fragment_class, "aria-current": options[:aria_current])
+          end
         elsif url.present?
-          breadcrumb_link_to(text, url, class: fragment_class)
+          breadcrumb_link_to(text, url, class: fragment_class, "aria-current": options[:aria_current])
         elsif options[:class].present?
-          content_tag(:span, text, class: fragment_class)
+          content_tag(:span, text, class: fragment_class, "aria-current": options[:aria_current])
         else
           text
         end
