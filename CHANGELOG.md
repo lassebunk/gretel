@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## Version 4.3.0
 * Support generating `aria-current` attribute. It's disabled by default. See the readme for more info
 
 ## Version 4.2.0
