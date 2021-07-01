@@ -1,7 +1,7 @@
 # Changelog
 
 ## Unreleased
-* Support generating `aria-current` attribute. It's enabled by default
+* Support generating `aria-current` attribute. It's disabled by default. See the readme for more info
 
 ## Version 4.2.0
 * Support generating JSON-LD structured data. See the readme for more info (via #26, thanks @dkniffin)

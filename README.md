@@ -98,7 +98,7 @@ Option                   | Description                                          
 :posttext_class          | CSS class for the posttext, if given. Can be set to `nil` for no class.                                                    | `"posttext"`
 :container_tag           | Tag type that contains the breadcrumbs.                                                                                    | `:div`
 :fragment_tag            | Tag type to contain each breadcrumb fragment/link.                                                                         | None
-:aria_current            | Value of `aria-current` attribute.                                                                                         | `"page"`
+:aria_current            | Value of `aria-current` attribute.                                                                                         | None
 
 ### Styles
 
@@ -313,6 +313,25 @@ breadcrumbs do |links|
     link.nonexisting_option  # => nil
   end
 end
+```
+
+### ARIA support
+
+You can improve the accessibility of your page with the markup that specified in [ARIA](https://www.w3.org/TR/wai-aria-practices/examples/breadcrumb/index.html). Gretel supports generating `aria-current` attribute:
+
+```erb
+<% breadcrumb :issue, @issue %>
+<%= breadcrumbs aria_current: "page" %>
+```
+
+This will generate the following HTML (indented for readability):
+
+```html
+<div class="breadcrumbs">
+  <a href="/">Home</a> &rsaquo;
+  <a href="/issues">All issues</a> &rsaquo;
+  <span class="current" aria-current="page">My Issue</span>
+</div>
 ```
 
 ## Documentation

@@ -18,7 +18,7 @@ module Gretel
       pretext_class: "pretext",
       posttext_class: "posttext",
       id: nil,
-      aria_current: "page"
+      aria_current: nil
     }
 
     DEFAULT_STYLES = {
