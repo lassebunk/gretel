@@ -338,6 +338,11 @@ describe Gretel::ViewHelpers, type: :helper do
       assert_dom_equal(%{<ol class="breadcrumb"><li class="breadcrumb-item"><a href="/">Home</a></li><li class="breadcrumb-item active">About</li></ol>}, breadcrumbs(style: :bootstrap4).to_s)
     end
 
+    it "bootstrap5 style" do
+      breadcrumb :basic
+      assert_dom_equal(%{<ol class="breadcrumb"><li class="breadcrumb-item"><a href="/">Home</a></li><li class="breadcrumb-item active">About</li></ol>}, breadcrumbs(style: :bootstrap5).to_s)
+    end
+
     it "foundation5 style" do
       breadcrumb :basic
       assert_dom_equal(%{<ul class="breadcrumbs"><li><a href="/">Home</a></li><li class="current">About</li></ul>}, breadcrumbs(style: :foundation5).to_s)

@@ -110,7 +110,8 @@ Style          | Description
 `:ol`          | Renders the links in `<li>` elements contained in an outer `<ol>`.
 `:ul`          | Renders the links in `<li>` elements contained in an outer `<ul>`.
 `:bootstrap`   | Renders the links for use in [Bootstrap v3](https://getbootstrap.com/docs/3.4/).
-`:bootstrap4`  | Renders the links for use in [Bootstrap v4](https://getbootstrap.com/).
+`:bootstrap4`  | Renders the links for use in [Bootstrap v4](https://getbootstrap.com/docs/4.6/getting-started/introduction/).
+`:bootstrap5`  | Renders the links for use in [Bootstrap v5](https://getbootstrap.com/).
 `:foundation5` | Renders the links for use in [Foundation 5](https://get.foundation/).
 
 Or you can build the breadcrumbs manually for full customization; see below.
