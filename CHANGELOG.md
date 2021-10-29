@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+* Support Bootstrap 5. See the `:style` option in the readme for more info (via #30, thanks @tochi)
+* Accept Rails 7.0.x
+
 ## Version 4.3.0
 * Support generating `aria-current` attribute. It's disabled by default. See the readme for more info
 
