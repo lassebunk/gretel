@@ -112,6 +112,11 @@ describe Gretel::ViewHelpers, type: :helper do
       assert_dom_equal(%{<div class="breadcrumbs"><a class="custom_fragment_class" href="/">Home</a> &rsaquo; <span class="custom_fragment_class current">About</span></div>}, breadcrumbs(fragment_class: "custom_fragment_class").to_s)
     end
 
+    it "custom fragment class and custom link class" do
+      breadcrumb :basic
+      assert_dom_equal(%{<div class="breadcrumbs"><a class="custom_fragment_class custom_link_class" href="/">Home</a> &rsaquo; <span class="custom_fragment_class current">About</span></div>}, breadcrumbs(fragment_class: "custom_fragment_class", link_class: "custom_link_class").to_s)
+    end
+
     it "custom current class" do
       breadcrumb :basic
       assert_dom_equal(%{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="custom_current_class">About</span></div>}, breadcrumbs(current_class: "custom_current_class").to_s)
@@ -125,6 +130,11 @@ describe Gretel::ViewHelpers, type: :helper do
     it "custom posttext class" do
       breadcrumb :basic
       assert_dom_equal(%{<div class="breadcrumbs"><a href="/">Home</a> &rsaquo; <span class="current">About</span> <span class="custom_posttext_class">after breadcrumbs</span></div>}, breadcrumbs(posttext: "after breadcrumbs", posttext_class: "custom_posttext_class").to_s)
+    end
+
+    it "custom link class" do
+      breadcrumb :basic
+      assert_dom_equal(%{<div class="breadcrumbs"><a href="/" class="custom_link_class">Home</a> &rsaquo; <span class="current">About</span></div>}, breadcrumbs(link_class: "custom_link_class").to_s)
     end
 
     it "unsafe html" do

@@ -17,6 +17,7 @@ module Gretel
       current_class: "current",
       pretext_class: "pretext",
       posttext_class: "posttext",
+      link_class: nil,
       id: nil,
       aria_current: nil
     }
@@ -193,13 +194,13 @@ module Gretel
 
         # Loop through all but the last (current) link and build HTML of the fragments
         fragments = links[0..-2].map.with_index do |link, index|
-          render_fragment(options[:fragment_tag], link.text, link.url, options[:semantic], index + 1, fragment_class: options[:fragment_class])
+          render_fragment(options[:fragment_tag], link.text, link.url, options[:semantic], index + 1, fragment_class: options[:fragment_class], link_class: options[:link_class])
         end
 
         # The current link is handled a little differently, and is only linked if specified in the options
         current_link = links.last
         position = links.size
-        fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], position, fragment_class: options[:fragment_class], class: options[:current_class], current_link: current_link.url, aria_current: options[:aria_current])
+        fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], position, fragment_class: options[:fragment_class], class: options[:current_class], current_link: current_link.url, aria_current: options[:aria_current], link_class: options[:link_class])
 
         # Build the final HTML
         html_fragments = []
@@ -236,14 +237,13 @@ module Gretel
 
       # Renders semantic fragment HTML.
       def render_semantic_fragment(fragment_tag, text, url, position, options = {})
-        fragment_class = [options[:fragment_class], options[:class]].join(' ').strip
-        fragment_class = nil if fragment_class.blank?
+        fragment_class = join_classes(options[:fragment_class], options[:class])
         fragment_tag = fragment_tag || 'span'
         text = content_tag(:span, text, itemprop: "name")
 
         aria_current = options[:aria_current]
         if url.present?
-          text = breadcrumb_link_to(text, url, itemprop: "item", "aria-current": aria_current)
+          text = breadcrumb_link_to(text, url, itemprop: "item", "aria-current": aria_current, class: options[:link_class])
           aria_current = nil
         elsif options[:current_link].present?
           current_url = "#{root_url}#{options[:current_link].gsub(/^\//, '')}"
@@ -256,8 +256,7 @@ module Gretel
 
       # Renders regular, non-semantic fragment HTML.
       def render_nonsemantic_fragment(fragment_tag, text, url, options = {})
-        fragment_class = [options[:fragment_class], options[:class]].join(' ').strip
-        fragment_class = nil if fragment_class.blank?
+        fragment_class = join_classes(options[:fragment_class], options[:class])
 
         if fragment_tag
           if url.present?
@@ -267,12 +266,17 @@ module Gretel
             content_tag(fragment_tag, text, class: fragment_class, "aria-current": options[:aria_current])
           end
         elsif url.present?
-          breadcrumb_link_to(text, url, class: fragment_class, "aria-current": options[:aria_current])
+          breadcrumb_link_to(text, url, class: join_classes(fragment_class, options[:link_class]), "aria-current": options[:aria_current])
         elsif options[:class].present?
           content_tag(:span, text, class: fragment_class, "aria-current": options[:aria_current])
         else
           text
         end
+      end
+
+      def join_classes(*classes)
+        clazz = classes.join(' ').strip
+        clazz.blank? ? nil : clazz
       end
 
       # Proxy for +context.link_to+ that can be overridden by plugins.
