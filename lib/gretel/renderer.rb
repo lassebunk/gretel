@@ -192,70 +192,100 @@ module Gretel
       def render
         return "" if links.empty?
 
+        renderer_class = options[:semantic] ? SemanticRenderer : NonSemanticRenderer
+        renderer = renderer_class.new(context, options)
         # Loop through all but the last (current) link and build HTML of the fragments
         fragments = links[0..-2].map.with_index do |link, index|
-          render_fragment(options[:fragment_tag], link.text, link.url, options[:semantic], index + 1, fragment_class: options[:fragment_class], link_class: options[:link_class])
+          renderer.render_fragment(link, index + 1)
         end
 
         # The current link is handled a little differently, and is only linked if specified in the options
         current_link = links.last
         position = links.size
-        fragments << render_fragment(options[:fragment_tag], current_link.text, (options[:link_current] ? current_link.url : nil), options[:semantic], position, fragment_class: options[:fragment_class], class: options[:current_class], current_link: current_link.url, aria_current: options[:aria_current], link_class: options[:link_class])
+        fragments << renderer.render_current_fragment(current_link, position)
 
         # Build the final HTML
-        html_fragments = []
-
-        if options[:pretext].present?
-          html_fragments << content_tag(:span, options[:pretext], class: options[:pretext_class])
-        end
-
-        html_fragments << fragments.join(options[:separator])
-
-        if options[:posttext].present?
-          html_fragments << content_tag(:span, options[:posttext], class: options[:posttext_class])
-        end
-
-        html = html_fragments.join(" ").html_safe
-
-        if options[:semantic]
-          content_tag(options[:container_tag], html, id: options[:id], class: options[:class], itemscope: "", itemtype: "https://schema.org/BreadcrumbList")
-        else
-          content_tag(options[:container_tag], html, id: options[:id], class: options[:class])
-        end
+        html_fragments = [
+          renderer.render_pretext,
+          fragments.join(options[:separator]),
+          renderer.render_posttext
+        ]
+        html = html_fragments.compact.join(" ").html_safe
+        renderer.render_container(html)
       end
 
       alias :to_s :render
 
-      # Renders HTML for a breadcrumb fragment, i.e. a breadcrumb link.
-      def render_fragment(fragment_tag, text, url, semantic, position, options = {})
-        if semantic
-          render_semantic_fragment(fragment_tag, text, url, position, options)
-        else
-          render_nonsemantic_fragment(fragment_tag, text, url, options)
+      # Avoid unnecessary html escaping by template engines.
+      def html_safe?
+        true
+      end
+    end
+
+    class Base
+      attr_reader :context, :options
+
+      def initialize(context, options)
+        @context = context
+        @options = options
+      end
+
+      def render_fragment(link, position)
+        render_fragment_tag(fragment_tag, link.text, link.url, position, **fragment_options)
+      end
+
+      def render_current_fragment(link, position)
+        url = options[:link_current] ? link.url : nil
+        opts = fragment_options.merge(class: options[:current_class], current_link: link.url, aria_current: options[:aria_current])
+        render_fragment_tag(fragment_tag, link.text, url, position, **opts)
+      end
+
+      def render_fragment_tag(fragment_tag, text, url, position, options = {})
+      end
+
+      def render_container(html)
+      end
+
+      def render_pretext
+        if options[:pretext].present?
+          content_tag(:span, options[:pretext], class: options[:pretext_class])
         end
       end
 
-      # Renders semantic fragment HTML.
-      def render_semantic_fragment(fragment_tag, text, url, position, options = {})
-        fragment_class = join_classes(options[:fragment_class], options[:class])
-        fragment_tag = fragment_tag || 'span'
-        text = content_tag(:span, text, itemprop: "name")
-
-        aria_current = options[:aria_current]
-        if url.present?
-          text = breadcrumb_link_to(text, url, itemprop: "item", "aria-current": aria_current, class: options[:link_class])
-          aria_current = nil
-        elsif options[:current_link].present?
-          current_url = "#{root_url}#{options[:current_link].gsub(/^\//, '')}"
-          text = text + tag(:meta, itemprop: "item", content: current_url)
+      def render_posttext
+        if options[:posttext].present?
+          content_tag(:span, options[:posttext], class: options[:posttext_class])
         end
-
-        text = text + tag(:meta, itemprop:"position", content: "#{position}")
-        content_tag(fragment_tag.to_sym, text, class: fragment_class, itemprop: "itemListElement", itemscope: "", itemtype: "https://schema.org/ListItem", "aria-current": aria_current)
       end
 
-      # Renders regular, non-semantic fragment HTML.
-      def render_nonsemantic_fragment(fragment_tag, text, url, options = {})
+      private
+
+      def fragment_tag
+        options[:fragment_tag]
+      end
+
+      def fragment_options
+        options.slice(:fragment_class, :link_class)
+      end
+
+      def join_classes(*classes)
+        clazz = classes.join(' ').strip
+        clazz.blank? ? nil : clazz
+      end
+
+      # Proxy for +context.link_to+ that can be overridden by plugins.
+      def breadcrumb_link_to(name, url, options = {})
+        context.link_to(name, url, options)
+      end
+
+      # Proxy to view context.
+      def method_missing(method, *args, &block)
+        context.send(method, *args, &block)
+      end
+    end
+
+    class NonSemanticRenderer < Base
+      def render_fragment_tag(fragment_tag, text, url, position, options = {})
         fragment_class = join_classes(options[:fragment_class], options[:class])
 
         if fragment_tag
@@ -274,24 +304,32 @@ module Gretel
         end
       end
 
-      def join_classes(*classes)
-        clazz = classes.join(' ').strip
-        clazz.blank? ? nil : clazz
+      def render_container(html)
+        content_tag(options[:container_tag], html, id: options[:id], class: options[:class])
+      end
+    end
+
+    class SemanticRenderer < Base
+      def render_fragment_tag(fragment_tag, text, url, position, options = {})
+        fragment_class = join_classes(options[:fragment_class], options[:class])
+        fragment_tag = fragment_tag || 'span'
+        text = content_tag(:span, text, itemprop: "name")
+
+        aria_current = options[:aria_current]
+        if url.present?
+          text = breadcrumb_link_to(text, url, itemprop: "item", "aria-current": aria_current, class: options[:link_class])
+          aria_current = nil
+        elsif options[:current_link].present?
+          current_url = "#{root_url}#{options[:current_link].gsub(/^\//, '')}"
+          text = text + tag(:meta, itemprop: "item", content: current_url)
+        end
+
+        text = text + tag(:meta, itemprop:"position", content: "#{position}")
+        content_tag(fragment_tag.to_sym, text, class: fragment_class, itemprop: "itemListElement", itemscope: "", itemtype: "https://schema.org/ListItem", "aria-current": aria_current)
       end
 
-      # Proxy for +context.link_to+ that can be overridden by plugins.
-      def breadcrumb_link_to(name, url, options = {})
-        context.link_to(name, url, options)
-      end
-
-      # Proxy to view context.
-      def method_missing(method, *args, &block)
-        context.send(method, *args, &block)
-      end
-
-      # Avoid unnecessary html escaping by template engines.
-      def html_safe?
-        true
+      def render_container(html)
+        content_tag(options[:container_tag], html, id: options[:id], class: options[:class], itemscope: "", itemtype: "https://schema.org/BreadcrumbList")
       end
     end
   end
