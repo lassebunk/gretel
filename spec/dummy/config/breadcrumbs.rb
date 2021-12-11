@@ -7,7 +7,5 @@ if crumb_defined?(:root)
     link "Home1", root_path
   end
 else
-  crumb :hom2 do
-    link "Home2", root_path
-  end
+  raise 'Unexpected'
 end
