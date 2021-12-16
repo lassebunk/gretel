@@ -1,8 +1,10 @@
 # Changelog
 
 ## Unreleased
+
+## Version 4.4.0
 * Support Bootstrap 5. See the `:style` option in the readme for more info (via #30, thanks @tochi)
-* Accept Rails 7.0.x
+* Support Rails 7.0
 * Link class is now customizable with `<%= breadcrumbs link_class: "some-class" %>`. (via #10)
 
 ## Version 4.3.0
