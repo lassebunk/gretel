@@ -33,11 +33,11 @@ jobs:
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: ${{ matrix.ruby_version }}
+        ruby-version: "${{ matrix.ruby_version }}"
 
     - name: Run test
       env:
-        RAILS_VERSION: ${{ matrix.rails_version }}
+        RAILS_VERSION: "${{ matrix.rails_version }}"
       run: |
         bundle update
         cd spec/dummy; rake db:migrate db:test:prepare; cd ../..
@@ -47,7 +47,7 @@ jobs:
       uses: actions/upload-artifact@v2
       if: always()
       with:
-        name: coverage-ruby-${{ matrix.ruby_version }}-rails-${{ matrix.rails_version }}
+        name: "coverage-ruby-${{ matrix.ruby_version }}-rails-${{ matrix.rails_version }}"
         path: coverage
 
     - name: Show coverage
