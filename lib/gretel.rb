@@ -21,7 +21,7 @@ module Gretel
           Rails::Engine.subclasses.map(&:instance)
 
         engine_roots = engines.map { |e| e.config.root }
-        
+
         [*engine_roots, Rails.root].map do |root|
           [root.join("config", "breadcrumbs.rb"),
            root.join("config", "breadcrumbs", "**", "*.rb"),
@@ -59,7 +59,7 @@ module Gretel
     end
 
     # Registers a style for later use.
-    # 
+    #
     #   Gretel.register_style :ul, { container_tag: :ul, fragment_tag: :li }
     def register_style(style, options)
       Gretel::Renderer.register_style style, options
@@ -69,7 +69,7 @@ module Gretel
     attr_writer :reload_environments
 
     # Yields this +Gretel+ to be configured.
-    # 
+    #
     #   Gretel.configure do |config|
     #     config.reload_environments << "staging"
     #   end

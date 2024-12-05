@@ -1,11 +1,11 @@
 module Gretel
   module ViewHelpers
     # Sets the current breadcrumb to be rendered elsewhere. Put it somewhere in the view, preferably in the top, before you render any breadcrumbs HTML:
-    # 
+    #
     #   <% breadcrumb :category, @category %>
-    # 
+    #
     # If you pass an instance of an object that responds to +model_name+ (like an ActiveRecord model instance), the breadcrumb can be automatically inferred, so a shortcut for the above would be:
-    # 
+    #
     #   <% breadcrumb @category %>
     def breadcrumb(key = nil, *args)
       if key.nil? || key.is_a?(Hash)
@@ -15,15 +15,15 @@ module Gretel
     end
 
     # Yields a block where inside the block you have a different breadcrumb than outside.
-    # 
+    #
     #   <% breadcrumb :about %>
-    # 
+    #
     #   <%= breadcrumbs # shows the :about breadcrumb %>
-    # 
+    #
     #   <% with_breadcrumb :product, Product.first do %>
     #     <%= breadcrumbs # shows the :product breadcrumb %>
     #   <% end %>
-    # 
+    #
     #   <%= breadcrumbs # shows the :about breadcrumb %>
     def with_breadcrumb(key, *args, &block)
       original_renderer = @_gretel_renderer
@@ -49,7 +49,7 @@ module Gretel
     end
 
     # Returns or yields parent breadcrumb (second-to-last in the trail) if it is present.
-    # 
+    #
     #   <% parent_breadcrumb do |link| %>
     #     <%= link_to link.text, link.url %> (<%= link.key %>)
     #   <% end %>
