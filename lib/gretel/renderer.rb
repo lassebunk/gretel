@@ -81,7 +81,7 @@ module Gretel
 
       # Handle autoroot
       if options[:autoroot] && out.map(&:key).exclude?(:root) && Gretel::Crumbs.crumb_defined?(:root)
-        out.unshift *Gretel::Crumb.new(context, :root).links
+        out.unshift(*Gretel::Crumb.new(context, :root).links)
       end
 
       # Set current link to actual path
@@ -114,7 +114,7 @@ module Gretel
         links = crumb.links.dup
 
         # Get parent links
-        links.unshift *parent_links_for(crumb)
+        links.unshift(*parent_links_for(crumb))
 
         links
       else
@@ -126,7 +126,7 @@ module Gretel
     def parent_links_for(crumb)
       links = []
       while crumb = crumb.parent
-        links.unshift *crumb.links
+        links.unshift(*crumb.links)
       end
       links
     end
