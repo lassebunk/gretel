@@ -1,16 +1,19 @@
 language: ruby
 sudo: false
 rvm:
-  - 2.2.0
-  - 2.1.0
-  - 2.0.0
-  - 1.9.3
+  - 2.4.1
+  - 2.3.4
+  - 2.2.2
 gemfile:
-  - gemfiles/Gemfile-rails.3.1.x
-  - gemfiles/Gemfile-rails.3.2.x
-  - gemfiles/Gemfile-rails.4.0.x
   - gemfiles/Gemfile-rails.4.1.x
+  - gemfiles/Gemfile-rails.4.2.x
+  - gemfiles/Gemfile-rails.5.0.x
+  - gemfiles/Gemfile-rails.5.1.x
 before_script:
-  - "cd test/dummy; rake db:migrate; rake db:test:prepare; cd ../.."
+  - "cd test/dummy; bundle exec rake db:migrate; bundle exec rake db:test:prepare; cd ../.."
 notifications:
   email: false
+matrix:
+  exclude:
+    - rvm: 2.4.1
+      gemfile: gemfiles/Gemfile-rails.4.1.x
