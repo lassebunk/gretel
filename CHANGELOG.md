@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 3.0.10
+* Replaces data-vocabulary markup as google doesn't support it and now uses schema.org markup
+* simplified semantic fragment rendering
+
 ## Version 3.0.9
 * Adds breadcrumbs option `link_current_to_request_path` to link the current breadcrumb to the request path(#28 via #29)
 * Fixes semantic breadcrumbs when the last item has no link (via #55)
